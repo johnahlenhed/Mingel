@@ -1,0 +1,21 @@
+.lowerPuzzle {
+  --circle-size: 20vw;
+
+  width: 95vw;
+  height: 20vh;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: yellow;
+  position: relative;
+}
+
+.dotInLower {
+  position: absolute;
+  width: var(--circle-size);
+  aspect-ratio: 1;
+  top: calc(-1 * var(--circle-size) / 2);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: yellow;
+  border-radius: 50%;
+}

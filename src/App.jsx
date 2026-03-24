@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import RegisterLandingPage from './pages/RegisterLandingPage.jsx'
-import RegisterPage from './pages/RegisterPage'
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import RegisterLandingPage from "./pages/RegisterLandingPage.jsx";
+import RegisterPage from "./pages/RegisterPage";
 import "./App.css";
-import Landingpage from "./Landingpage.jsx";
+import Landingpage from "./pages/Landingpage.jsx";
 
 function App() {
   return (
@@ -14,6 +14,6 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </Router>
-  )
+  );
 }
 export default App;
