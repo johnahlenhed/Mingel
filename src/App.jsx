@@ -1,8 +1,13 @@
 import { useState } from 'react'
-// import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import LandingPage from './pages/LandingPage'
 import RegisterPage from './pages/RegisterPage'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "./assets/vite.svg";
+import heroImg from "./assets/hero.png";
+import "./App.css";
+import Landingpage from "./Landingpage.jsx";
 
 function App() {
   return (
@@ -13,6 +18,5 @@ function App() {
       </Routes>
     </Router>
   )
-}
 
-export default App
+export default App;
