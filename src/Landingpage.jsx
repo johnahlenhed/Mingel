@@ -15,12 +15,18 @@ export default function Landingpage() {
             className={styles.input}
             placeholder="0000"
             type="number"
+            inputmode="numeric"
           ></input>
           <button className={styles.button}>Connect</button>
         </article>
 
         <article className={styles.lowerPuzzle}>
           <div className={styles.dotInLower}></div>
+        </article>
+        <article className={styles.myConnectionsContainer}>
+          <button className={styles.myConnections}>
+            My connections (icon)
+          </button>
         </article>
       </section>
     </main>
