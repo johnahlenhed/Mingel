@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import styles from './LandingPage.module.css'
+import styles from './RegisterLandingPage.module.css'
 
-function LandingPage() {
+function RegisterLandingPage() {
     return (
         <main className={styles.landingPage}>
             <h1>Welcome to Mingel!</h1>
@@ -12,4 +12,4 @@ function LandingPage() {
     )
 }
 
-export default LandingPage
+export default RegisterLandingPage
