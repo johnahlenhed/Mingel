@@ -3,9 +3,11 @@
   --text: #000000;
   --text-h: #000000;
   --text-accent: #C8341A;
+  --text-faded: #6B6B66;
   --bg: #ffffff;
+  --container-bg: #000000;
   --border: #000000;
-  --accent: #ffffff81;
+  --accent: #C8341A;
   --accent-bg: rgba(0, 0, 0, 0.185);
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
