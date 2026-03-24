@@ -6,12 +6,16 @@ export default function Landingpage() {
     <main className={styles.main}>
       <section className={styles.section}>
         <article className={styles.upperPuzzle}>
-          <div className={styles.dotInUpper}></div>
+          {/* <div className={styles.dotInUpper}></div> */}
         </article>
 
         <article className={styles.form}>
           <label className={styles.label}></label>
-          <input></input>
+          <input
+            className={styles.input}
+            placeholder="0000"
+            type="number"
+          ></input>
           <button className={styles.button}>Connect</button>
         </article>
 
