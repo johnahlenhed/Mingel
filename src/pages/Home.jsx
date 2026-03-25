@@ -1,9 +1,9 @@
 import { useState } from "react";
-import styles from "./Landingpage.module.css";
+import styles from "./Home.module.css";
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
 
-export default function Landingpage() {
+export default function Home() {
   return (
     <main className={styles.main}>
       <section className={styles.section}>
