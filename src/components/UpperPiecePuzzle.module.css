@@ -1,0 +1,43 @@
+.upperPuzzle {
+  --circle-size: 20vw;
+
+  margin-top: 5vh;
+  width: 100%;
+  height: 20vh;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border: 2px dashed lightgray;
+  background-color: white;
+  position: relative;
+  overflow: visible;
+}
+
+.upperPuzzle::before {
+  content: "";
+  position: absolute;
+  width: var(--circle-size);
+  aspect-ratio: 1;
+  left: 50%;
+  bottom: calc(-1 * var(--circle-size) / 2);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: white;
+  z-index: 2;
+}
+
+.upperPuzzle::after {
+  content: "";
+  position: absolute;
+  width: var(--circle-size);
+  height: calc(var(--circle-size) / 2);
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  border: 2px dashed lightgray;
+  border-bottom: none;
+  border-top-left-radius: 999px;
+  border-top-right-radius: 999px;
+  background: transparent;
+  z-index: 3;
+  pointer-events: none;
+}

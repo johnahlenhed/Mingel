@@ -1,0 +1,30 @@
+.main {
+  background-color: hotpink;
+  margin: 2%;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+}
+
+.upperPuzzle {
+  height: 30vh;
+  z-index: -5;
+  width: 30vw;
+}
+
+.upperPuzzle::before {
+  z-index: -5;
+}
+
+.lowerPuzzle {
+  z-index: 5;
+  width: 30vw;
+}
+
+.dotInLower {
+  z-index: 5;
+}
