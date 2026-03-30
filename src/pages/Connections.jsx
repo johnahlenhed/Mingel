@@ -50,6 +50,16 @@ export default function Connections() {
             </div>
           </div>
         ))}
+
+        {/* Empty container */}
+        <div className={styles.emptyContainer}>
+          <div className={styles.upperContainer}>
+            <UpperPiecePuzzle></UpperPiecePuzzle>
+          </div>
+          <div className={styles.lowerContainer}>
+            <LowerPiecePuzzle></LowerPiecePuzzle>
+          </div>
+        </div>
       </section>
 
       <section className={styles.navbar}>
