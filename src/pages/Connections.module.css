@@ -6,23 +6,26 @@
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-auto-rows: 50vh;
   gap: 16px;
 }
 
-.upperPuzzle {
-  height: 30vh;
+.upperContainer {
+  /* Upper piece takes ~60% of the wrapper height */
+  height: 70%;
   z-index: -5;
-  width: 30vw;
+  /* width: 30vw; */
 }
 
-.upperPuzzle::before {
+.upperContainer::before {
   z-index: -5;
 }
 
-.lowerPuzzle {
+.lowerContainer {
+  /* Lower piece takes the rest */
+  height: 30%;
   z-index: 5;
-  width: 30vw;
+  /* width: 30vw; */
 }
 
 .dotInLower {

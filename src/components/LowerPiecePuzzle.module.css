@@ -2,7 +2,7 @@
   --circle-size: 20vw;
 
   width: 100%;
-  height: 20vh;
+  height: 100%;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   background-color: yellow;

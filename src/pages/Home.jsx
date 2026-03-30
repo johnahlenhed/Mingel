@@ -6,8 +6,10 @@ import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <section className={styles.section}>
-        <UpperPiecePuzzle />
+      <section className={styles.layout}>
+        <div className={styles.upperContainer}>
+          <UpperPiecePuzzle />
+        </div>
 
         <article className={styles.form}>
           <label className={styles.label}></label>
@@ -20,7 +22,9 @@ export default function Home() {
           <button className={styles.button}>Connect</button>
         </article>
 
-        <LowerPiecePuzzle />
+        <div className={styles.lowerContainer}>
+          <LowerPiecePuzzle />
+        </div>
 
         <article className={styles.myConnectionsContainer}>
           <button className={styles.myConnections}>

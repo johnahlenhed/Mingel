@@ -1,9 +1,8 @@
 .upperPuzzle {
   --circle-size: 20vw;
 
-  margin-top: 5vh;
   width: 100%;
-  height: 20vh;
+  height: 100%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   border: 2px dashed lightgray;
