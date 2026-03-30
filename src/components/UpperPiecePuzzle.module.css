@@ -9,6 +9,15 @@
   background-color: white;
   position: relative;
   overflow: visible;
+
+  /* avoid content being overlapped by the bottom semicircle */
+  padding-bottom: calc(var(--circle-size) / 2 + 2vh);
+}
+
+/* ensure any direct child (the inner wrapper with text) sits above pseudo-elements */
+.upperPuzzle > * {
+  position: relative;
+  z-index: 4;
 }
 
 .upperPuzzle::before {
@@ -39,4 +48,15 @@
   background: transparent;
   z-index: 3;
   pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 5; /* above pseudo elements */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 1rem;
 }

@@ -51,25 +51,6 @@ export default function Connections() {
           </div>
         ))}
       </section>
-
-      {/* <section className={styles.gridContainer}>
-        <div>
-          <UpperPiecePuzzle />
-          <LowerPiecePuzzle />
-        </div>
-        <div>
-          <UpperPiecePuzzle />
-          <LowerPiecePuzzle />
-        </div>
-        <div>
-          <UpperPiecePuzzle />
-          <LowerPiecePuzzle />
-        </div>
-        <div>
-          <UpperPiecePuzzle />
-          <LowerPiecePuzzle />
-        </div>
-      </section> */}
     </main>
   );
 }

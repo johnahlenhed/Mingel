@@ -1,6 +1,5 @@
 .main {
-  background-color: hotpink;
-  margin: 2%;
+  margin: 5% 2% 2% 2%;
 }
 
 .gridContainer {
@@ -10,24 +9,25 @@
   gap: 16px;
 }
 
-.upperContainer {
-  /* Upper piece takes ~60% of the wrapper height */
-  height: 70%;
-  z-index: -5;
-  /* width: 30vw; */
+.puzzleWrapper {
+  height: 100%;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
 }
 
-.upperContainer::before {
-  z-index: -5;
+.upperContainer {
+  height: 70%;
+  z-index: 1;
 }
 
 .lowerContainer {
-  /* Lower piece takes the rest */
   height: 30%;
-  z-index: 5;
-  /* width: 30vw; */
+  z-index: 2;
+  margin-top: calc(-1 * var(--circle-size) / 2);
 }
 
 .dotInLower {
-  z-index: 5;
+  z-index: 4;
 }
