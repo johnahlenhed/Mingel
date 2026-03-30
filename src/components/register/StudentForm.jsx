@@ -11,6 +11,7 @@ function StudentForm() {
         email: '',
         link: ''
     })
+    const [error, setError] = useState(null)
 
     const handleChange = (e) => {
         setFormData({
@@ -22,9 +23,22 @@ function StudentForm() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        if (!formData.full_name || !formData.email || !formData.programme || !formData.link) {
+            setError('Please fill in all fields')
+            return
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(formData.email)) {
+            setError('Please enter a valid email address')
+            return
+        }
+
+        setError(null)
+
         const code = await getUniqueCode()
 
-        const { data, error } = await supabase
+        const { data, error: supabaseError } = await supabase
             .from('users')
             .insert({
                 ...formData,
@@ -32,8 +46,8 @@ function StudentForm() {
                 code: code
             })
 
-        if (error) {
-            console.error('Error inserting data:', error)
+        if (supabaseError) {
+            console.error('Error inserting data:', supabaseError)
         } else {
             console.log('Data inserted successfully:', data)
             setFormData({
@@ -61,6 +75,7 @@ function StudentForm() {
                     <label htmlFor="link">Link</label>
                     <input type="text" id="link" name="link" value={formData.link} onChange={handleChange} required />
                 
+                    {error && <p className={styles.error}>{error}</p>}
                     <button type="submit">Register</button>
                 </form>
         </main>
