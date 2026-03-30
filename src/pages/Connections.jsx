@@ -27,7 +27,7 @@ export default function Connections() {
   }, []);
 
   return (
-    <main className={styles.main}>
+    <main className={styles.layout}>
       <section>3 pieces of puzzle...</section>
       <section className={styles.gridContainer}>
         {rows?.map((row) => (
@@ -50,6 +50,11 @@ export default function Connections() {
             </div>
           </div>
         ))}
+      </section>
+
+      <section className={styles.navbar}>
+        <button className={styles.navButton}>Home</button>
+        <button className={styles.navButton}>Add</button>
       </section>
     </main>
   );

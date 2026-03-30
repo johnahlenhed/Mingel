@@ -1,5 +1,7 @@
-.main {
+.layout {
   margin: 5% 2% 2% 2%;
+  position: relative;
+  padding-bottom: 2%;
 }
 
 .gridContainer {
@@ -30,4 +32,19 @@
 
 .dotInLower {
   z-index: 4;
+}
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.navButton {
+  height: 7vh;
+  width: 50%;
 }
