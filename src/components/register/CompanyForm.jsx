@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './CompanyForm.module.css'
 import { supabase } from '../../lib/supabase.js'
+import { getUniqueCode } from '../../lib/utils.js'
 
 function CompanyForm() {
 
@@ -21,11 +22,14 @@ function CompanyForm() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        const code = await getUniqueCode()
+
         const { data, error } = await supabase
             .from('users')
             .insert({
                 ...formData,
-                role: 'company'
+                role: 'company',
+                code: code
             })
 
         if (error) {

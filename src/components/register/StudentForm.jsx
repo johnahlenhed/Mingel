@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './StudentForm.module.css'
 import { supabase } from '../../lib/supabase.js'
+import { getUniqueCode } from '../../lib/utils.js'
 
 function StudentForm() {
 
@@ -21,11 +22,14 @@ function StudentForm() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        const code = await getUniqueCode()
+
         const { data, error } = await supabase
             .from('users')
             .insert({
                 ...formData,
-                role: 'student'
+                role: 'student',
+                code: code
             })
 
         if (error) {
