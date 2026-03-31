@@ -4,6 +4,13 @@
   padding-bottom: 2%;
 }
 
+.smallPuzzleContainer {
+  margin: 5% 0;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -1,3 +1,4 @@
+import SmallPuzzle from "../components/SmallPuzzle.jsx";
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
 import { useState } from "react";
@@ -28,7 +29,9 @@ export default function Connections() {
 
   return (
     <main className={styles.layout}>
-      <section>3 pieces of puzzle...</section>
+      <section className={styles.smallPuzzleContainer}>
+        <SmallPuzzle />
+      </section>
       <section className={styles.gridContainer}>
         {rows?.map((row) => (
           <div key={row.id} className={styles.puzzleWrapper}>
