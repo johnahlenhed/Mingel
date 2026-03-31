@@ -61,5 +61,9 @@
 
 .navButton {
   height: 7vh;
-  width: 50%;
+  width: 100%;
+}
+
+a {
+  width: 100%;
 }

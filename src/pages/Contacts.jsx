@@ -3,7 +3,7 @@ import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Contacts.module.css";
 import { supabase } from "../lib/supabase.js";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function Contacts() {
   const [rows, setRows] = useState([]);
@@ -79,10 +79,19 @@ export default function Contacts() {
             className={styles.contactWrapper}
           >
             <div className={styles.upperContainer}>
-              <UpperPiecePuzzle />
+              <UpperPiecePuzzle>
+                <div>
+                  <p>{row.full_name}</p>
+                  <p>{row.email}</p>
+                </div>
+              </UpperPiecePuzzle>
             </div>
             <div className={styles.lowerContainer}>
-              <LowerPiecePuzzle />
+              <LowerPiecePuzzle>
+                <div>
+                  <p>{row.full_name}</p>
+                </div>
+              </LowerPiecePuzzle>
             </div>
           </div>
         ))}
@@ -99,7 +108,9 @@ export default function Contacts() {
         ))}
       </section>
 
-      <button className={styles.backButton}>Back</button>
+      <Link to="/connections">
+        <button className={styles.backButton}>Back</button>
+      </Link>
     </main>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./Home.module.css";
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -27,9 +28,11 @@ export default function Home() {
         </div>
 
         <article className={styles.myConnectionsContainer}>
-          <button className={styles.myConnections}>
-            My connections (icon)
-          </button>
+          <Link to="/connections">
+            <button className={styles.myConnections}>
+              My connections (icon)
+            </button>
+          </Link>
         </article>
       </section>
     </main>
