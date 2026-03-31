@@ -51,12 +51,13 @@
 .content {
   position: absolute;
   top: 0;
-  left: 6%;
+  left: 0;
   z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
   text-align: center;
   padding: 1rem;
 }
