@@ -11,7 +11,7 @@ export default function Connections() {
 
   useEffect(() => {
     async function loadData() {
-      const { data, error } = await supabase.from("Test_table").select("*");
+      const { data, error } = await supabase.from("users").select("*");
       setRows(data);
 
       console.log("Supabase data:", data);
@@ -38,7 +38,7 @@ export default function Connections() {
             <div className={styles.upperContainer}>
               <UpperPiecePuzzle>
                 <div>
-                  <p>{row.name}</p>
+                  <p>{row.full_name}</p>
                   <p>{row.email}</p>
                 </div>
               </UpperPiecePuzzle>
