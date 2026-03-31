@@ -1,8 +1,8 @@
 import SmallPuzzle from "../components/SmallPuzzle.jsx";
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import styles from "./Connections.module.css";
 import { supabase } from "../lib/supabase.js";
 
@@ -34,24 +34,30 @@ export default function Connections() {
       </section>
       <section className={styles.gridContainer}>
         {rows?.map((row) => (
-          <div key={row.id} className={styles.puzzleWrapper}>
-            <div className={styles.upperContainer}>
-              <UpperPiecePuzzle>
-                <div>
-                  <p>{row.full_name}</p>
-                  <p>{row.email}</p>
-                </div>
-              </UpperPiecePuzzle>
+          <Link
+            key={row.id}
+            to={`/contacts/${row.id}`}
+            className={styles.puzzleWrapper}
+          >
+            <div key={row.id} className={styles.puzzleWrapper}>
+              <div className={styles.upperContainer}>
+                <UpperPiecePuzzle>
+                  <div>
+                    <p>{row.full_name}</p>
+                    <p>{row.email}</p>
+                  </div>
+                </UpperPiecePuzzle>
+              </div>
+              <div className={styles.lowerContainer}>
+                <LowerPiecePuzzle>
+                  <div>
+                    <p>{row.name}</p>
+                    <p>{row.email}</p>
+                  </div>
+                </LowerPiecePuzzle>
+              </div>
             </div>
-            <div className={styles.lowerContainer}>
-              <LowerPiecePuzzle>
-                <div>
-                  <p>{row.name}</p>
-                  <p>{row.email}</p>
-                </div>
-              </LowerPiecePuzzle>
-            </div>
-          </div>
+          </Link>
         ))}
 
         {/* Empty container */}

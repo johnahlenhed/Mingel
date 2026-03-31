@@ -3,8 +3,9 @@ import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Contacts.module.css";
 import { supabase } from "../lib/supabase.js";
+import { useParams } from "react-router-dom";
 
-export default function Connections() {
+export default function Contacts() {
   const [rows, setRows] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -55,6 +56,17 @@ export default function Connections() {
       inline: "center",
     });
   };
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (!rows.length) return;
+
+    const index = rows.findIndex((r) => r.id === id);
+    if (index !== -1) {
+      scrollToCard(index);
+    }
+  }, [rows, id]);
 
   return (
     <main className={styles.layout}>
