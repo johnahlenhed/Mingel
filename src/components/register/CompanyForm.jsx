@@ -61,7 +61,6 @@ function CompanyForm() {
 
     return (
         <main className={styles.registerPage}>
-            <h1>Get started</h1>
             <form className={styles.registerForm} onSubmit={handleSubmit}>
                 <label htmlFor="full_name">Full name</label>
                 <input type="text" id="full_name" name="full_name" value={formData.full_name} onChange={handleChange} required />

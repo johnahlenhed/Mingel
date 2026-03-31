@@ -1,18 +1,20 @@
 :root {
 
-  --text: #000000;
-  --text-h: #000000;
-  --text-accent: #C8341A;
-  --text-faded: #6B6B66;
+  --text: #181818;
+  --text-white: #ffffff;
+  --text-h: #181818;
+  --text-accent: #E51236;
+  --text-faded: #6B6B6B;
   --bg: #ffffff;
-  --container-bg: #000000;
-  --border: #000000;
-  --accent: #C8341A;
-  --accent-bg: rgba(0, 0, 0, 0.185);
+  --container-bg: #0B0829;
+  --border: #001A52;
+  --accent: #E51236;
+  --accent-bg: #001A52;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --heading: 'Inter', sans-serif;
+  --text: 'Inter', sans-serif;
+
+
 
   .manrope-font {
   font-family: "Manrope", sans-serif;
@@ -20,6 +22,13 @@
   font-weight: 400;
   font-style: normal;
   }
+
+  .inter-font {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
