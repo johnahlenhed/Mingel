@@ -1,3 +1,4 @@
+import SmallPuzzle from "../components/SmallPuzzle.jsx";
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
 import { useState } from "react";
@@ -10,7 +11,7 @@ export default function Connections() {
 
   useEffect(() => {
     async function loadData() {
-      const { data, error } = await supabase.from("Test_table").select("*");
+      const { data, error } = await supabase.from("users").select("*");
       setRows(data);
 
       console.log("Supabase data:", data);
@@ -28,14 +29,16 @@ export default function Connections() {
 
   return (
     <main className={styles.layout}>
-      <section>3 pieces of puzzle...</section>
+      <section className={styles.smallPuzzleContainer}>
+        <SmallPuzzle />
+      </section>
       <section className={styles.gridContainer}>
         {rows?.map((row) => (
           <div key={row.id} className={styles.puzzleWrapper}>
             <div className={styles.upperContainer}>
               <UpperPiecePuzzle>
                 <div>
-                  <p>{row.name}</p>
+                  <p>{row.full_name}</p>
                   <p>{row.email}</p>
                 </div>
               </UpperPiecePuzzle>
