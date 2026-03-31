@@ -1,0 +1,12 @@
+.btn {
+  background-color: darkgrey;
+  margin: 4vh 0;
+  padding: 1rem;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  color: white;
+}

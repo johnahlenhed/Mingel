@@ -1,5 +1,6 @@
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
+import NavigationButton from "../components/NavigationButton";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Contacts.module.css";
 import { supabase } from "../lib/supabase.js";
@@ -109,7 +110,7 @@ export default function Contacts() {
       </section>
 
       <Link to="/connections">
-        <button className={styles.backButton}>Back</button>
+        <NavigationButton>Back</NavigationButton>
       </Link>
     </main>
   );

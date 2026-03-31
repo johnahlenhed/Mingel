@@ -1,6 +1,7 @@
 import SmallPuzzle from "../components/SmallPuzzle.jsx";
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
+import NavigationButton from "../components/NavigationButton";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Connections.module.css";
@@ -67,10 +68,7 @@ export default function Connections() {
 
       <section className={styles.navbar}>
         <Link to="/">
-          <button className={styles.navButton}>Home</button>
-        </Link>
-        <Link to="/">
-          <button className={styles.navButton}>Add</button>
+          <NavigationButton>Home</NavigationButton>
         </Link>
       </section>
     </main>

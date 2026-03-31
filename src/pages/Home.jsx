@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./Home.module.css";
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
+import NavigationButton from "../components/NavigationButton";
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -29,9 +30,7 @@ export default function Home() {
 
         <article className={styles.myConnectionsContainer}>
           <Link to="/connections">
-            <button className={styles.myConnections}>
-              My connections (icon)
-            </button>
+            <NavigationButton>My connections (icon)</NavigationButton>
           </Link>
         </article>
       </section>

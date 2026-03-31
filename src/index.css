@@ -1,24 +1,23 @@
 :root {
-
   --text: #000000;
   --text-h: #000000;
-  --text-accent: #C8341A;
-  --text-faded: #6B6B66;
+  --text-accent: #c8341a;
+  --text-faded: #6b6b66;
   --bg: #ffffff;
   --container-bg: #000000;
   --border: #000000;
-  --accent: #C8341A;
+  --accent: #c8341a;
   --accent-bg: rgba(0, 0, 0, 0.185);
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   .manrope-font {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
   }
 
   font: 18px/145% var(--sans);
@@ -36,6 +35,15 @@
   @media (max-width: 1024px) {
     font-size: 16px;
   }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
 }
 
 body {
