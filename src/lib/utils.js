@@ -1,4 +1,5 @@
 import { supabase } from "./supabase"
+import bcrypt from "bcryptjs"
 
 export const getUniqueCode = async () => {
 
@@ -18,4 +19,12 @@ export const getUniqueCode = async () => {
         }
     }
     return code
+}
+
+export const hashPassword = async (password) => {
+    return await bcrypt.hash(password, 10)
+}
+
+export const verifyPassword = async (password, hash) => {
+    return await bcrypt.compare(password, hash)
 }
