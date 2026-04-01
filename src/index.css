@@ -14,17 +14,18 @@
   --accent: #E51236;
   --accent-bg: #001A52;
 
-
   --heading: 'Inter', sans-serif;
   --text: 'Inter', sans-serif;
 
 
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
 
   .manrope-font {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
   }
 
   .inter-font {
@@ -49,6 +50,15 @@
   @media (max-width: 1024px) {
     font-size: 16px;
   }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
 }
 
 body {

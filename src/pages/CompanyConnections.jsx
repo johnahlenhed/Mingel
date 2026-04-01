@@ -4,7 +4,7 @@ import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
 import NavigationButton from "../components/NavigationButton";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Connections.module.css";
+import styles from "./CompanyConnections.module.css";
 import { supabase } from "../lib/supabase.js";
 
 export default function Connections() {
@@ -30,12 +30,9 @@ export default function Connections() {
 
   return (
     <main className={styles.layout}>
-      <section className={styles.smallPuzzleContainer}>
-        <SmallPuzzle />
-      </section>
       <section className={styles.gridContainer}>
         {rows?.map((row) => (
-          <Link key={row.id} to={`/contacts/${row.id}`}>
+          <Link key={row.id} to={`/company-contacts/${row.id}`}>
             <div key={row.id} className={styles.puzzleWrapper}>
               <div className={styles.upperContainer}>
                 <UpperPiecePuzzle>
@@ -54,20 +51,10 @@ export default function Connections() {
             </div>
           </Link>
         ))}
-
-        {/* Empty container */}
-        <div className={styles.emptyContainer}>
-          <div className={styles.upperContainer}>
-            <UpperPiecePuzzle></UpperPiecePuzzle>
-          </div>
-          <div className={styles.lowerContainer}>
-            <LowerPiecePuzzle></LowerPiecePuzzle>
-          </div>
-        </div>
       </section>
 
       <section className={styles.navbar}>
-        <Link to="/">
+        <Link to="/company1">
           <NavigationButton>Home</NavigationButton>
         </Link>
       </section>

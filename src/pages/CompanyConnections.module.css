@@ -1,14 +1,7 @@
 .layout {
-  margin: 5% 2% 2% 2%;
+  margin: 12% 2% 2% 2%;
   position: relative;
   padding-bottom: 2%;
-}
-
-.smallPuzzleContainer {
-  margin: 5% 0;
-  display: flex;
-  justify-content: center;
-  gap: 2.5rem;
 }
 
 .gridContainer {

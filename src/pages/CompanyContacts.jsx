@@ -1,0 +1,119 @@
+import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
+import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
+import NavigationButton from "../components/NavigationButton";
+import { useState, useEffect, useRef } from "react";
+import styles from "./CompanyContacts.module.css";
+import { supabase } from "../lib/supabase.js";
+import { Link, useParams } from "react-router-dom";
+
+export default function Contacts() {
+  const [rows, setRows] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const containerRef = useRef(null);
+  const cardRefs = useRef([]);
+
+  useEffect(() => {
+    async function loadData() {
+      const { data, error } = await supabase.from("users").select("*");
+      setRows(data);
+
+      console.log("Supabase data:", data);
+      console.log("Supabase error:", error);
+
+      if (error) {
+        console.error(error);
+      } else {
+        setRows(data);
+      }
+    }
+
+    loadData();
+  }, []);
+
+  // Check which card is visible
+  useEffect(() => {
+    if (!rows.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.dataset.index);
+            setActiveIndex(index);
+          }
+        });
+      },
+      { threshold: 0.6 },
+    );
+    cardRefs.current.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [rows]);
+
+  // Scroll to card when clicking a dot
+  const scrollToCard = (index) => {
+    cardRefs.current[index]?.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+    });
+  };
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (!rows.length) return;
+
+    const index = rows.findIndex((r) => r.id === id);
+    if (index !== -1) {
+      scrollToCard(index);
+    }
+  }, [rows, id]);
+
+  return (
+    <main className={styles.layout}>
+      <section className={styles.cardContainer} ref={containerRef}>
+        {rows?.map((row, i) => (
+          <div
+            key={row.id}
+            data-index={i}
+            ref={(el) => (cardRefs.current[i] = el)}
+            className={styles.contactWrapper}
+          >
+            <div className={styles.upperContainer}>
+              <UpperPiecePuzzle>
+                <div>
+                  <p>{row.full_name}</p>
+                  <p>{row.email}</p>
+                </div>
+              </UpperPiecePuzzle>
+            </div>
+            <div className={styles.lowerContainer}>
+              <LowerPiecePuzzle>
+                <div>
+                  <p>{row.full_name}</p>
+                </div>
+              </LowerPiecePuzzle>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* Dots */}
+      <section className={styles.dots}>
+        {rows.map((_, i) => (
+          <button
+            key={i}
+            className={`${styles.dot} ${i === activeIndex ? styles.activeDot : ""}`}
+            onClick={() => scrollToCard(i)}
+          />
+        ))}
+      </section>
+
+      <section className={styles.btnContainer}>
+        <Link to="/company2">
+          <NavigationButton>Back</NavigationButton>
+        </Link>
+      </section>
+    </main>
+  );
+}
