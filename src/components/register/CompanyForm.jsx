@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import styles from './CompanyForm.module.css'
+import styles from './Form.module.css'
 import { supabase } from '../../lib/supabase.js'
 import { getUniqueCode } from '../../lib/utils.js'
+import RedButton from './RedButton.jsx'
+import WhiteButton from './WhiteButton.jsx'
 
 function CompanyForm() {
 
@@ -61,23 +63,31 @@ function CompanyForm() {
 
     return (
         <main className={styles.registerPage}>
-            <h1>Get started</h1>
             <form className={styles.registerForm} onSubmit={handleSubmit}>
-                <label htmlFor="full_name">Full name</label>
-                <input type="text" id="full_name" name="full_name" value={formData.full_name} onChange={handleChange} required />
 
-                <label htmlFor="company">Company</label>
-                <input type="text" id="company" name="company" value={formData.company} onChange={handleChange} required />
+                <div className={styles.inputWrapper}>
+                    <label htmlFor="full_name">Full name <span>*</span></label>
+                    <input type="text" id="full_name" name="full_name" value={formData.full_name} onChange={handleChange} required />
+                </div>
 
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-    
-                <label htmlFor="link">Link</label>
-                <input type="text" id="link" name="link" value={formData.link} onChange={handleChange} required />
-    
+                <div className={styles.inputWrapper}>
+                    <label htmlFor="company">Company <span>*</span></label>
+                    <input type="text" id="company" name="company" value={formData.company} onChange={handleChange} required />
+                </div>
+
+                <div className={styles.inputWrapper}>
+                    <label htmlFor="email">Email <span>*</span></label>
+                    <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                </div>
+
+                <div className={styles.inputWrapper}>
+                    <label htmlFor="link">Link <span>*</span></label>
+                    <input type="text" id="link" name="link" value={formData.link} onChange={handleChange} required />
+                </div>
+
                 {error && <p className={styles.error}>{error}</p>}
-
-                <button type="submit">Register</button>
+                <RedButton type="submit" text="Get started" />
+                <WhiteButton text="Copy link" />
             </form>
         </main>
     )
