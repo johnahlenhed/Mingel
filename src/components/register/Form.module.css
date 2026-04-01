@@ -1,0 +1,73 @@
+.registerPage {
+    width: 100%;
+    margin-top: 5rem;
+}
+
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 90%;
+}
+
+.inputWrapper label {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background-color: var(--bg);
+    padding: 0 4px;
+    font-size: 0.8rem;
+    color: var(--text-faded);
+}
+
+.inputWrapper label span {
+    color: var(--text-accent);
+}
+
+.inputWrapper input,
+.inputWrapper select {
+    width: 100%;
+    height: 53px;
+    padding: 0 20px;
+    border: 2px solid var(--secondary-faded);
+    border-radius: 32px;
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.inputWrapper input:focus,
+.inputWrapper select:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+
+.inputWrapper select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.inputWrapper select:invalid {
+    color: var(--text-faded);
+}
+
+.inputWrapper:has(select)::after {
+    content: '↓';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--text-faded);
+}
+
+.error {
+    color: var(--text-accent);
+    font-size: 0.85rem;
+}

@@ -1,0 +1,63 @@
+.upperPuzzle {
+  --circle-size: 20vw;
+
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border: 2px dashed lightgray;
+  background-color: white;
+  position: relative;
+  overflow: visible;
+
+  /* avoid content being overlapped by the bottom semicircle */
+  padding-bottom: calc(var(--circle-size) / 2 + 2vh);
+}
+
+/* ensure any direct child (the inner wrapper with text) sits above pseudo-elements */
+.upperPuzzle > * {
+  position: relative;
+  z-index: 4;
+}
+
+.upperPuzzle::before {
+  content: "";
+  position: absolute;
+  width: var(--circle-size);
+  aspect-ratio: 1;
+  left: 50%;
+  bottom: calc(-1 * var(--circle-size) / 2);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: white;
+  z-index: 2;
+}
+
+.upperPuzzle::after {
+  content: "";
+  position: absolute;
+  width: var(--circle-size);
+  height: calc(var(--circle-size) / 2);
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  border: 2px dashed lightgray;
+  border-bottom: none;
+  border-top-left-radius: 999px;
+  border-top-right-radius: 999px;
+  background: transparent;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 5; /* above pseudo elements */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 1rem;
+}
