@@ -1,0 +1,62 @@
+.layout {
+  margin: 12% 2% 2% 2%;
+  position: relative;
+  padding-bottom: 2%;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 50vh;
+  gap: 16px;
+}
+
+.puzzleWrapper {
+  height: 100%;
+  max-width: 45vw;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+.upperContainer {
+  height: 70%;
+  z-index: 1;
+}
+
+.lowerContainer {
+  height: 30%;
+  z-index: 2;
+  margin-top: calc(-1 * var(--circle-size) / 2);
+}
+
+.dotInLower {
+  z-index: 4;
+}
+
+.emptyContainer {
+  margin-bottom: 10vh;
+}
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  z-index: 1000;
+  border-top: 2px solid darkgrey;
+  background-color: lightgray;
+}
+
+/* .navButton {
+  height: 7vh;
+  width: 100%;
+} */
+
+a {
+  width: 100%;
+}
