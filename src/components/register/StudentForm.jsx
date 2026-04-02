@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './Form.module.css'
 import { supabase } from '../../lib/supabase.js'
-import { getUniqueCode, hashPassword, verifyPassword } from '../../lib/utils.js'
+import { getUniqueCode, hashPassword } from '../../lib/utils.js'
 import RedButton from './RedButton.jsx'
 import WhiteButton from './WhiteButton.jsx'
 
