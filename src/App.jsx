@@ -8,6 +8,7 @@ import Contacts from "./pages/Contacts.jsx";
 import CompanyHome from "./pages/CompanyHome.jsx";
 import CompanyConnections from "./pages/CompanyConnections.jsx";
 import CompanyContacts from "./pages/CompanyContacts.jsx";
+import Login from "./pages/Login.jsx";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         {/* <Route path="/contacts" element={<Contacts />} /> */}
         <Route path="/contacts/:id" element={<Contacts />} />
         <Route path="/register" element={<LandingPage />} />
+        <Route path="/login" element={<Login />} />
 
         <Route path="/company1" element={<CompanyHome />} />
         <Route path="/company2" element={<CompanyConnections />} />

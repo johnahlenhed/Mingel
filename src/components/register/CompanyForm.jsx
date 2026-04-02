@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './Form.module.css'
 import { supabase } from '../../lib/supabase.js'
-import { getUniqueCode } from '../../lib/utils.js'
+import { getUniqueCode, hashPassword } from '../../lib/utils.js'
 import RedButton from './RedButton.jsx'
 import WhiteButton from './WhiteButton.jsx'
 
@@ -38,14 +38,22 @@ function CompanyForm() {
 
         setError(null)
 
+        // Generate a unique 4-digit code for the user
         const code = await getUniqueCode()
+
+        // Generate a random 6-digit login code and hash it before storing in the database
+        const loginCode = Math.floor(100000 + Math.random() * 900000).toString()
+        const hashedLoginCode = await hashPassword(loginCode)
+
+        console.log('Login code:', loginCode) // For testing purposes, log the login code to the console
 
         const { data, error: supabaseError } = await supabase
             .from('users')
             .insert({
                 ...formData,
                 role: 'company',
-                code: code
+                code: code,
+                login_code: hashedLoginCode
             })
 
         if (supabaseError) {
