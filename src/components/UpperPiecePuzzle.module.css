@@ -2,7 +2,8 @@
   --circle-size: 20vw;
 
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  height: 99%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   border: 2px dashed lightgray;
@@ -60,4 +61,35 @@
   height: 100%;
   text-align: center;
   padding: 1rem;
+}
+
+/* Variants */
+
+/* Transparent background + light border */
+.lightBorder {
+  background-color: transparent;
+  border: 2px solid lightgray;
+}
+
+.lightBorder::before {
+  background: transparent;
+  border: none;
+}
+
+.lightBorder::after {
+  border: 2px solid lightgray;
+}
+
+/* Transparent background + blue border */
+.darkBorder {
+  background-color: transparent;
+  border-color: var(--yrgo-blue);
+}
+
+.darkBorder::before {
+  background: white;
+}
+
+.darkBorder::after {
+  border-color: var(--yrgo-blue);
 }
