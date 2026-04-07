@@ -9,6 +9,7 @@ import CompanyHome from "./pages/CompanyHome.jsx";
 import CompanyConnections from "./pages/CompanyConnections.jsx";
 import CompanyContacts from "./pages/CompanyContacts.jsx";
 import Login from "./pages/Login.jsx";
+import Puzzle from "./pages/Puzzle.jsx";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/company1" element={<CompanyHome />} />
         <Route path="/company2" element={<CompanyConnections />} />
         <Route path="/company-contacts/:id" element={<CompanyContacts />} />
+        <Route path="/puzzle" element={<Puzzle />} />
       </Routes>
     </Router>
   );
