@@ -21,17 +21,24 @@ export default function Home() {
             type="number"
             inputmode="numeric"
           ></input>
-          <button className={styles.button}>Connect</button>
+          <div className={styles.addBtn}>
+            <NavigationButton>Add +</NavigationButton>
+          </div>
         </article>
 
         <div className={styles.lowerContainer}>
           <LowerPiecePuzzle />
         </div>
 
-        <article className={styles.myConnectionsContainer}>
-          <Link to="/connections">
-            <NavigationButton>My connections (icon)</NavigationButton>
-          </Link>
+        <article className={styles.linksContainer}>
+          <div className={styles.myConnectionsContainer}>
+            <Link to="/connections">
+              <NavigationButton>Connections (icon)</NavigationButton>
+            </Link>
+          </div>
+          <div>
+            <a>Change the URL you share</a>
+          </div>
         </article>
       </section>
     </main>
