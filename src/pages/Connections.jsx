@@ -16,7 +16,7 @@ export default function Connections() {
         .from("users")
         .select("*")
         // LIMIT FOR TESTING
-        .limit(2);
+        .limit(1);
       // LIMIT FOR TESTING
 
       setRows(data);
@@ -126,10 +126,10 @@ export default function Connections() {
         arr.push(
           <div className={styles.hollowContainer}>
             <div className={styles.upperContainer}>
-              <UpperPiecePuzzle variant="lightBorder" />
+              <UpperPiecePuzzle variant="lightBorderSolid" />
             </div>
             <div className={styles.lowerContainer}>
-              <LowerPiecePuzzle variant="lightBorder" />
+              <LowerPiecePuzzle variant="lightBorderSolid" />
             </div>
           </div>,
         );
@@ -163,7 +163,7 @@ export default function Connections() {
           <Link key={row.id} to={`/contacts/${row.id}`}>
             <div key={row.id} className={styles.puzzleWrapper}>
               <div className={styles.upperContainer}>
-                <UpperPiecePuzzle>
+                <UpperPiecePuzzle variant="darkBorderSolid">
                   <div>
                     <p>{row.full_name}</p>
                   </div>
@@ -186,7 +186,7 @@ export default function Connections() {
         <div className={styles.emptyContainer}>
           <Link to="/">
             <div className={styles.upperContainer}>
-              <UpperPiecePuzzle variant="darkBorder">
+              <UpperPiecePuzzle variant="darkBorderDashed">
                 <div>
                   <p>
                     Add new <br />+
@@ -195,7 +195,7 @@ export default function Connections() {
               </UpperPiecePuzzle>
             </div>
             <div className={styles.lowerContainer}>
-              <LowerPiecePuzzle variant="darkBorder"></LowerPiecePuzzle>
+              <LowerPiecePuzzle variant="darkBorderSolid"></LowerPiecePuzzle>
             </div>
           </Link>
         </div>

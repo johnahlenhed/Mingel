@@ -83,30 +83,46 @@
   border: none;
 }
 
-/* Transparent background + light border */
-.lightBorder {
+/* Transparent background + light border (HOLLOW) */
+.lightBorderSolid {
   background-color: white;
   border: 2px solid lightgray;
 }
 
-.lightBorder::before {
+.lightBorderSolid::before {
   background: white;
 }
 
-.lightBorder::after {
+.lightBorderSolid::after {
   border-color: lightgray;
 }
 
-/* Transparent background + blue border */
-.darkBorder {
-  background-color: white;
-  border-color: var(--yrgo-blue);
+/* Transparent background + light dashed border (Home) */
+.lightBorderDashed {
+  background-color: transparent;
+  border: 2px dashed lightgray;
 }
 
-.darkBorder::before {
+.lightBorderDashed::before {
+  background: transparent;
+  border-bottom: none;
+}
+
+.lightBorderDashed::after {
+  border: 2px dashed lightgray;
+  border-bottom: none;
+}
+
+/* Transparent background + blue border (ADD) */
+.darkBorderSolid {
+  background-color: transparent;
+  border: 2px solid var(--yrgo-blue);
+}
+
+.darkBorderSolid::before {
   background: white;
 }
 
-.darkBorder::after {
+.darkBorderSolid::after {
   border-color: var(--yrgo-blue);
 }

@@ -6,8 +6,8 @@
   height: 99%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  border: 2px dashed lightgray;
-  background-color: white;
+  /* border: 2px dashed lightgray; */
+  /* background-color: white; */
   position: relative;
   overflow: visible;
 
@@ -30,7 +30,7 @@
   bottom: calc(-1 * var(--circle-size) / 2);
   transform: translateX(-50%);
   border-radius: 50%;
-  background: white;
+  /* background: white; */
   z-index: 2;
 }
 
@@ -42,7 +42,7 @@
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
-  border: 2px dashed lightgray;
+  /* border: 2px dashed lightgray; */
   border-bottom: none;
   border-top-left-radius: 999px;
   border-top-right-radius: 999px;
@@ -65,31 +65,65 @@
 
 /* Variants */
 
-/* Transparent background + light border */
-.lightBorder {
+/* Transparent background + light dashed border (Home) */
+.lightBorderDashed {
   background-color: transparent;
-  border: 2px solid lightgray;
+  border: 2px dashed lightgray;
 }
 
-.lightBorder::before {
+.lightBorderDashed::before {
   background: transparent;
-  border: none;
+  border-bottom: none;
 }
 
-.lightBorder::after {
+.lightBorderDashed::after {
+  border: 2px dashed lightgray;
+  border-bottom: none;
+}
+
+/* Transparent background + light solid border (HOLLOW) */
+.lightBorderSolid {
+  background-color: transparent;
   border: 2px solid lightgray;
 }
 
-/* Transparent background + blue border */
-.darkBorder {
-  background-color: transparent;
-  border-color: var(--yrgo-blue);
+.lightBorderSolid::before {
+  background: transparent;
+  border-bottom: none;
 }
 
-.darkBorder::before {
+.lightBorderSolid::after {
+  border: 2px solid lightgray;
+  border-bottom: none;
+}
+
+/* Transparent background + blue dashed border (ADD) */
+.darkBorderDashed {
+  background-color: transparent;
+  border: 2px dashed var(--yrgo-blue);
+  /* border-color: var(--yrgo-blue); */
+  /* border-bottom: none; */
+}
+
+.darkBorderDashed::before {
   background: white;
 }
 
-.darkBorder::after {
+.darkBorderDashed::after {
   border-color: var(--yrgo-blue);
+}
+
+/* Transparent background + blue solid border (Connected) */
+.darkBorderSolid {
+  background-color: transparent;
+  border: 2px solid var(--yrgo-blue);
+}
+
+.darkBorderDashed::before {
+  background: white;
+}
+
+.darkBorderDashed::after {
+  border: 2px solid var(--yrgo-blue);
+  border-bottom: none;
 }

@@ -10,7 +10,7 @@ export default function Home() {
     <main className={styles.main}>
       <section className={styles.layout}>
         <div className={styles.upperContainer}>
-          <UpperPiecePuzzle />
+          <UpperPiecePuzzle variant="lightBorderDashed"></UpperPiecePuzzle>
         </div>
 
         <article className={styles.form}>
@@ -27,7 +27,7 @@ export default function Home() {
         </article>
 
         <div className={styles.lowerContainer}>
-          <LowerPiecePuzzle />
+          <LowerPiecePuzzle variant="lightBorderDashed" />
         </div>
 
         <article className={styles.linksContainer}>
