@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase.js'
 import { getUniqueCode, hashPassword } from '../../lib/utils.js'
 import RedButton from './RedButton.jsx'
 import WhiteButton from './WhiteButton.jsx'
+import { sendLoginEmail } from '../../lib/sendEmail.js'
 
 const programmes = [
     'Web Development (WU)',
@@ -50,8 +51,6 @@ function StudentForm() {
         const loginCode = Math.floor(100000 + Math.random() * 900000).toString()
         const hashedLoginCode = await hashPassword(loginCode)
 
-        console.log('Login code:', loginCode) // For testing purposes, log the login code to the console
-
         const { data, error: supabaseError } = await supabase
             .from('users')
             .insert({
@@ -64,7 +63,8 @@ function StudentForm() {
         if (supabaseError) {
             console.error('Error inserting data:', supabaseError)
         } else {
-            console.log('Data inserted successfully:', data)
+            await sendLoginEmail(formData.email, loginCode) // Send the login code to the user's email
+            console.log('Email sent!')
             setFormData({
                 full_name: '',
                 programme: '',
