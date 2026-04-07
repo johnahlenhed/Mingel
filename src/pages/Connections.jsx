@@ -16,7 +16,7 @@ export default function Connections() {
         .from("users")
         .select("*")
         // LIMIT FOR TESTING
-        .limit(1);
+        .limit(2);
       // LIMIT FOR TESTING
 
       setRows(data);
@@ -124,7 +124,7 @@ export default function Connections() {
       const arr = [];
       for (let i = 0; i < count; i++) {
         arr.push(
-          <div key={i} className={styles.hollowContainer}>
+          <div className={styles.hollowContainer}>
             <div className={styles.upperContainer}>
               <UpperPiecePuzzle variant="lightBorder" />
             </div>
@@ -186,7 +186,7 @@ export default function Connections() {
         <div className={styles.emptyContainer}>
           <Link to="/">
             <div className={styles.upperContainer}>
-              <UpperPiecePuzzle>
+              <UpperPiecePuzzle variant="darkBorder">
                 <div>
                   <p>
                     Add new <br />+
