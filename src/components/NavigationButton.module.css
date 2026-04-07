@@ -1,11 +1,9 @@
 .btn {
   background-color: darkgrey;
-  padding: 1rem;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  padding: 0.7rem;
+  border-radius: 9999px;
   width: 100%;
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1rem;
   border: none;
   color: white;
 }
