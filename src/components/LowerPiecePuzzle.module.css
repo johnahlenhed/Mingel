@@ -1,3 +1,7 @@
+:root {
+  --yrgo-blue: #002a52;
+}
+
 .lowerPuzzle {
   --circle-size: 20vw;
 
@@ -5,7 +9,7 @@
   height: 100%;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  border: 2px dashed darkgray;
+  /* border: 2px dashed darkgray; */
   background-color: white;
   position: relative;
   overflow: visible;
@@ -60,4 +64,49 @@
   width: 100%;
   text-align: center;
   padding: 1rem;
+}
+
+/* Variants */
+/* Blue solid */
+.blue {
+  background-color: var(--yrgo-blue);
+  border: 2px solid var(--yrgo-blue);
+}
+
+.blue::before {
+  background: var(--yrgo-blue);
+  border: none;
+}
+
+.blue::after {
+  border-color: var(--yrgo-blue);
+  border: none;
+}
+
+/* Transparent background + light border */
+.lightBorder {
+  background-color: white;
+  border: 2px solid lightgray;
+}
+
+.lightBorder::before {
+  background: white;
+}
+
+.lightBorder::after {
+  border-color: lightgray;
+}
+
+/* Transparent background + blue border */
+.darkBorder {
+  background-color: white;
+  border-color: var(--yrgo-blue);
+}
+
+.darkBorder::before {
+  background: white;
+}
+
+.darkBorder::after {
+  border-color: var(--yrgo-blue);
 }
