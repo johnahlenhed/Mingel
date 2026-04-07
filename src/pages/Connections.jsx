@@ -120,77 +120,33 @@ export default function Connections() {
 
   // NUMBER OF HOLLOW CONTAINERS
   function hollowContainers() {
+    function renderHollowPieces(count) {
+      const arr = [];
+      for (let i = 0; i < count; i++) {
+        arr.push(
+          <div key={i} className={styles.hollowContainer}>
+            <div className={styles.upperContainer}>
+              <UpperPiecePuzzle variant="lightBorder" />
+            </div>
+            <div className={styles.lowerContainer}>
+              <LowerPiecePuzzle variant="lightBorder" />
+            </div>
+          </div>,
+        );
+      }
+      return arr;
+    }
+
     const count = Array.isArray(rows) ? rows.length : 0;
     const progress = Math.min(count, 3);
 
     switch (progress) {
       case 0:
-        return (
-          <>
-            <div className={styles.hollowContainer}>
-              <div className={styles.upperContainer}>
-                <UpperPiecePuzzle variant="lightBorder"></UpperPiecePuzzle>
-              </div>
-              <div className={styles.lowerContainer}>
-                <LowerPiecePuzzle variant="lightBorder"></LowerPiecePuzzle>
-              </div>
-            </div>
-
-            <div className={styles.hollowContainer}>
-              <div className={styles.upperContainer}>
-                <UpperPiecePuzzle variant="lightBorder"></UpperPiecePuzzle>
-              </div>
-              <div className={styles.lowerContainer}>
-                <LowerPiecePuzzle variant="lightBorder"></LowerPiecePuzzle>
-              </div>
-            </div>
-
-            <div className={styles.hollowContainer}>
-              <div className={styles.upperContainer}>
-                <UpperPiecePuzzle variant="lightBorder"></UpperPiecePuzzle>
-              </div>
-              <div className={styles.lowerContainer}>
-                <LowerPiecePuzzle variant="lightBorder"></LowerPiecePuzzle>
-              </div>
-            </div>
-          </>
-        );
+        return <>{renderHollowPieces(3)}</>;
       case 1:
-        return (
-          <>
-            <div className={styles.hollowContainer}>
-              <div className={styles.upperContainer}>
-                <UpperPiecePuzzle variant="lightBorder"></UpperPiecePuzzle>
-              </div>
-              <div className={styles.lowerContainer}>
-                <LowerPiecePuzzle variant="lightBorder"></LowerPiecePuzzle>
-              </div>
-            </div>
-
-            <div className={styles.hollowContainer}>
-              <div className={styles.upperContainer}>
-                <UpperPiecePuzzle variant="lightBorder"></UpperPiecePuzzle>
-              </div>
-              <div className={styles.lowerContainer}>
-                <LowerPiecePuzzle variant="lightBorder"></LowerPiecePuzzle>
-              </div>
-            </div>
-          </>
-        );
-
+        return <>{renderHollowPieces(2)}</>;
       case 2:
-        return (
-          <>
-            <div className={styles.hollowContainer}>
-              <div className={styles.upperContainer}>
-                <UpperPiecePuzzle variant="lightBorder"></UpperPiecePuzzle>
-              </div>
-              <div className={styles.lowerContainer}>
-                <LowerPiecePuzzle variant="lightBorder"></LowerPiecePuzzle>
-              </div>
-            </div>
-          </>
-        );
+        return <>{renderHollowPieces(1)}</>;
 
       default:
         return <></>;
