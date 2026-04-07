@@ -10,6 +10,7 @@ import CompanyConnections from "./pages/CompanyConnections.jsx";
 import CompanyContacts from "./pages/CompanyContacts.jsx";
 import Login from "./pages/Login.jsx";
 import Puzzle from "./pages/Puzzle.jsx";
+import Admin from "./admin/Admin.jsx";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/company2" element={<CompanyConnections />} />
         <Route path="/company-contacts/:id" element={<CompanyContacts />} />
         <Route path="/puzzle" element={<Puzzle />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );
