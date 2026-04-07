@@ -46,8 +46,6 @@ function CompanyForm() {
         const loginCode = Math.floor(100000 + Math.random() * 900000).toString()
         const hashedLoginCode = await hashPassword(loginCode)
 
-        console.log('Login code:', loginCode) // For testing purposes, log the login code to the console
-
         const { data, error: supabaseError } = await supabase
             .from('users')
             .insert({
