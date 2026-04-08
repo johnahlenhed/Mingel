@@ -1,55 +1,61 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { supabase } from "../lib/supabase.js";
 import styles from "./Puzzle.module.css";
 
-const pieces = Array.from({ length: 50 }, (_, i) => ({
-    id: i + 1,
-    src: `/puzzle/piece${i + 1}.svg`
-}))
 
 function Puzzle() {
     const [unlockedPieces, setUnlockedPieces] = useState(0)
+    const [svgContent, setSvgContent] = useState('')
+    const wrapperRef = useRef(null)
 
     useEffect(() => {
-        // Fetch unlocked pieces from Supabase
+        document.body.classList.add('puzzle-page')
+        fetch('/puzzle/puzzle.svg')
+            .then(res => res.text())
+            .then(text => setSvgContent(text))
+        return () => document.body.classList.remove('puzzle-page')
+    }, [])
+
+    useEffect(() => {
+        if (!svgContent) return
+    
+        // Väntar tills React har renderat SVG:n i DOM:en
+        const timer = setTimeout(() => {
+            if (!wrapperRef.current) return
+            for (let i = 1; i <= 50; i++) {
+                const el = wrapperRef.current.querySelector(`[id="${i}"]`)
+                if (el) el.classList.toggle('unlocked', i <= unlockedPieces)
+            }
+        }, 0)
+    
+        return () => clearTimeout(timer)
+    }, [unlockedPieces, svgContent])
+
+
+    useEffect(() => {
         const fetchCount = async () => {
             const { count } = await supabase
                 .from('connections')
                 .select('*', { count: 'exact' })
                 .eq('status', 'accepted')
-
-                setUnlockedPieces(Math.floor(count / 3)) // Unlock one piece for every 3 connections
+                console.log('count:', count)
+            setUnlockedPieces(Math.floor(count / 3))
         }
-
         fetchCount()
-
-        // Listen for real-time updates
         const subscription = supabase
             .channel('connections')
-            .on('postgres_changes', {
-                event: 'UPDATE',
-                schema: 'public',
-                table: 'connections',
-                filter: 'status=eq.accepted'
-            }, async () => {
-                await fetchCount()
-            })
+            .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'connections', filter: 'status=eq.accepted' },
+                async () => await fetchCount())
             .subscribe()
-
         return () => subscription.unsubscribe()
     }, [])
 
     return (
-        <main className={styles.puzzleGrid}>
-            {pieces.map((piece) => (
-                <img
-                    key={piece.id}
-                    src={piece.src}
-                    alt={`Puzzle piece ${piece.id}`}
-                    className={`${styles.piece} ${piece.id <= unlockedPieces ? styles.unlocked : ''}`}
-                />
-            ))}
-        </main>
+        <div
+            ref={wrapperRef}
+            className={styles.puzzleWrapper}
+            dangerouslySetInnerHTML={{ __html: svgContent }}
+        />
     )
 }
 
