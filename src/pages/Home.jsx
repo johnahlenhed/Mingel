@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./Home.module.css";
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
+import DigitInput from "../components/DigitInput";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
 import NavigationButton from "../components/NavigationButton";
 import { Link } from "react-router-dom";
@@ -14,13 +15,11 @@ export default function Home() {
         </div>
 
         <article className={styles.form}>
-          <label className={styles.label}></label>
-          <input
-            className={styles.input}
-            placeholder="0000"
-            type="number"
-            inputmode="numeric"
-          ></input>
+          <DigitInput
+            onComplete={(code) => {
+              console.log("Code:", code);
+            }}
+          ></DigitInput>
           <div className={styles.addBtn}>
             <NavigationButton>Add +</NavigationButton>
           </div>
