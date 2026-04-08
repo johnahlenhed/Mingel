@@ -185,7 +185,7 @@ export default function Connections() {
         {/* ADD container */}
         <div className={styles.emptyContainer}>
           <Link to="/">
-            <div className={styles.upperContainer}>
+            <div className={`${styles.upperContainer} ${styles.upperEmpty}`}>
               <UpperPiecePuzzle variant="darkBorderDashed">
                 <div>
                   <p>
