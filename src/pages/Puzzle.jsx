@@ -52,6 +52,23 @@ function Puzzle() {
         return () => subscription.unsubscribe()
     }, [])
 
+    useEffect(() => {
+        const subscription = supabase
+            .channel('settings')
+            .on('postgres_changes', {
+                event: 'UPDATE',
+                schema: 'public',
+                table: 'settings',
+            }, (payload) => {
+                if (payload.new.puzzle_completed) {
+                    setUnlockedPieces(50)
+                }
+            })
+            .subscribe()
+        
+        return () => subscription.unsubscribe()
+    }, [])
+
     return (
         <div
             ref={wrapperRef}
