@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
 import "./App.css";
+import DynamicBG from "./components/DynamicBG.jsx";
 import Home from "./pages/Home.jsx";
 import Connections from "./pages/Connections.jsx";
 import Contacts from "./pages/Contacts.jsx";
@@ -17,15 +18,43 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/connections" element={<Connections />} />
+        <Route
+          path="/connections"
+          element={
+            <DynamicBG>
+              <Connections />
+            </DynamicBG>
+          }
+        />
         {/* <Route path="/contacts" element={<Contacts />} /> */}
-        <Route path="/contacts/:id" element={<Contacts />} />
+        <Route
+          path="/contacts/:id"
+          element={
+            <DynamicBG>
+              <Contacts />
+            </DynamicBG>
+          }
+        />
         <Route path="/register" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
 
         <Route path="/company1" element={<CompanyHome />} />
-        <Route path="/company2" element={<CompanyConnections />} />
-        <Route path="/company-contacts/:id" element={<CompanyContacts />} />
+        <Route
+          path="/company2"
+          element={
+            <DynamicBG>
+              <CompanyConnections />
+            </DynamicBG>
+          }
+        />
+        <Route
+          path="/company-contacts/:id"
+          element={
+            <DynamicBG>
+              <CompanyContacts />
+            </DynamicBG>
+          }
+        />
         <Route path="/puzzle" element={<Puzzle />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>
