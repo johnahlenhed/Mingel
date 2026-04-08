@@ -8,6 +8,7 @@ import { supabase } from "../lib/supabase.js";
 
 export default function Connections() {
   const [rows, setRows] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function loadData() {
@@ -26,6 +27,10 @@ export default function Connections() {
 
     loadData();
   }, []);
+
+  function toggleModal() {
+    setIsModalOpen((s) => !s);
+  }
 
   return (
     <main className={styles.layout}>
@@ -54,8 +59,53 @@ export default function Connections() {
 
       <section className={styles.navbar}>
         <Link to="/company1">
-          <NavigationButton>Home</NavigationButton>
+          <NavigationButton>
+            <div className={styles.navContent}>
+              <span>Show code</span>
+              <img
+                className={styles.arrowIcon}
+                src="../../arrow_right.svg"
+                alt="Arrow pointing right"
+              />
+            </div>
+          </NavigationButton>
         </Link>
+
+        <img
+          onClick={toggleModal}
+          className={styles.helpBtn}
+          src="../../public/StudentHelp.png"
+          alt="Question mark button for help"
+        />
+
+        <section className={styles.modalContainer}>
+          <article
+            className={`${styles.modalContent} ${isModalOpen ? styles.showModal : ""}`}
+          >
+            <h3>How does it work?</h3>
+            <p>
+              Meet students and grow your network by sharing your unique code.
+            </p>
+            <p>
+              Every connection is collected in your library, and after the event
+              you can highlight promising candidates using the handshake icon.
+            </p>
+            <button
+              className={styles.modalClose}
+              onClick={() => setIsModalOpen(false)}
+              aria-label="Close"
+            >
+              ×
+            </button>
+          </article>
+          {isModalOpen && (
+            <div
+              className={styles.modalOverlay}
+              onClick={() => setIsModalOpen(false)}
+              aria-hidden="true"
+            />
+          )}
+        </section>
       </section>
     </main>
   );

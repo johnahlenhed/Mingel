@@ -45,18 +45,73 @@
   left: 0;
   width: 100%;
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 0.5rem;
   z-index: 1000;
-  border-top: 2px solid darkgrey;
-  background-color: lightgray;
+  /* border-top: 2px solid darkgrey;
+  background-color: lightgray; */
 }
 
-/* .navButton {
-  height: 7vh;
-  width: 100%;
-} */
+.navContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.helpBtn {
+  /* width: 15vw; */
+  aspect-ratio: 1;
+  height: 8vh;
+  z-index: 1000;
+}
 
 a {
   width: 100%;
+}
+
+.modalContainer {
+  position: relative;
+}
+
+.modalContent {
+  position: fixed;
+  width: 80vw;
+  max-width: 520px;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+}
+
+.showModal {
+  display: block;
+}
+
+.modalOverlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1990;
+}
+
+.modalClose {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.25rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: black;
 }
