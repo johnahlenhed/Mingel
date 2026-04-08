@@ -1,4 +1,3 @@
-import SmallPuzzle from "../components/SmallPuzzle.jsx";
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
 import NavigationButton from "../components/NavigationButton";
