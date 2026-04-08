@@ -56,6 +56,12 @@ function CompanyForm() {
             })
 
         if (supabaseError) {
+            if (supabaseError.code === '23505') { // Unique violation error code
+                setError('A user with this email already exists')
+            } else {
+                console.error('Error inserting data:', supabaseError)
+                setError('An error occurred while registering. Please try again.')
+            }
             console.error('Error inserting data:', supabaseError)
         } else {
             await sendLoginEmail(formData.email, loginCode) // Send the login code to the user's email
