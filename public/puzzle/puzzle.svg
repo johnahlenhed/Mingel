@@ -185,7 +185,7 @@
 </g>
 <defs>
 <style>
-  .piece { opacity: 0.15; transition: opacity 0.5s ease; }
+  .piece { opacity: 0.3; transition: opacity 0.5s ease; }
   .piece.unlocked { opacity: 1 !important; }
 </style>
 <clipPath id="clip0_23_6">

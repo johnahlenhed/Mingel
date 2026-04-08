@@ -44,6 +44,8 @@ function Puzzle() {
         fetchCount()
         const subscription = supabase
             .channel('connections')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'connections', filter: 'status=eq.accepted' },
+                async () => await fetchCount())
             .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'connections', filter: 'status=eq.accepted' },
                 async () => await fetchCount())
             .subscribe()
