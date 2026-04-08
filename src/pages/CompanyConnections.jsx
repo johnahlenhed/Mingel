@@ -34,14 +34,14 @@ export default function Connections() {
           <Link key={row.id} to={`/company-contacts/${row.id}`}>
             <div key={row.id} className={styles.puzzleWrapper}>
               <div className={styles.upperContainer}>
-                <UpperPiecePuzzle>
+                <UpperPiecePuzzle variant="darkBorderSolid">
                   <div>
                     <p>{row.full_name}</p>
                   </div>
                 </UpperPiecePuzzle>
               </div>
               <div className={styles.lowerContainer}>
-                <LowerPiecePuzzle>
+                <LowerPiecePuzzle variant="blue">
                   <div>
                     <p>{row.full_name}</p>
                   </div>

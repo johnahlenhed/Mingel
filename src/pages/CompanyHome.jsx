@@ -7,7 +7,7 @@ export default function CompanyHome() {
   return (
     <main className={styles.layout}>
       <section className={styles.rotatedContainer}>
-        <LowerPiecePuzzle></LowerPiecePuzzle>
+        <LowerPiecePuzzle variant="lightBorderDashed"></LowerPiecePuzzle>
       </section>
 
       <section>
