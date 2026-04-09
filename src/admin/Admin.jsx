@@ -20,8 +20,10 @@ function Admin() {
     }
 
     const completePuzzle = async () => {
-        // Logic will apply when when Puzzle.jsx is completed, for now we can just simulate it with a button click
-        console.log('Puzzle completed!')
+        await supabase
+            .from('settings')
+            .update({ puzzle_completed: true })
+            .eq('id', '1451a93e-4633-4a40-9cfb-1dd110eab0dd')
     }
 
     if (!authenticated) {
