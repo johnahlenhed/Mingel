@@ -9,6 +9,26 @@ export default function ConnectionRequest() {
     useEffect(() => {
         if (!user) return
 
+        // Fetch already pending requests
+        const fetchPending = async () => {
+            const { data } = await supabase
+            .from('connections')
+            .select('*, users!connections_from_user_fkey(full_name, code)')
+            .eq('to_user', user.id)
+            .eq('status', 'pending')
+            .limit(1)
+            .maybeSingle()
+
+            if (data) {
+            setRequest({
+                connectionId: data.id,
+                senderName: data.users.full_name,
+                senderCode: data.users.code
+            })
+            }
+        }
+        fetchPending()
+
         const subscription = supabase
             .channel('incoming-connections')
             .on('postgres_changes', {

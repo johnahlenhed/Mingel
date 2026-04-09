@@ -4,7 +4,7 @@ import styles from "./Puzzle.module.css";
 
 
 function Puzzle() {
-    const [unlockedPieces, setUnlockedPieces] = useState(0)
+    const [unlockedPieces, setUnlockedPieces] = useState(2)
     const [svgContent, setSvgContent] = useState('')
     const wrapperRef = useRef(null)
 

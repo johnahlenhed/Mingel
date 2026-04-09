@@ -8,10 +8,15 @@ import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase.js";
 import { useUser } from "../lib/useUser.js";
 import ConnectionRequest from "../components/ConnectionRequest.jsx";
+import { Navigate } from "react-router-dom";
 
 export default function Home() {
   const user = useUser();
   const [connectionStatus, setConnectionStatus] = useState(null);
+
+  if (user?.role === 'company') {
+    return <Navigate to="/company1" />
+  }
 
   const handleConnect = async (code) => {
     setConnectionStatus(null)
