@@ -8,17 +8,19 @@ export default function FourDigitDisplay() {
   useEffect(() => {
     async function loadCode() {
       const { data, error } = await supabase
-        .from("codes") // <-- adjust to DB
+        .from("users") // <-- adjust to DB
         .select("code") // <-- adjust to DB
-        .limit(1)
-        .single();
+        .limit(1);
 
       if (error) {
         console.error("Error loading code:", error);
         return;
       }
 
-      setCode(data.code); // ie "4821"
+      if (data && data.length > 0) {
+        setCode(data[0].code);
+        console.log("Company code is:", data[0].code);
+      }
     }
 
     loadCode();

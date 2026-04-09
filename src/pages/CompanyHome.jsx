@@ -15,11 +15,7 @@ export default function CompanyHome() {
       <section>
         <article className={styles.codeContainer}>
           <DisplayDigit></DisplayDigit>
-          {/* <p className={styles.connectionCode}>0000</p> */}
         </article>
-        {/* <article className={styles.editBtnContainer}>
-          <button>Edit contact info</button>
-          </article> */}
       </section>
       <section className={styles.rotatedContainer}>
         <UpperPiecePuzzle variant="lightBorderDashed"></UpperPiecePuzzle>
