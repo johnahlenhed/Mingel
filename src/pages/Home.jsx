@@ -32,7 +32,15 @@ export default function Home() {
         <article className={styles.linksContainer}>
           <div className={styles.myConnectionsContainer}>
             <Link to="/connections">
-              <NavigationButton>Connections (icon)</NavigationButton>
+              <NavigationButton>
+                <div className={styles.navContent}>
+                  <span>Connections</span>{" "}
+                  <img
+                    className={styles.arrowIcon}
+                    src="../../arrow_right.svg"
+                  />
+                </div>
+              </NavigationButton>
             </Link>
           </div>
           <div>

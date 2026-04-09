@@ -23,7 +23,9 @@ export default function CompanyHome() {
 
       <section className={styles.navigation}>
         <Link to="/company2">
-          <NavigationButton>Connections</NavigationButton>
+          <NavigationButton>
+            Connections <img src="../../arrow_right.svg" />
+          </NavigationButton>
         </Link>
       </section>
 
