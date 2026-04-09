@@ -5,34 +5,47 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Connections.module.css";
 import { supabase } from "../lib/supabase.js";
+import { useUser } from "../lib/useUser.js";
 
 export default function Connections() {
+  const user = useUser();
   const [rows, setRows] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    if (!user) return
+
+    // Function to load connections data for the current user
     async function loadData() {
       const { data, error } = await supabase
-        .from("users")
-        .select("*")
-        // LIMIT FOR TESTING
-        .limit(1);
-      // LIMIT FOR TESTING
-
-      setRows(data);
-
-      console.log("Supabase data:", data);
-      console.log("Supabase error:", error);
+        .from("connections")
+        .select("*, users!connections_to_user_fkey(id, full_name, company, programme)")
+        .eq("from_user", user.id)
+        .eq("status", "accepted")
 
       if (error) {
-        console.error(error);
+        console.error(error)
       } else {
-        setRows(data);
+        setRows(data)
       }
     }
+    loadData()
 
-    loadData();
-  }, []);
+    // Subscribe to changes in connections where current user is the sender
+    const subscription = supabase
+      .channel('accepted-connections')
+      .on('postgres_changes', {
+        event: 'UPDATE',
+        schema: 'public',
+        table: 'connections',
+        filter: `from_user=eq.${user.id}`
+      }, () => loadData())
+      .subscribe()
+
+    return () => subscription.unsubscribe()
+
+
+  }, [user])
 
   function toggleModal() {
     setIsModalOpen((s) => !s);
@@ -124,7 +137,7 @@ export default function Connections() {
       const arr = [];
       for (let i = 0; i < count; i++) {
         arr.push(
-          <div className={styles.hollowContainer}>
+          <div key={i} className={styles.hollowContainer}>
             <div className={styles.upperContainer}>
               <UpperPiecePuzzle variant="lightBorderSolid" />
             </div>
@@ -160,13 +173,13 @@ export default function Connections() {
       </section>
       <section className={styles.gridContainer}>
         {rows?.map((row) => (
-          <Link key={row.id} to={`/contacts/${row.id}`}>
+          <Link key={row.id} to={`/contacts/${row.users.id}`}>
             <div key={row.id} className={styles.puzzleWrapper}>
               <div className={styles.upperContainer}>
                 <UpperPiecePuzzle variant="darkBorderSolid">
                   <div>
-                    <p>{row.full_name}</p>
-                    <p>{row.company}</p>
+                    <p>{row.users.full_name}</p>
+                    <p>{row.users.company}</p>
                   </div>
                 </UpperPiecePuzzle>
               </div>

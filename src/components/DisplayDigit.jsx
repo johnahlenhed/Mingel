@@ -1,33 +1,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import styles from "./DisplayDigit.module.css";
+import { useUser } from "../lib/useUser";
 
 export default function FourDigitDisplay() {
-  const [code, setCode] = useState("");
-
-  useEffect(() => {
-    async function loadCode() {
-      const { data, error } = await supabase
-        .from("users") // <-- adjust to DB
-        .select("code") // <-- adjust to DB
-        .limit(1);
-
-      if (error) {
-        console.error("Error loading code:", error);
-        return;
-      }
-
-      if (data && data.length > 0) {
-        setCode(data[0].code);
-        console.log("Company code is:", data[0].code);
-      }
-    }
-
-    loadCode();
-  }, []);
+  const user = useUser();
 
   // If no code - show empty slots
-  const digits = code ? code.split("") : ["", "", "", ""];
+  const digits = user?.code ? user.code.split("") : ["", "", "", ""];
 
   return (
     <div className={styles.container}>
