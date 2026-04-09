@@ -12,6 +12,7 @@ export const sendLoginEmail = async (email, loginCode) => {
     )
 
     if (!response.ok) {
-        console.error('Failed to send email')
+        const errorData = await response.json()
+        console.error('Failed to send email', errorData)
     }
 }
