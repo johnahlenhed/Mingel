@@ -48,6 +48,13 @@
   width: 100%;
 }
 
+.lowerContent {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .myConnectionsContainer {
   display: flex;
   align-items: center;
