@@ -5,6 +5,7 @@ import { getUniqueCode, hashPassword } from '../../lib/utils.js'
 import RedButton from './RedButton.jsx'
 import WhiteButton from './WhiteButton.jsx'
 import { sendLoginEmail } from '../../lib/sendEmail.js'
+import { useNavigate } from 'react-router-dom'
 
 const programmes = [
     'Web Development (WU)',
@@ -12,6 +13,7 @@ const programmes = [
 ]
 
 function StudentForm() {
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         full_name: '',
@@ -78,6 +80,7 @@ function StudentForm() {
                 email: '',
                 link: ''
             })
+            navigate('/login')
         }
     }
 

@@ -8,6 +8,7 @@ function Puzzle() {
     const [svgContent, setSvgContent] = useState('')
     const wrapperRef = useRef(null)
 
+    // Add class to body for page-specific styling and fetch SVG content
     useEffect(() => {
         document.body.classList.add('puzzle-page')
         fetch('/puzzle/puzzle.svg')
@@ -16,6 +17,7 @@ function Puzzle() {
         return () => document.body.classList.remove('puzzle-page')
     }, [])
 
+    // Update SVG classes after content or unlocked pieces change
     useEffect(() => {
         if (!svgContent) return
     
@@ -31,17 +33,33 @@ function Puzzle() {
         return () => clearTimeout(timer)
     }, [unlockedPieces, svgContent])
 
-
+    // Fetch initial puzzle completion status and subscribe to changes
     useEffect(() => {
-        const fetchCount = async () => {
-            const { count } = await supabase
-                .from('connections')
-                .select('*', { count: 'exact' })
-                .eq('status', 'accepted')
-                console.log('count:', count)
-            setUnlockedPieces(Math.floor(count / 3))
+        const fetchSettings = async () => {
+            const { data } = await supabase
+                .from('settings')
+                .select('puzzle_completed')
+                .single()
+            if (data?.puzzle_completed) {
+                setUnlockedPieces(50)
+            } else {
+                fetchCount() // Fetch initial count of accepted connections to determine unlocked pieces
+            }
         }
-        fetchCount()
+        fetchSettings()
+    }, [])
+
+    // Fetch initial count of accepted connections and subscribe to changes
+    const fetchCount = async () => {
+        const { count } = await supabase
+            .from('connections')
+            .select('*', { count: 'exact' })
+            .eq('status', 'accepted')
+        setUnlockedPieces(Math.floor(count / 3))
+    }
+
+    // Subscribe to changes in accepted connections to update unlocked pieces in real-time
+    useEffect(() => {
         const subscription = supabase
             .channel('connections')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'connections', filter: 'status=eq.accepted' },
@@ -52,6 +70,7 @@ function Puzzle() {
         return () => subscription.unsubscribe()
     }, [])
 
+    // Subscribe to puzzle completion status changes
     useEffect(() => {
         const subscription = supabase
             .channel('settings')
@@ -62,6 +81,8 @@ function Puzzle() {
             }, (payload) => {
                 if (payload.new.puzzle_completed) {
                     setUnlockedPieces(50)
+                } else {
+                    fetchCount()
                 }
             })
             .subscribe()

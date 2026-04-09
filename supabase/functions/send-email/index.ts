@@ -22,7 +22,7 @@ Deno.serve(async (req) => {
   const resend = new Resend(Deno.env.get('RESEND_API_KEY'))
 
   const { error } = await resend.emails.send({
-    from: 'Mingel <onboarding@resend.dev>',
+    from: 'Mingel <hello@mingel.johnahlenhed.se>',
     to: email,
     subject: 'Your login code for the event:',
     html: `

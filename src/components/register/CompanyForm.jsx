@@ -5,8 +5,10 @@ import { getUniqueCode, hashPassword } from '../../lib/utils.js'
 import RedButton from './RedButton.jsx'
 import WhiteButton from './WhiteButton.jsx'
 import { sendLoginEmail } from '../../lib/sendEmail.js'
+import { useNavigate } from 'react-router-dom'
 
 function CompanyForm() {
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         full_name: '',
@@ -73,6 +75,7 @@ function CompanyForm() {
                 email: '',
                 link: ''
             })
+            navigate('/login')
         }
     }
 
