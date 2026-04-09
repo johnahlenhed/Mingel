@@ -31,6 +31,14 @@
   margin-top: calc(-1 * var(--circle-size) / 2);
 }
 
+.lowerContent {
+  position: absolute;
+  top: -80%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+}
+
 .dotInLower {
   z-index: 4;
 }
@@ -45,18 +53,70 @@
   left: 0;
   width: 100%;
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 0.5rem;
   z-index: 1000;
-  border-top: 2px solid darkgrey;
-  background-color: lightgray;
 }
 
-/* .navButton {
-  height: 7vh;
-  width: 100%;
-} */
+.navContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.helpBtn {
+  aspect-ratio: 1;
+  height: 8vh;
+  z-index: 1000;
+}
 
 a {
   width: 100%;
+}
+
+.modalContainer {
+  position: relative;
+}
+
+.modalContent {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transform: translateY(100%); /* Start below viewport */
+  transition: transform 0.4s ease;
+
+  z-index: 2000;
+  pointer-events: none;
+}
+
+.showModal {
+  transform: translateY(0); /* Align to bottom of viewport */
+  pointer-events: auto;
+}
+
+.modalOverlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1990;
+}
+
+.modalClose {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.25rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: black;
 }

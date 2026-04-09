@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.puzzleWrapper {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    padding: 5rem;
+}
+
+.puzzleWrapper svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.puzzleWrapper svg .piece {
+    opacity: 0.15;
+    transition: opacity 0.5s ease;
+}
+
+.puzzleWrapper svg .unlocked {
+    opacity: 1;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

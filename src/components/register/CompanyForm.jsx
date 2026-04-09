@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import styles from './Form.module.css'
 import { supabase } from '../../lib/supabase.js'
-import { getUniqueCode } from '../../lib/utils.js'
+import { getUniqueCode, hashPassword } from '../../lib/utils.js'
 import RedButton from './RedButton.jsx'
 import WhiteButton from './WhiteButton.jsx'
+import { sendLoginEmail } from '../../lib/sendEmail.js'
+import { useNavigate } from 'react-router-dom'
 
 function CompanyForm() {
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         full_name: '',
@@ -38,19 +41,33 @@ function CompanyForm() {
 
         setError(null)
 
+        // Generate a unique 4-digit code for the user
         const code = await getUniqueCode()
+
+        // Generate a random 6-digit login code and hash it before storing in the database
+        const loginCode = Math.floor(100000 + Math.random() * 900000).toString()
+        const hashedLoginCode = await hashPassword(loginCode)
 
         const { data, error: supabaseError } = await supabase
             .from('users')
             .insert({
                 ...formData,
                 role: 'company',
-                code: code
+                code: code,
+                login_code: hashedLoginCode
             })
 
         if (supabaseError) {
+            if (supabaseError.code === '23505') { // Unique violation error code
+                setError('A user with this email already exists')
+            } else {
+                console.error('Error inserting data:', supabaseError)
+                setError('An error occurred while registering. Please try again.')
+            }
             console.error('Error inserting data:', supabaseError)
         } else {
+            await sendLoginEmail(formData.email, loginCode) // Send the login code to the user's email
+            console.log('Email sent!')
             console.log('Data inserted successfully:', data)
             setFormData({
                 full_name: '',
@@ -58,6 +75,7 @@ function CompanyForm() {
                 email: '',
                 link: ''
             })
+            navigate('/login')
         }
     }
 

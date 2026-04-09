@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import styles from './Form.module.css'
 import { supabase } from '../../lib/supabase.js'
-import { getUniqueCode, hashPassword, verifyPassword } from '../../lib/utils.js'
+import { getUniqueCode, hashPassword } from '../../lib/utils.js'
 import RedButton from './RedButton.jsx'
 import WhiteButton from './WhiteButton.jsx'
+import { sendLoginEmail } from '../../lib/sendEmail.js'
+import { useNavigate } from 'react-router-dom'
 
 const programmes = [
     'Web Development (WU)',
@@ -11,6 +13,7 @@ const programmes = [
 ]
 
 function StudentForm() {
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         full_name: '',
@@ -50,8 +53,6 @@ function StudentForm() {
         const loginCode = Math.floor(100000 + Math.random() * 900000).toString()
         const hashedLoginCode = await hashPassword(loginCode)
 
-        console.log('Login code:', loginCode) // For testing purposes, log the login code to the console
-
         const { data, error: supabaseError } = await supabase
             .from('users')
             .insert({
@@ -62,8 +63,16 @@ function StudentForm() {
             })
 
         if (supabaseError) {
+            if (supabaseError.code === '23505') { // Unique violation error code
+                setError('A user with this email already exists')
+            } else {
+                console.error('Error inserting data:', supabaseError)
+                setError('An error occurred while registering. Please try again.')
+            }
             console.error('Error inserting data:', supabaseError)
         } else {
+            await sendLoginEmail(formData.email, loginCode) // Send the login code to the user's email
+            console.log('Email sent!')
             console.log('Data inserted successfully:', data)
             setFormData({
                 full_name: '',
@@ -71,6 +80,7 @@ function StudentForm() {
                 email: '',
                 link: ''
             })
+            navigate('/login')
         }
     }
 

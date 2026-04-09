@@ -5,31 +5,35 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./CompanyContacts.module.css";
 import { supabase } from "../lib/supabase.js";
 import { Link, useParams } from "react-router-dom";
+import { useUser } from "../lib/useUser.js";
 
-export default function Contacts() {
+export default function CompanyContacts() {
+  const user = useUser();
   const [rows, setRows] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { id } = useParams();
 
   const containerRef = useRef(null);
   const cardRefs = useRef([]);
 
   useEffect(() => {
-    async function loadData() {
-      const { data, error } = await supabase.from("users").select("*");
-      setRows(data);
+    if (!user) return;
 
-      console.log("Supabase data:", data);
-      console.log("Supabase error:", error);
+    async function loadData() {
+      const { data, error } = await supabase
+        .from("connections")
+        .select("*, users!connections_from_user_fkey(id, full_name, email, programme, link)")
+        .eq("to_user", user.id)
+        .eq("status", "accepted");
 
       if (error) {
-        console.error(error);
+        console.error(error)
       } else {
-        setRows(data);
+        setRows(data)
       }
     }
-
-    loadData();
-  }, []);
+    loadData()
+  }, [user])
 
   // Check which card is visible
   useEffect(() => {
@@ -58,12 +62,10 @@ export default function Contacts() {
     });
   };
 
-  const { id } = useParams();
-
   useEffect(() => {
     if (!rows.length) return;
 
-    const index = rows.findIndex((r) => r.id === id);
+    const index = rows.findIndex((r) => r.users.id === id);
     if (index !== -1) {
       scrollToCard(index);
     }
@@ -80,17 +82,17 @@ export default function Contacts() {
             className={styles.contactWrapper}
           >
             <div className={styles.upperContainer}>
-              <UpperPiecePuzzle>
+              <UpperPiecePuzzle variant="darkBorderSolid">
                 <div>
-                  <p>{row.full_name}</p>
-                  <p>{row.email}</p>
+                  <p>{row.users.full_name}</p>
+                  <p>{row.users.email}</p>
                 </div>
               </UpperPiecePuzzle>
             </div>
             <div className={styles.lowerContainer}>
-              <LowerPiecePuzzle>
+              <LowerPiecePuzzle variant="blue">
                 <div>
-                  <p>{row.full_name}</p>
+                  <p className={styles.lowerContent}>{row.users.full_name}</p>
                 </div>
               </LowerPiecePuzzle>
             </div>
@@ -111,7 +113,7 @@ export default function Contacts() {
 
       <section className={styles.btnContainer}>
         <Link to="/company2">
-          <NavigationButton>Back</NavigationButton>
+          <NavigationButton>View all</NavigationButton>
         </Link>
       </section>
     </main>
