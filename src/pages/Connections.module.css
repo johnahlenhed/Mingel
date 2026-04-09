@@ -1,3 +1,7 @@
+:root {
+  --yrgo-blue: #002a52;
+}
+
 .layout {
   margin: 5% 2% 2% 2%;
   position: relative;
@@ -5,10 +9,65 @@
 }
 
 .smallPuzzleContainer {
+  --gap: 1rem;
   margin: 5% 0;
+  width: 100%;
   display: flex;
   justify-content: center;
-  gap: 2.5rem;
+  gap: var(--gap);
+}
+
+.smallPuzzleImg {
+  height: 10vh;
+  width: auto;
+}
+
+.animateLeft {
+  animation: moveLeft 0.4s ease forwards;
+}
+
+.animateMiddle {
+  animation: middlePiece 0.4s ease forwards;
+}
+
+.animateRight {
+  animation: moveRight 0.4s ease forwards;
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+  80% {
+    transform: translateX(calc(var(--gap) * 2.5)) scale(1.05);
+  }
+  100% {
+    transform: translateX(calc(var(--gap) * 2.5)) scale(1);
+  }
+}
+
+@keyframes middlePiece {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+  80% {
+    transform: translateX(0) scale(1.05);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+  80% {
+    transform: translateX(calc(var(--gap) * -2.5)) scale(1.05);
+  }
+  100% {
+    transform: translateX(calc(var(--gap) * -2.5)) scale(1);
+  }
 }
 
 .gridContainer {
@@ -36,34 +95,76 @@
   height: 30%;
   z-index: 2;
   margin-top: calc(-1 * var(--circle-size) / 2);
+  /* margin-top: 4rem; */
+  /* background-color: var(--yrgo-blue); */
+}
+
+.upperEmpty {
+  margin-bottom: 4rem;
 }
 
 .dotInLower {
   z-index: 4;
 }
 
-.emptyContainer {
+/* .emptyContainer {
   margin-bottom: 10vh;
-}
-
-.navbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  z-index: 1000;
-  border-top: 2px solid darkgrey;
-  background-color: lightgray;
-}
-
-/* .navButton {
-  height: 7vh;
-  width: 100%;
 } */
+
+.helpBtn {
+  position: fixed;
+  bottom: 2%;
+  right: 5%;
+  width: 15vw;
+  z-index: 1000;
+}
 
 a {
   width: 100%;
+}
+
+.modalContainer {
+  position: relative;
+}
+
+.modalContent {
+  position: fixed;
+  width: 80vw;
+  max-width: 520px;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+}
+
+.showModal {
+  display: block;
+}
+
+.modalOverlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1990;
+}
+
+.modalClose {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.25rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: black;
 }

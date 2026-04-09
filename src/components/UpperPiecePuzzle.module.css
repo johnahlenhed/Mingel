@@ -2,11 +2,12 @@
   --circle-size: 20vw;
 
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  height: 99%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  border: 2px dashed lightgray;
-  background-color: white;
+  /* border: 2px dashed lightgray; */
+  /* background-color: white; */
   position: relative;
   overflow: visible;
 
@@ -29,7 +30,7 @@
   bottom: calc(-1 * var(--circle-size) / 2);
   transform: translateX(-50%);
   border-radius: 50%;
-  background: white;
+  /* background: white; */
   z-index: 2;
 }
 
@@ -41,7 +42,7 @@
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
-  border: 2px dashed lightgray;
+  /* border: 2px dashed lightgray; */
   border-bottom: none;
   border-top-left-radius: 999px;
   border-top-right-radius: 999px;
@@ -60,4 +61,85 @@
   height: 100%;
   text-align: center;
   padding: 1rem;
+}
+
+/* Variants */
+.default {
+  border: 2px solid lightgray;
+  border-bottom: none;
+  background-color: white;
+}
+
+.default::before {
+  background-color: white;
+}
+
+.default::after {
+  border: 2px solid lightgray;
+  border-bottom: none;
+}
+
+/* Transparent background + light dashed border (Home) */
+.lightBorderDashed {
+  background-color: transparent;
+  border: 2px dashed lightgray;
+  /* border-bottom: none; */
+}
+
+.lightBorderDashed::before {
+  background: white;
+  /* border-bottom: none; */
+}
+
+.lightBorderDashed::after {
+  border: 2px dashed lightgray;
+  border-bottom: none;
+}
+
+/* Transparent background + light solid border (HOLLOW) */
+.lightBorderSolid {
+  background-color: transparent;
+  border: 2px solid lightgray;
+}
+
+.lightBorderSolid::before {
+  background-color: white;
+  border-bottom: none;
+}
+
+.lightBorderSolid::after {
+  border: 2px solid lightgray;
+  border-bottom: none;
+}
+
+/* Transparent background + blue dashed border (ADD) */
+.darkBorderDashed {
+  background-color: transparent;
+  border: 2px dashed #002a52;
+}
+
+.darkBorderDashed::before {
+  background: white;
+  border-bottom: none;
+}
+
+.darkBorderDashed::after {
+  border: 2px dashed #002a52;
+  border-bottom: none;
+}
+
+/* Transparent background + blue solid border (Connected) */
+.darkBorderSolid {
+  background-color: transparent;
+  border: 2px solid #002a52;
+}
+
+.darkBorderSolid::before {
+  background: white;
+  border-bottom: none;
+}
+
+.darkBorderSolid::after {
+  border: 2px solid #002a52;
+  border-bottom: none;
 }

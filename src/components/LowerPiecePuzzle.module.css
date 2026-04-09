@@ -1,3 +1,7 @@
+:root {
+  --yrgo-blue: #002a52;
+}
+
 .lowerPuzzle {
   --circle-size: 20vw;
 
@@ -5,8 +9,6 @@
   height: 100%;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  border: 2px dashed darkgray;
-  background-color: white;
   position: relative;
   overflow: visible;
   padding-top: calc(var(--circle-size) / 2 + 2vh);
@@ -23,10 +25,9 @@
   width: var(--circle-size);
   aspect-ratio: 1;
   left: 50%;
-  top: calc(-1 * var(--circle-size) / 2);
+  top: calc((-1 * var(--circle-size) / 2) - 2px);
   transform: translateX(-50%);
   border-radius: 50%;
-  background: white;
   z-index: 2;
 }
 
@@ -36,10 +37,8 @@
   width: var(--circle-size);
   height: calc(var(--circle-size) / 2);
   left: 50%;
-  top: calc((-1 * var(--circle-size) / 2) - 4px);
-
+  top: calc((-1 * var(--circle-size) / 2) - 2px);
   transform: translateX(-50%);
-  border: 2px dashed darkgrey;
   border-bottom: none;
   border-top-left-radius: 999px;
   border-top-right-radius: 999px;
@@ -49,9 +48,7 @@
 }
 
 .content {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   z-index: 5;
   display: flex;
   align-items: center;
@@ -60,4 +57,93 @@
   width: 100%;
   text-align: center;
   padding: 1rem;
+}
+
+/* Variants */
+.default {
+  border: 2px solid lightgray;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: white;
+}
+
+.default::before {
+  background-color: white;
+}
+
+.default::after {
+  border: 2px solid lightgray;
+  border-bottom: none;
+}
+
+/* Blue solid */
+.blue {
+  border: 2px solid var(--yrgo-blue);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: var(--yrgo-blue);
+}
+
+.blue::before {
+  background: var(--yrgo-blue);
+  /* border: none; */
+}
+
+.blue::after {
+  border: 2px solid var(--yrgo-blue);
+  border-bottom: none;
+}
+
+/* Transparent background + light border (HOLLOW) */
+.lightBorderSolid {
+  background-color: transparent;
+  border: 2px solid lightgray;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.lightBorderSolid::before {
+  background: white;
+  /* border-bottom: none; */
+}
+
+.lightBorderSolid::after {
+  border: 2px solid lightgray;
+  border-bottom: none;
+}
+
+/* Transparent background + light dashed border (Home) */
+.lightBorderDashed {
+  background-color: transparent;
+  border: 2px dashed lightgray;
+  /* border-top: none; */
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.lightBorderDashed::before {
+  background-color: white;
+  /* border-bottom: none; */
+}
+
+.lightBorderDashed::after {
+  border: 2px dashed lightgray;
+  border-bottom: none;
+}
+
+/* Transparent background + blue border (ADD) */
+.darkBorderSolid {
+  background-color: transparent;
+  border: 2px solid var(--yrgo-blue);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.darkBorderSolid::before {
+  background: white;
+}
+
+.darkBorderSolid::after {
+  border: 2px solid var(--yrgo-blue);
+  border-bottom: none;
 }
