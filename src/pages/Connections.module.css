@@ -95,21 +95,11 @@
   height: 30%;
   z-index: 2;
   margin-top: calc(-1 * var(--circle-size) / 2);
-  /* margin-top: 4rem; */
-  /* background-color: var(--yrgo-blue); */
-}
-
-.upperEmpty {
-  margin-bottom: 4rem;
 }
 
 .dotInLower {
   z-index: 4;
 }
-
-/* .emptyContainer {
-  margin-bottom: 10vh;
-} */
 
 .helpBtn {
   position: fixed;

@@ -48,8 +48,6 @@
   gap: 1rem;
   padding: 0.5rem;
   z-index: 1000;
-  /* border-top: 2px solid darkgrey;
-  background-color: lightgray; */
 }
 
 .navContent {
@@ -60,7 +58,6 @@
 }
 
 .helpBtn {
-  /* width: 15vw; */
   aspect-ratio: 1;
   height: 8vh;
   z-index: 1000;
