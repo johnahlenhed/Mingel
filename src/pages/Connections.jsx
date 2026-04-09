@@ -137,7 +137,7 @@ export default function Connections() {
       const arr = [];
       for (let i = 0; i < count; i++) {
         arr.push(
-          <div className={styles.hollowContainer}>
+          <div key={i} className={styles.hollowContainer}>
             <div className={styles.upperContainer}>
               <UpperPiecePuzzle variant="lightBorderSolid" />
             </div>

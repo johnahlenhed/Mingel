@@ -15,10 +15,6 @@ import Lobby from "./pages/Lobby.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import ConnectionRequest from "./components/ConnectionRequest.jsx";
 
-// Clear user data in development mode for testing purposes
-if (import.meta.env.DEV) {
-    localStorage.removeItem('user')
-  }
 
 function App() {
   return (

@@ -4,7 +4,7 @@ import styles from "./Puzzle.module.css";
 
 
 function Puzzle() {
-    const [unlockedPieces, setUnlockedPieces] = useState(2)
+    const [unlockedPieces, setUnlockedPieces] = useState()
     const [svgContent, setSvgContent] = useState('')
     const wrapperRef = useRef(null)
 
@@ -33,6 +33,15 @@ function Puzzle() {
         return () => clearTimeout(timer)
     }, [unlockedPieces, svgContent])
 
+    // Fetch initial count of accepted connections and subscribe to changes
+    const fetchCount = async () => {
+        const { count } = await supabase
+            .from('connections')
+            .select('*', { count: 'exact' })
+            .eq('status', 'accepted')
+        setUnlockedPieces(2 + Math.floor(count / 3))
+    }
+
     // Fetch initial puzzle completion status and subscribe to changes
     useEffect(() => {
         const fetchSettings = async () => {
@@ -48,15 +57,6 @@ function Puzzle() {
         }
         fetchSettings()
     }, [])
-
-    // Fetch initial count of accepted connections and subscribe to changes
-    const fetchCount = async () => {
-        const { count } = await supabase
-            .from('connections')
-            .select('*', { count: 'exact' })
-            .eq('status', 'accepted')
-        setUnlockedPieces(Math.floor(count / 3))
-    }
 
     // Subscribe to changes in accepted connections to update unlocked pieces in real-time
     useEffect(() => {
