@@ -40,6 +40,13 @@
   margin-top: calc(-1 * var(--circle-size) / 2);
 }
 
+.lowerContent {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 /* Dots */
 .dots {
   display: flex;

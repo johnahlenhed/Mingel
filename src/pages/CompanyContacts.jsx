@@ -90,7 +90,7 @@ export default function Contacts() {
             <div className={styles.lowerContainer}>
               <LowerPiecePuzzle variant="blue">
                 <div>
-                  <p>{row.full_name}</p>
+                  <p className={styles.lowerContent}>{row.full_name}</p>
                 </div>
               </LowerPiecePuzzle>
             </div>

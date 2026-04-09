@@ -48,7 +48,7 @@ export default function Connections() {
               <div className={styles.lowerContainer}>
                 <LowerPiecePuzzle variant="blue">
                   <div>
-                    <p>{row.full_name}</p>
+                    <p className={styles.lowerContent}>{row.full_name}</p>
                   </div>
                 </LowerPiecePuzzle>
               </div>

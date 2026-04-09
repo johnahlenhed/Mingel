@@ -97,6 +97,13 @@
   margin-top: calc(-1 * var(--circle-size) / 2);
 }
 
+.lowerContent {
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .dotInLower {
   z-index: 4;
 }
