@@ -1,6 +1,8 @@
 import styles from "./CompanyHome.module.css";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
+import DisplayDigit from "../components/DisplayDigit";
 import NavigationButton from "../components/NavigationButton";
+import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import { Link } from "react-router-dom";
 
 export default function CompanyHome() {
@@ -12,11 +14,15 @@ export default function CompanyHome() {
 
       <section>
         <article className={styles.codeContainer}>
-          <p className={styles.connectionCode}>0000</p>
+          <DisplayDigit></DisplayDigit>
+          {/* <p className={styles.connectionCode}>0000</p> */}
         </article>
-        <article className={styles.editBtnContainer}>
+        {/* <article className={styles.editBtnContainer}>
           <button>Edit contact info</button>
-        </article>
+          </article> */}
+      </section>
+      <section className={styles.rotatedContainer}>
+        <UpperPiecePuzzle variant="lightBorderDashed"></UpperPiecePuzzle>
       </section>
 
       <section className={styles.navigation}>
@@ -24,6 +30,10 @@ export default function CompanyHome() {
           <NavigationButton>Connections</NavigationButton>
         </Link>
       </section>
+
+      <div>
+        <a>Change the URL you share</a>
+      </div>
     </main>
   );
 }
