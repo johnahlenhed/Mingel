@@ -55,6 +55,12 @@
   width: 100%;
 }
 
+.navContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
 /* a {
   width: 100%;
 } */
