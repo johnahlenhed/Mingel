@@ -111,7 +111,7 @@ export default function Contacts() {
 
       <section className={styles.btnContainer}>
         <Link to="/connections">
-          <NavigationButton>Back</NavigationButton>
+          <NavigationButton>View all</NavigationButton>
         </Link>
       </section>
     </main>
