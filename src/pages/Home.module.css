@@ -40,8 +40,18 @@
   text-align: center;
 }
 
-.addBtn {
+.addBtnContainer {
   width: 50vw;
+}
+
+.addBtn {
+  background-color: darkgrey;
+  padding: 0.7rem;
+  border-radius: 9999px;
+  width: 100%;
+  font-size: 1rem;
+  border: none;
+  color: white;
 }
 
 .linksContainer {

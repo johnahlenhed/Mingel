@@ -38,8 +38,8 @@ export default function Home() {
               console.log("Code:", code);
             }}
           />
-          <div className={styles.addBtn}>
-            <NavigationButton>Add +</NavigationButton>
+          <div className={styles.addBtnContainer}>
+            <button className={styles.addBtn}>Add +</button>
           </div>
         </article>
 
