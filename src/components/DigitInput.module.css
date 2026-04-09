@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.inputBox {
+  width: 2.5rem;
+  height: 4rem;
+  font-size: 2rem;
+  color: black;
+  text-align: center;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  background-color: #f7f7f7;
+  outline: none;
+}
+
+.inputBox:focus {
+  border-color: #4a90e2;
+  background-color: white;
+}
