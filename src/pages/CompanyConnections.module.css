@@ -81,24 +81,24 @@ a {
 
 .modalContent {
   position: fixed;
-  width: 80vw;
-  max-width: 520px;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
   padding: 1.5rem;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  display: none;
-  justify-content: center;
-  align-items: center;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
   text-align: center;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(100%); /* Start below viewport */
+  transition: transform 0.4s ease;
+
   z-index: 2000;
+  pointer-events: none;
 }
 
 .showModal {
-  display: block;
+  transform: translateY(0); /* Align to bottom of viewport */
+  pointer-events: auto;
 }
 
 .modalOverlay {
