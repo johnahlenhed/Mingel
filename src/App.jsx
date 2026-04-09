@@ -15,6 +15,11 @@ import Lobby from "./pages/Lobby.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
+  // Clear user data in development mode for testing purposes
+  if (import.meta.env.DEV) {
+    localStorage.removeItem('user')
+  }
+
   return (
     <Router>
       <Routes>
