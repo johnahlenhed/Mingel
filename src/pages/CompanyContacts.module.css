@@ -1,7 +1,7 @@
 .layout {
   padding: 15% 0 0 0;
   box-sizing: border-box;
-  background: lightgray;
+  /* background: lightgray; */
   /* width: 100vw;
   height: 100vh; */
 }
@@ -38,6 +38,14 @@
   height: 30%;
   z-index: 2;
   margin-top: calc(-1 * var(--circle-size) / 2);
+}
+
+.lowerContent {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
 }
 
 /* Dots */

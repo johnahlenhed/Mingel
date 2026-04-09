@@ -80,7 +80,7 @@ export default function Contacts() {
             className={styles.contactWrapper}
           >
             <div className={styles.upperContainer}>
-              <UpperPiecePuzzle>
+              <UpperPiecePuzzle variant="darkBorderSolid">
                 <div>
                   <p>{row.full_name}</p>
                   <p>{row.email}</p>
@@ -88,9 +88,9 @@ export default function Contacts() {
               </UpperPiecePuzzle>
             </div>
             <div className={styles.lowerContainer}>
-              <LowerPiecePuzzle>
+              <LowerPiecePuzzle variant="blue">
                 <div>
-                  <p>{row.full_name}</p>
+                  <p className={styles.lowerContent}>{row.full_name}</p>
                 </div>
               </LowerPiecePuzzle>
             </div>
@@ -111,7 +111,7 @@ export default function Contacts() {
 
       <section className={styles.btnContainer}>
         <Link to="/company2">
-          <NavigationButton>Back</NavigationButton>
+          <NavigationButton>View all</NavigationButton>
         </Link>
       </section>
     </main>
