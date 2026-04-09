@@ -17,7 +17,7 @@ export const useEventStatus = () => {
         fetchStatus();
 
         const subscription = supabase
-            .from('settings')
+            .channel('settings')
             .on('postgres_changes', {
                 event: 'UPDATE',
                 schema: 'public',

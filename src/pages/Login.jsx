@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { verifyPassword } from "../lib/utils";
 import RedButton from "../components/register/RedButton";
 import styles from "./Login.module.css";
+import { useUser } from "../lib/useUser";
+import { useEventStatus } from "../lib/useEventStatus";
+
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -12,6 +15,12 @@ function Login() {
     })
     const [error, setError] = useState(null)
     const navigate = useNavigate()
+    const user = useUser()
+    const eventActive = useEventStatus()
+
+    if (user && eventActive !== null) {
+        return <Navigate to={eventActive ? '/' : '/lobby'} />
+    }
 
     const handleChange = (e) => {
         setFormData({
@@ -47,7 +56,7 @@ function Login() {
         localStorage.setItem('user', JSON.stringify(data))
 
         // Redirect to home page
-        navigate('/')
+        navigate(eventActive ? '/' : '/lobby')
     }
 
 
