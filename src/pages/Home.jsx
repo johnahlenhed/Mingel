@@ -37,7 +37,7 @@ export default function Home() {
       .select('*')
       .or(`and(from_user.eq.${user.id},to_user.eq.${targetUser.id}),and(from_user.eq.${targetUser.id},to_user.eq.${user.id})`)
       .in('status', ['pending', 'accepted'])
-      .single()
+      .maybeSingle()
 
     if (existing) {
       if (existing.status === 'pending') {

@@ -13,6 +13,7 @@ import Puzzle from "./pages/Puzzle.jsx";
 import Admin from "./admin/Admin.jsx";
 import Lobby from "./pages/Lobby.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import ConnectionRequest from "./components/ConnectionRequest.jsx";
 
 // Clear user data in development mode for testing purposes
 if (import.meta.env.DEV) {
@@ -22,6 +23,7 @@ if (import.meta.env.DEV) {
 function App() {
   return (
     <Router>
+      <ConnectionRequest />
       <Routes>
         {/* Always accessible routes */}
         <Route path="/register" element={<LandingPage />} />

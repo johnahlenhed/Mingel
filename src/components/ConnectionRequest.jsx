@@ -1,4 +1,4 @@
-import { useEffects, useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase.js";
 import { useUser } from "../lib/useUser.js";
 
@@ -6,7 +6,7 @@ export default function ConnectionRequest() {
     const user = useUser()
     const [request, setRequest] = useState(null)
 
-    useEffects(() => {
+    useEffect(() => {
         if (!user) return
 
         const subscription = supabase
