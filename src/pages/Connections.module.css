@@ -105,6 +105,10 @@
   color: white;
 }
 
+.lowerText {
+  display: flex;
+}
+
 .dotInLower {
   z-index: 4;
 }

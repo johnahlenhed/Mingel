@@ -166,13 +166,17 @@ export default function Connections() {
                 <UpperPiecePuzzle variant="darkBorderSolid">
                   <div>
                     <p>{row.full_name}</p>
+                    <p>{row.company}</p>
                   </div>
                 </UpperPiecePuzzle>
               </div>
               <div className={styles.lowerContainer}>
                 <LowerPiecePuzzle variant="blue">
-                  <div>
-                    <p className={styles.lowerContent}>View (icon)</p>
+                  <div className={styles.lowerContent}>
+                    <div className={styles.lowerText}>
+                      <span>View</span>
+                      <img src="../../arrow_right.svg" />
+                    </div>
                   </div>
                 </LowerPiecePuzzle>
               </div>
