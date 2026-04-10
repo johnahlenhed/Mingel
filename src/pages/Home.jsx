@@ -7,7 +7,6 @@ import NavigationButton from "../components/NavigationButton";
 import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase.js";
 import { useUser } from "../lib/useUser.js";
-import ConnectionRequest from "../components/ConnectionRequest.jsx";
 import { Navigate } from "react-router-dom";
 
 export default function Home() {
@@ -76,7 +75,6 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <ConnectionRequest />
       <section className={styles.layout}>
         <div className={styles.upperContainer}>
           <UpperPiecePuzzle variant="lightBorderDashed" />
