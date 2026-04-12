@@ -1,5 +1,5 @@
 .backgroundImg {
-  background-image: url("/public/dynamicBG.png");
+  background-image: url("/dynamicBG.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
