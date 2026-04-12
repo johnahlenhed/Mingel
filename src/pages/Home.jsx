@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import styles from "./Home.module.css";
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import DigitInput from "../components/DigitInput";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
 import NavigationButton from "../components/NavigationButton";
+import Modal from "../components/Modal";
 import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase.js";
 import { useUser } from "../lib/useUser.js";
@@ -14,16 +15,6 @@ export default function Home() {
   const user = useUser();
   const [connectionStatus, setConnectionStatus] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalRef = useRef(null);
-
-  const startY = useRef(0);
-  const lastY = useRef(0);
-  const dragging = useRef(false);
-  const velocity = useRef(0);
-  const lastMoveTime = useRef(0);
-
-  const threshold = 80; //px needed to close modal
-  const velocityThreshold = 0.6;
 
   if (user?.role === "company") {
     return <Navigate to="/company1" />;
@@ -90,84 +81,7 @@ export default function Home() {
     setConnectionStatus("Connection request sent!");
   };
 
-  // Modal
-  function closeModal() {
-    const modal = modalRef.current;
-    if (!modal) return;
-
-    modal.style.transition = "transform 0.3s ease";
-    modal.style.transform = "translateY(100%)";
-
-    setTimeout(() => {
-      setIsModalOpen(false);
-    }, 250);
-  }
-
-  useEffect(() => {
-    if (!isModalOpen) return;
-
-    const modal = modalRef.current;
-
-    // Reset transform when modal opens
-    modal.style.transform = "translateY(0)";
-    modal.style.transition = "transform 0.3s ease";
-
-    const onTouchStart = (e) => {
-      dragging.current = true;
-      startY.current = e.touches[0].clientY;
-      lastY.current = startY.current;
-      lastMoveTime.current = Date.now();
-
-      modal.style.transition = "none";
-    };
-
-    const onTouchMove = (e) => {
-      if (!dragging.current) return;
-
-      const y = e.touches[0].clientY;
-      const diff = y - startY.current;
-
-      // Calculate velocity
-      const now = Date.now();
-      const deltaT = now - lastMoveTime.current;
-      velocity.current = (y - lastY.current) / deltaT;
-
-      lastY.current = y;
-      lastMoveTime.current = now;
-
-      if (diff > 0) {
-        modal.style.transform = `translateY(${diff}px)`;
-      }
-    };
-
-    const onTouchEnd = () => {
-      dragging.current = false;
-      modal.style.transition = "transform 0.3s ease";
-
-      const diff = lastY.current - startY.current;
-
-      const fastSwipe = velocity.current > velocityThreshold;
-      const longDrag = diff > threshold;
-
-      if (fastSwipe || longDrag) {
-        closeModal();
-      } else {
-        modal.style.transform = "translateY(0)";
-      }
-    };
-
-    modal.addEventListener("touchstart", onTouchStart);
-    modal.addEventListener("touchmove", onTouchMove);
-    modal.addEventListener("touchend", onTouchEnd);
-
-    return () => {
-      modal.removeEventListener("touchstart", onTouchStart);
-      modal.removeEventListener("touchmove", onTouchMove);
-      modal.removeEventListener("touchend", onTouchEnd);
-    };
-  }, [isModalOpen]);
-
-  // Toggle modal
+  // Open modal
   function toggleModal() {
     setIsModalOpen((s) => !s);
   }
@@ -225,35 +139,23 @@ export default function Home() {
         </article>
       </section>
 
-      <section className={styles.modalContainer}>
-        <article
-          ref={modalRef}
-          className={`${styles.modalContent} ${isModalOpen ? styles.showModal : ""}`}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <input
+          className={styles.inputURL}
+          type="url"
+          placeholder="New URL"
+        ></input>
+
+        <button className={styles.saveBtn}>Save</button>
+
+        <button
+          className={styles.modalClose}
+          onClick={() => setIsModalOpen(false)}
+          aria-label="Close"
         >
-          <input
-            className={styles.inputURL}
-            type="url"
-            placeholder="New URL"
-          ></input>
-
-          <button className={styles.saveBtn}>Save</button>
-
-          <button
-            className={styles.modalClose}
-            onClick={closeModal}
-            aria-label="Close"
-          >
-            ×
-          </button>
-        </article>
-        {isModalOpen && (
-          <div
-            className={styles.modalOverlay}
-            onClick={closeModal}
-            aria-hidden="true"
-          />
-        )}
-      </section>
+          ×
+        </button>
+      </Modal>
     </main>
   );
 }

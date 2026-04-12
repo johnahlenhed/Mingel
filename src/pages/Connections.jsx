@@ -1,6 +1,7 @@
 import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
 import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
 // import NavigationButton from "../components/NavigationButton";
+import Modal from "../components/Modal";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Connections.module.css";
@@ -193,67 +194,6 @@ export default function Connections() {
     }
   }
 
-  // MODAL
-  useEffect(() => {
-    if (!isModalOpen) return;
-
-    const modal = modalRef.current;
-
-    modal.style.transform = "translateY(0)";
-    modal.style.transition = "transform 0.3s ease";
-
-    const onTouchStart = (e) => {
-      dragging.current = true;
-      startY.current = e.touches[0].clientY;
-      lastY.current = startY.current;
-      lastMoveTime.current = Date.now();
-      modal.style.transition = "none";
-    };
-
-    const onTouchMove = (e) => {
-      if (!dragging.current) return;
-
-      const y = e.touches[0].clientY;
-      const diff = y - startY.current;
-
-      const now = Date.now();
-      const deltaT = now - lastMoveTime.current;
-      velocity.current = (y - lastY.current) / deltaT;
-
-      lastY.current = y;
-      lastMoveTime.current = now;
-
-      if (diff > 0) {
-        modal.style.transform = `translateY(${diff}px)`;
-      }
-    };
-
-    const onTouchEnd = () => {
-      dragging.current = false;
-      modal.style.transition = "transform 0.3s ease";
-
-      const diff = lastY.current - startY.current;
-      const fastSwipe = velocity.current > velocityThreshold;
-      const longDrag = diff > threshold;
-
-      if (fastSwipe || longDrag) {
-        closeModal();
-      } else {
-        modal.style.transform = "translateY(0)";
-      }
-    };
-
-    modal.addEventListener("touchstart", onTouchStart);
-    modal.addEventListener("touchmove", onTouchMove);
-    modal.addEventListener("touchend", onTouchEnd);
-
-    return () => {
-      modal.removeEventListener("touchstart", onTouchStart);
-      modal.removeEventListener("touchmove", onTouchMove);
-      modal.removeEventListener("touchend", onTouchEnd);
-    };
-  }, [isModalOpen]);
-
   return (
     <main className={styles.layout}>
       <section className={styles.smallPuzzleContainer}>
@@ -313,34 +253,22 @@ export default function Connections() {
         alt="Question mark button for help"
       />
 
-      <section className={styles.modalContainer}>
-        <article
-          ref={modalRef}
-          className={`${styles.modalContent} ${isModalOpen ? styles.showModal : ""}`}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h3>How does it work?</h3>
+        <p>
+          Create connections by entering a company's code, collecting piece in
+          your personal puzzle. Complete three to see it join a larger piece
+          live on screen.
+        </p>
+        <p>Keep goging and make the most of the people around you!</p>
+        <button
+          className={styles.modalClose}
+          onClick={() => setIsModalOpen(false)}
+          aria-label="Close"
         >
-          <h3>How does it work?</h3>
-          <p>
-            Create connections by entering a company's code, collecting piece in
-            your personal puzzle. Complete three to see it join a larger piece
-            live on screen.
-          </p>
-          <p>Keep goging and make the most of the people around you!</p>
-          <button
-            className={styles.modalClose}
-            onClick={closeModal}
-            aria-label="Close"
-          >
-            ×
-          </button>
-        </article>
-        {isModalOpen && (
-          <div
-            className={styles.modalOverlay}
-            onClick={closeModal}
-            aria-hidden="true"
-          />
-        )}
-      </section>
+          ×
+        </button>
+      </Modal>
     </main>
   );
 }
