@@ -95,7 +95,7 @@ export default function Connections() {
         <img
           onClick={toggleModal}
           className={styles.helpBtn}
-          src="../../public/StudentHelp.png"
+          src="../../StudentHelp.png"
           alt="Question mark button for help"
         />
 
