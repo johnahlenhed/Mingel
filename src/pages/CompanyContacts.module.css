@@ -48,6 +48,15 @@
   color: white;
 }
 
+.handshake {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15vw;
+  aspect-ratio: 1;
+}
+
 /* Dots */
 .dots {
   display: flex;
