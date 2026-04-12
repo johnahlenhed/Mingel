@@ -22,18 +22,20 @@ export default function Contacts() {
     async function loadData() {
       const { data, error } = await supabase
         .from("connections")
-        .select("*, users!connections_to_user_fkey(id, full_name, email, programme, link)")
+        .select(
+          "*, users!connections_to_user_fkey(id, full_name, email, programme, link)",
+        )
         .eq("from_user", user.id)
-        .eq("status", "accepted")
+        .eq("status", "accepted");
 
       if (error) {
-        console.error(error)
+        console.error(error);
       } else {
-        setRows(data)
+        setRows(data);
       }
     }
-    loadData()
-  }, [user])
+    loadData();
+  }, [user]);
 
   // Check which card is visible
   useEffect(() => {
@@ -93,6 +95,14 @@ export default function Contacts() {
             </div>
             <div className={styles.lowerContainer}>
               <LowerPiecePuzzle variant="blue">
+                {row.handshake ? (
+                  <img
+                    className={styles.handshakeTrue}
+                    src="/handshake_student.png"
+                    alt="Handshake"
+                  />
+                ) : null}
+
                 <div>
                   <p className={styles.lowerContent}>{row.users.full_name}</p>
                 </div>

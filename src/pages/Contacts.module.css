@@ -40,6 +40,15 @@
   margin-top: calc(-1 * var(--circle-size) / 2);
 }
 
+.handshakeTrue {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15vw;
+  aspect-ratio: 1;
+}
+
 .lowerContent {
   position: absolute;
   top: 0%;
