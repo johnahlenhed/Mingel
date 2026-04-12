@@ -13,70 +13,81 @@ import { Navigate } from "react-router-dom";
 export default function Home() {
   const user = useUser();
   const [connectionStatus, setConnectionStatus] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (user?.role === 'company') {
-    return <Navigate to="/company1" />
+  if (user?.role === "company") {
+    return <Navigate to="/company1" />;
   }
 
   const handleConnect = async (code) => {
-    setConnectionStatus(null)
+    setConnectionStatus(null);
 
     const { data: targetUser, error: userError } = await supabase
       .from("users")
       .select("*")
-      .eq('code', code)
-      .single()
+      .eq("code", code)
+      .single();
 
     if (userError || !targetUser) {
-      setConnectionStatus("User not found")
-      return
+      setConnectionStatus("User not found");
+      return;
     }
 
     if (targetUser.id === user.id) {
-      setConnectionStatus("You cannot connect with yourself")
-      return
+      setConnectionStatus("You cannot connect with yourself");
+      return;
     }
 
     const { data: existing } = await supabase
-      .from('connections')
-      .select('*')
-      .or(`and(from_user.eq.${user.id},to_user.eq.${targetUser.id}),and(from_user.eq.${targetUser.id},to_user.eq.${user.id})`)
-      .in('status', ['pending', 'accepted'])
-      .maybeSingle()
+      .from("connections")
+      .select("*")
+      .or(
+        `and(from_user.eq.${user.id},to_user.eq.${targetUser.id}),and(from_user.eq.${targetUser.id},to_user.eq.${user.id})`,
+      )
+      .in("status", ["pending", "accepted"])
+      .maybeSingle();
 
     if (existing) {
-      if (existing.status === 'pending') {
-        setConnectionStatus("Connection request already pending with this user")
+      if (existing.status === "pending") {
+        setConnectionStatus(
+          "Connection request already pending with this user",
+        );
       } else {
-        setConnectionStatus("You are already connected with this user")
+        setConnectionStatus("You are already connected with this user");
       }
-      return
+      return;
     }
 
     // Create connection
     const { error: connectionError } = await supabase
-      .from('connections')
+      .from("connections")
       .insert({
         from_user: user.id,
         to_user: targetUser.id,
-        status: 'pending'
-      })
+        status: "pending",
+      });
 
     if (connectionError) {
-      if (connectionError.code === '23505') { // Unique violation
-        setConnectionStatus('Already connected with this user')
+      if (connectionError.code === "23505") {
+        // Unique violation
+        setConnectionStatus("Already connected with this user");
       } else {
-        setConnectionStatus('Something went wrong')
+        setConnectionStatus("Something went wrong");
       }
-      return
+      return;
     }
 
-    setConnectionStatus("Connection request sent!")
+    setConnectionStatus("Connection request sent!");
+  };
+
+  // Toggle modal
+  function toggleModal() {
+    setIsModalOpen((s) => !s);
   }
 
   return (
     <main className={styles.main}>
-      <ConnectionRequest />
+      {/* <ConnectionRequest /> */}
       <section className={styles.layout}>
         <div className={styles.upperContainer}>
           <UpperPiecePuzzle variant="lightBorderDashed" />
@@ -120,9 +131,40 @@ export default function Home() {
             </Link>
           </div>
           <div>
-            <a>Change the URL you share</a>
+            <p className={styles.changeURL} onClick={toggleModal}>
+              Change the URL you share
+            </p>
           </div>
         </article>
+      </section>
+
+      <section className={styles.modalContainer}>
+        <article
+          className={`${styles.modalContent} ${isModalOpen ? styles.showModal : ""}`}
+        >
+          <input
+            className={styles.inputURL}
+            type="url"
+            placeholder="New URL"
+          ></input>
+
+          <button className={styles.saveBtn}>Save</button>
+
+          <button
+            className={styles.modalClose}
+            onClick={() => setIsModalOpen(false)}
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </article>
+        {isModalOpen && (
+          <div
+            className={styles.modalOverlay}
+            onClick={() => setIsModalOpen(false)}
+            aria-hidden="true"
+          />
+        )}
       </section>
     </main>
   );
