@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { supabase } from "../lib/supabase.js";
 import styles from "./Puzzle.module.css";
-
+import { QRCodeSVG } from "qrcode.react";
+import { useEventStatus } from "../lib/useEventStatus.js";
 
 function Puzzle() {
     const [unlockedPieces, setUnlockedPieces] = useState()
     const [svgContent, setSvgContent] = useState('')
     const wrapperRef = useRef(null)
+    const eventActive = useEventStatus()
 
     // Add class to body for page-specific styling and fetch SVG content
     useEffect(() => {
@@ -61,7 +63,7 @@ function Puzzle() {
     // Subscribe to changes in accepted connections to update unlocked pieces in real-time
     useEffect(() => {
         const subscription = supabase
-            .channel('connections')
+            .channel('puzzle-connections')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'connections', filter: 'status=eq.accepted' },
                 async () => await fetchCount())
             .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'connections', filter: 'status=eq.accepted' },
@@ -73,7 +75,7 @@ function Puzzle() {
     // Subscribe to puzzle completion status changes
     useEffect(() => {
         const subscription = supabase
-            .channel('settings')
+            .channel('puzzle-settings')
             .on('postgres_changes', {
                 event: 'UPDATE',
                 schema: 'public',
@@ -91,11 +93,23 @@ function Puzzle() {
     }, [])
 
     return (
-        <div
-            ref={wrapperRef}
-            className={styles.puzzleWrapper}
-            dangerouslySetInnerHTML={{ __html: svgContent }}
-        />
+        <>
+            {!eventActive ? (
+                <div>
+                    <QRCodeSVG
+                        value="https://mingel.vercel.app/register"
+                        size={256}
+                    />
+                </div>
+            ) : (
+                <div
+                    ref={wrapperRef}
+                    className={styles.puzzleWrapper}
+                    dangerouslySetInnerHTML={{ __html: svgContent }}
+                />
+            )}
+        </>
+        
     )
 }
 
