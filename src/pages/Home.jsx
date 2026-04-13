@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle.jsx";
 import DigitInput from "../components/application/DigitInput.jsx";
@@ -14,6 +14,7 @@ import { Navigate } from "react-router-dom";
 export default function Home() {
   const user = useUser();
   const [code, setCode] = useState("");
+  const [reset, setReset] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUrl, setNewUrl] = useState("");
@@ -84,6 +85,16 @@ export default function Home() {
     setConnectionStatus("Connection request sent!");
   };
 
+  useEffect(() => {
+    if (!connectionStatus) return;
+
+    const timer = setTimeout(() => {
+      setConnectionStatus(null);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [connectionStatus]);
+
   // Open modal
   function toggleModal() {
     setIsModalOpen((s) => !s);
@@ -125,12 +136,19 @@ export default function Home() {
         </div>
 
         <article className={styles.form}>
-          <DigitInput onComplete={setCode} onChangeCode={setCode} />
+          <DigitInput
+            onComplete={setCode}
+            onChangeCode={setCode}
+            reset={reset}
+          />
           {connectionStatus && <p>{connectionStatus}</p>}
           <div className={styles.addBtnContainer}>
             <button
               className={styles.addBtn}
-              onClick={() => handleConnect(code)}
+              onClick={() => {
+                handleConnect(code);
+                setReset((prev) => !prev);
+              }}
               disabled={code.length !== 4}
             >
               Add +
