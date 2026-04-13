@@ -9,6 +9,18 @@ function Puzzle() {
     const [svgContent, setSvgContent] = useState('')
     const wrapperRef = useRef(null)
     const eventActive = useEventStatus()
+    const [pieceOrder, setPieceOrder] = useState([])
+
+    // Randomize piece order on initial load
+    useEffect(() => {
+        const order = Array.from({ length: 50 }, (_, i) => i + 1)
+        // Fisher-Yates shuffle
+        for (let i = order.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [order[i], order[j]] = [order[j], order[i]]
+        }
+        setPieceOrder(order)
+    }, [])
 
     // Add class to body for page-specific styling and fetch SVG content
     useEffect(() => {
@@ -21,19 +33,19 @@ function Puzzle() {
 
     // Update SVG classes after content or unlocked pieces change
     useEffect(() => {
-        if (!svgContent) return
+        if (!svgContent || !pieceOrder.length) return
     
         // Väntar tills React har renderat SVG:n i DOM:en
         const timer = setTimeout(() => {
             if (!wrapperRef.current) return
-            for (let i = 1; i <= 50; i++) {
-                const el = wrapperRef.current.querySelector(`[id="${i}"]`)
-                if (el) el.classList.toggle('unlocked', i <= unlockedPieces)
-            }
+            pieceOrder.forEach((pieceId, index) => {
+            const el = wrapperRef.current.querySelector(`[id="${pieceId}"]`)
+            if (el) el.classList.toggle('unlocked', index < unlockedPieces)
+            })
         }, 0)
     
         return () => clearTimeout(timer)
-    }, [unlockedPieces, svgContent])
+    }, [unlockedPieces, svgContent, pieceOrder])
 
     // Fetch initial count of accepted connections and subscribe to changes
     const fetchCount = async () => {
@@ -102,11 +114,14 @@ function Puzzle() {
                     />
                 </div>
             ) : (
-                <div
+                <div className={styles.puzzleContainer}>
+                    <img src="/puzzle/puzzle-placeholder.png" alt="Puzzle Placeholder" className={styles.puzzleImage} />
+                    <div
                     ref={wrapperRef}
                     className={styles.puzzleWrapper}
                     dangerouslySetInnerHTML={{ __html: svgContent }}
-                />
+                    />
+                </div>
             )}
         </>
         
