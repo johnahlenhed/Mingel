@@ -53,17 +53,17 @@ export default function Connections() {
     setIsModalOpen((s) => !s);
   }
 
-  function closeModal() {
-    const modal = modalRef.current;
-    if (!modal) return;
+  // function closeModal() {
+  //   const modal = modalRef.current;
+  //   if (!modal) return;
 
-    modal.style.transition = "transform 0.3s ease";
-    modal.style.transform = "translateY(100%)";
+  //   modal.style.transition = "transform 0.3s ease";
+  //   modal.style.transform = "translateY(100%)";
 
-    setTimeout(() => {
-      setIsModalOpen(false);
-    }, 250);
-  }
+  //   setTimeout(() => {
+  //     setIsModalOpen(false);
+  //   }, 250);
+  // }
 
   return (
     <main className={styles.layout}>
@@ -120,13 +120,6 @@ export default function Connections() {
           Every connection is collected in your library, and after the event you
           can highlight promising candidates using the handshake icon.
         </p>
-        <button
-          className={styles.modalClose}
-          onClick={closeModal}
-          aria-label="Close"
-        >
-          ×
-        </button>
       </Modal>
     </main>
   );

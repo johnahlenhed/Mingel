@@ -13,17 +13,6 @@ export default function Connections() {
   const [rows, setRows] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const modalRef = useRef(null);
-
-  const startY = useRef(0);
-  const lastY = useRef(0);
-  const dragging = useRef(false);
-  const velocity = useRef(0);
-  const lastMoveTime = useRef(0);
-
-  const threshold = 80;
-  const velocityThreshold = 0.6;
-
   useEffect(() => {
     if (!user) return;
 
@@ -65,18 +54,6 @@ export default function Connections() {
 
   function toggleModal() {
     setIsModalOpen((s) => !s);
-  }
-
-  function closeModal() {
-    const modal = modalRef.current;
-    if (!modal) return;
-
-    modal.style.transition = "transform 0.3s ease";
-    modal.style.transform = "translateY(100%)";
-
-    setTimeout(() => {
-      setIsModalOpen(false);
-    }, 250);
   }
 
   function showSmallPuzzle() {
@@ -261,13 +238,6 @@ export default function Connections() {
           live on screen.
         </p>
         <p>Keep goging and make the most of the people around you!</p>
-        <button
-          className={styles.modalClose}
-          onClick={() => setIsModalOpen(false)}
-          aria-label="Close"
-        >
-          ×
-        </button>
       </Modal>
     </main>
   );

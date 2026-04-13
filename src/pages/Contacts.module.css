@@ -1,9 +1,5 @@
 .layout {
-  padding: 15% 0 0 0;
-  box-sizing: border-box;
-  /* background: lightgray; */
-  /* width: 100vw;
-  height: 100vh; */
+  padding-top: 15%;
 }
 
 .cardContainer {
@@ -69,12 +65,12 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #ffffff66;
+  background: var(--secondary-faded);
   border: none;
 }
 
 .activeDot {
-  background: white;
+  background: var(--text-h);
   transform: scale(1.2);
 }
 

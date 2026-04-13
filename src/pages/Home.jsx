@@ -147,14 +147,6 @@ export default function Home() {
         ></input>
 
         <button className={styles.saveBtn}>Save</button>
-
-        <button
-          className={styles.modalClose}
-          onClick={() => setIsModalOpen(false)}
-          aria-label="Close"
-        >
-          ×
-        </button>
       </Modal>
     </main>
   );

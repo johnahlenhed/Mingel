@@ -1,5 +1,5 @@
 .layout {
-  margin: 12% 2% 2% 2%;
+  margin: 2%;
   position: relative;
   padding-bottom: 2%;
 }
@@ -39,9 +39,9 @@
   color: white;
 }
 
-.dotInLower {
+/* .dotInLower {
   z-index: 4;
-}
+} */
 
 .emptyContainer {
   margin-bottom: 10vh;

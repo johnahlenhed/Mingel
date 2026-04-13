@@ -11,7 +11,7 @@
   bottom: 0;
   width: 100vw;
   padding: 1.5rem;
-  background: white;
+  background: var(--bg);
   border-radius: 12px 12px 0 0;
   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
   transform: translateY(100%);
@@ -28,5 +28,5 @@
   background: transparent;
   border: none;
   font-size: 2rem;
-  color: black;
+  color: var(--text);
 }

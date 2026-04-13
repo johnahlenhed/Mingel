@@ -1,7 +1,3 @@
-:root {
-  --yrgo-blue: #002a52;
-}
-
 .layout {
   margin: 5% 2% 2% 2%;
   position: relative;
@@ -107,10 +103,6 @@
 
 .lowerText {
   display: flex;
-}
-
-.dotInLower {
-  z-index: 4;
 }
 
 .helpBtn {
