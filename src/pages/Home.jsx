@@ -43,6 +43,11 @@ export default function Home() {
       return;
     }
 
+    if (targetUser.role === "student") {
+      setConnectionStatus("You can only connect with companies");
+      return;
+    }
+
     const { data: existing } = await supabase
       .from("connections")
       .select("*")
