@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase.js";
 import { useUser } from "../lib/useUser.js";
 import { Navigate } from "react-router-dom";
+import LogoutButton from "../components/LogoutButton.jsx";
 
 export default function Home() {
   const user = useUser();
@@ -39,6 +40,11 @@ export default function Home() {
 
     if (targetUser.id === user.id) {
       setConnectionStatus("You cannot connect with yourself");
+      return;
+    }
+
+    if (targetUser.role === "student") {
+      setConnectionStatus("You can only connect with companies");
       return;
     }
 
@@ -126,85 +132,88 @@ export default function Home() {
   };
 
   return (
-    <main className={styles.main}>
-      <section className={styles.layout}>
-        <div className={styles.upperContainer}>
-          <UpperPiecePuzzle variant="lightBorderDashed" />
-        </div>
-
-        <article className={styles.form}>
-          <DigitInput
-            onComplete={setCode}
-            onChangeCode={setCode}
-            reset={reset}
-          />
-          {connectionStatus && <p>{connectionStatus}</p>}
-          <div className={styles.addBtnContainer}>
-            <button
-              className={styles.addBtn}
-              onClick={() => {
-                handleConnect(code);
-                setReset((prev) => !prev);
-              }}
-              disabled={code.length !== 4}
-            >
-              Add +
-            </button>
+    <>
+      <main className={styles.main}>
+        <section className={styles.layout}>
+          <div className={styles.upperContainer}>
+            <UpperPiecePuzzle variant="lightBorderDashed" />
           </div>
-        </article>
 
-        <div className={styles.lowerContainer}>
-          <LowerPiecePuzzle variant="lightBorderDashed">
-            <div className={styles.lowerContent}>
-              {user ? (
-                <>
-                  <p>{user.full_name}</p>
-                  <p>{user.programme}</p>
-                </>
-              ) : (
-                <p>Loading...</p>
-              )}
+          <article className={styles.form}>
+            <DigitInput
+              onComplete={setCode}
+              onChangeCode={setCode}
+              reset={reset}
+            />
+            {connectionStatus && <p>{connectionStatus}</p>}
+            <div className={styles.addBtnContainer}>
+              <button
+                className={styles.addBtn}
+                onClick={() => {
+                  handleConnect(code);
+                  setReset((prev) => !prev);
+                }}
+                disabled={code.length !== 4}
+              >
+                Add +
+              </button>
             </div>
-          </LowerPiecePuzzle>
-        </div>
+          </article>
 
-        <article className={styles.linksContainer}>
-          <div className={styles.myConnectionsContainer}>
-            <Link to="/connections">
-              <NavigationButton>
-                <div className={styles.navContent}>
-                  <span>Connections</span>
-                  <img
-                    className={styles.arrowIcon}
-                    src="../../arrow_right.svg"
-                  />
-                </div>
-              </NavigationButton>
-            </Link>
+          <div className={styles.lowerContainer}>
+            <LowerPiecePuzzle variant="lightBorderDashed">
+              <div className={styles.lowerContent}>
+                {user ? (
+                  <>
+                    <p>{user.full_name}</p>
+                    <p>{user.programme}</p>
+                  </>
+                ) : (
+                  <p>Loading...</p>
+                )}
+              </div>
+            </LowerPiecePuzzle>
           </div>
-          <div>
-            <p className={styles.changeURL} onClick={toggleModal}>
-              Change the URL you share
-            </p>
-          </div>
-        </article>
-      </section>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <input
-          className={styles.inputURL}
-          type="url"
-          placeholder={"Current: " + user?.link || "New URL"}
-          value={newUrl}
-          onChange={(e) => setNewUrl(e.target.value)}
-        ></input>
+          <article className={styles.linksContainer}>
+            <div className={styles.myConnectionsContainer}>
+              <Link to="/connections">
+                <NavigationButton>
+                  <div className={styles.navContent}>
+                    <span>Connections</span>
+                    <img
+                      className={styles.arrowIcon}
+                      src="../../arrow_right.svg"
+                    />
+                  </div>
+                </NavigationButton>
+              </Link>
+            </div>
+            <div>
+              <p className={styles.changeURL} onClick={toggleModal}>
+                Change the URL you share
+              </p>
+            </div>
+          </article>
+        </section>
 
-        {confirmation && <p className={styles.confirmation}>{confirmation}</p>}
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <input
+            className={styles.inputURL}
+            type="url"
+            placeholder={"Current: " + user?.link || "New URL"}
+            value={newUrl}
+            onChange={(e) => setNewUrl(e.target.value)}
+          ></input>
 
-        <button className={styles.saveBtn} onClick={handleSaveUrl}>
-          Save
-        </button>
-      </Modal>
-    </main>
+          {confirmation && <p className={styles.confirmation}>{confirmation}</p>}
+
+          <button className={styles.saveBtn} onClick={handleSaveUrl}>
+            Save
+          </button>
+        </Modal>
+      </main>
+      <LogoutButton />
+    </>
   );
 }
