@@ -155,3 +155,11 @@
     padding-left: 1rem;
     margin-bottom: 5rem;
 }
+
+.loginLink {
+    color: var(--text);
+    font-size: 14px;
+    text-decoration: underline;
+    margin-top: 2rem;
+    display: block;
+}

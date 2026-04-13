@@ -6,6 +6,7 @@ import PuzzlePiece from '../components/register/PuzzlePiece.jsx'
 import RoleSelector from '../components/register/RoleSelector.jsx'
 import StudentForm from '../components/register/StudentForm.jsx'
 import CompanyForm from '../components/register/CompanyForm.jsx'
+import { Link } from "react-router-dom";
 
 function LandingPage() {
 
@@ -72,6 +73,9 @@ function LandingPage() {
                 <RoleSelector onSelect={setRole} defaultRole="company" />
                 {role === 'company' && <CompanyForm />}
                 {role === 'student' && <StudentForm />}
+                <Link to="/login" className={styles.loginLink}>
+                    I already have an account
+                </Link>
             </section>
 
             
