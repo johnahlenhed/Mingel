@@ -1,13 +1,28 @@
 .selectionButton {
-    background-color: var(--bg);
-    color: var(--text);
-    border: 2px solid var(--accent);
-    border-radius: 30px;
-    padding: 16px 32px;
-    font-size: 18px;
-    font-family: var(--text);
-    font-weight: medium;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-    width: 100%;
+  background-color: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--bg);
+  border-radius: 0;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-family: var(--text);
+  font-weight: medium;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+  width: 100%;
+}
+
+.selected {
+  border-color: var(--accent);
+}
+
+.left {
+  border-radius: 30px;
+}
+
+.right {
+  border-radius: 30px;
 }
