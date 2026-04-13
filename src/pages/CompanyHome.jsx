@@ -13,12 +13,14 @@ export default function CompanyHome() {
   const user = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUrl, setNewUrl] = useState("");
+  const [confirmation, setConfirmation] = useState("");
 
   // Open modal
   function toggleModal() {
     setIsModalOpen((s) => !s);
   }
 
+  //Update URL in database
   const handleSaveUrl = async () => {
     if (!user) return;
 
@@ -33,10 +35,17 @@ export default function CompanyHome() {
       .eq("id", user.id);
 
     if (error) {
-      console.log(error);
+      // console.log(error);
+      setConfirmation("Something went wrong");
     } else {
-      console.log("URL updated successfully");
-      setIsModalOpen(false);
+      // console.log("URL updated successfully");
+      //setIsModalOpen(false);
+      setConfirmation("URL updated successfully!");
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setConfirmation("");
+        setNewUrl("");
+      }, 2000);
     }
   };
 
@@ -78,6 +87,8 @@ export default function CompanyHome() {
           value={newUrl}
           onChange={(e) => setNewUrl(e.target.value)}
         ></input>
+
+        {confirmation && <p className={styles.confirmation}>{confirmation}</p>}
 
         <button className={styles.saveBtn} onClick={handleSaveUrl}>
           Save
