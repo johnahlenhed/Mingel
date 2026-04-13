@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styles from "./Home.module.css";
-import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
-import DigitInput from "../components/DigitInput";
-import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
-import NavigationButton from "../components/NavigationButton";
-import Modal from "../components/Modal";
+import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle.jsx";
+import DigitInput from "../components/application/DigitInput.jsx";
+import LowerPiecePuzzle from "../components/application/LowerPiecePuzzle.jsx";
+import NavigationButton from "../components/application/NavigationButton.jsx";
+import Modal from "../components/application/Modal.jsx";
 import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase.js";
 import { useUser } from "../lib/useUser.js";

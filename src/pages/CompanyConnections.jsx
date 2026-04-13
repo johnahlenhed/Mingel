@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
-import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
-import NavigationButton from "../components/NavigationButton";
-import Modal from "../components/Modal";
+import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle.jsx";
+import LowerPiecePuzzle from "../components/application/LowerPiecePuzzle.jsx";
+import NavigationButton from "../components/application/NavigationButton.jsx";
+import Modal from "../components/application/Modal.jsx";
 import { Link } from "react-router-dom";
 import styles from "./CompanyConnections.module.css";
 import { supabase } from "../lib/supabase.js";

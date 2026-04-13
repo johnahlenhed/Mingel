@@ -1,8 +1,8 @@
 import styles from "./CompanyHome.module.css";
-import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
+import LowerPiecePuzzle from "../components/application/LowerPiecePuzzle";
 import DisplayDigit from "../components/DisplayDigit";
-import NavigationButton from "../components/NavigationButton";
-import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
+import NavigationButton from "../components/application/NavigationButton";
+import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle";
 import { Link } from "react-router-dom";
 
 export default function CompanyHome() {

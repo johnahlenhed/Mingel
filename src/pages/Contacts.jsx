@@ -1,6 +1,6 @@
-import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
-import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
-import NavigationButton from "../components/NavigationButton";
+import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle.jsx";
+import LowerPiecePuzzle from "../components/application/LowerPiecePuzzle.jsx";
+import NavigationButton from "../components/application/NavigationButton.jsx";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Contacts.module.css";
 import { supabase } from "../lib/supabase.js";

@@ -1,7 +1,7 @@
-import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
-import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
+import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle.jsx";
+import LowerPiecePuzzle from "../components/application/LowerPiecePuzzle.jsx";
 // import NavigationButton from "../components/NavigationButton";
-import Modal from "../components/Modal";
+import Modal from "../components/application/Modal.jsx";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Connections.module.css";
