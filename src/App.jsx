@@ -18,7 +18,7 @@ import ConnectionRequest from "./components/ConnectionRequest.jsx";
 function App() {
   return (
     <Router>
-      {/* <ConnectionRequest /> */}
+      <ConnectionRequest />
       <Routes>
         {/* Always accessible routes */}
         <Route path="/register" element={<LandingPage />} />
