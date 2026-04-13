@@ -15,6 +15,7 @@ export default function Home() {
   const user = useUser();
   const [connectionStatus, setConnectionStatus] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newUrl, setNewUrl] = useState("");
 
   if (user?.role === "company") {
     return <Navigate to="/company1" />;
@@ -86,6 +87,23 @@ export default function Home() {
     setIsModalOpen((s) => !s);
   }
 
+  // Update URL in database
+  const handleSaveUrl = async () => {
+    if (!user) return;
+
+    const { error } = await supabase
+      .from("users")
+      .update({ link: newUrl })
+      .eq("id", user.id);
+
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("URL updated succesfully");
+      setIsModalOpen(false);
+    }
+  };
+
   return (
     <main className={styles.main}>
       <ConnectionRequest />
@@ -143,10 +161,14 @@ export default function Home() {
         <input
           className={styles.inputURL}
           type="url"
-          placeholder="New URL"
+          placeholder={"Current: " + user?.link || "New URL"}
+          value={newUrl}
+          onChange={(e) => setNewUrl(e.target.value)}
         ></input>
 
-        <button className={styles.saveBtn}>Save</button>
+        <button className={styles.saveBtn} onClick={handleSaveUrl}>
+          Save
+        </button>
       </Modal>
     </main>
   );
