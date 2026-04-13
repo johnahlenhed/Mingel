@@ -1,5 +1,5 @@
 import styles from "./RegisterComplete.module.css";
-import WhiteButton from "../components/register/WhiteButton";
+import { Link } from "react-router-dom";
 
 export default function RegisterComplete() {
   return (
@@ -12,6 +12,9 @@ export default function RegisterComplete() {
         </p>
 
         <button className={styles.calendarBtn}>Add to Calendar +</button>
+        <Link to="/login">
+          <button className={styles.loginBtn}>Login</button>
+        </Link>
       </section>
     </main>
   );

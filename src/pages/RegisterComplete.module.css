@@ -14,17 +14,25 @@
   text-align: start;
 }
 
-.calendarBtn {
+.calendarBtn,
+.loginBtn {
   background-color: var(--bg);
   color: var(--text-secondary);
   width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--container-bg);
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   border-radius: 32px;
   transition: background-color 0.3s ease;
   margin-top: 5vh;
+}
+
+.calendarBtn {
+  border: 2px solid var(--container-bg);
+}
+
+.loginBtn {
+  border: 2px solid var(--accent);
 }
