@@ -4,6 +4,7 @@ import styles from "./RoleSelector.module.css";
 function RoleSelector({ onSelect, defaultRole }) {
   const [selectedRole, setSelectedRole] = useState(defaultRole);
   const [touchStartX, setTouchStartX] = useState(null);
+  const [touchStartTime, setTouchStartTime] = useState(null);
 
   const handleSelect = (role) => {
     setSelectedRole(role);
@@ -12,19 +13,31 @@ function RoleSelector({ onSelect, defaultRole }) {
 
   const handleTouchStart = (e) => {
     setTouchStartX(e.touches[0].clientX);
+    setTouchStartTime(Date.now());
   };
 
   const handleTouchEnd = (e) => {
     if (touchStartX === null) return;
 
-    const diff = e.changedTouches[0].clientX - touchStartX;
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - touchStartX;
+    const time = Date.now() - touchStartTime;
 
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) handleSelect("company");
-      else handleSelect("student");
+    const absDiff = Math.abs(diff);
+    const velocity = absDiff / time; // px per ms
+
+    const swipeDistance = 40; // px
+    const swipeVelocity = 0.3; // px/ms
+
+    const isSwipe = absDiff > swipeDistance || velocity > swipeVelocity;
+
+    if (isSwipe) {
+      if (diff > 0) handleSelect("student");
+      else handleSelect("company");
     }
 
     setTouchStartX(null);
+    setTouchStartTime(null);
   };
 
   return (
