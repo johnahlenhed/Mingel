@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
+import RegisterConfirmation from "./pages/RegisterComplete.jsx";
 import "./App.css";
 import DynamicBG from "./components/application/DynamicBG.jsx";
 import Home from "./pages/Home.jsx";
@@ -22,6 +23,10 @@ function App() {
       <Routes>
         {/* Always accessible routes */}
         <Route path="/register" element={<LandingPage />} />
+        <Route
+          path="/register-confirmation"
+          element={<RegisterConfirmation />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/puzzle" element={<Puzzle />} />
         <Route path="/admin" element={<Admin />} />
