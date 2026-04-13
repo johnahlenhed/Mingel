@@ -1,7 +1,8 @@
-import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
-import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
+import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle.jsx";
+import LowerPiecePuzzle from "../components/application/LowerPiecePuzzle.jsx";
 // import NavigationButton from "../components/NavigationButton";
-import { useState, useEffect } from "react";
+import Modal from "../components/application/Modal.jsx";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Connections.module.css";
 import { supabase } from "../lib/supabase.js";
@@ -13,39 +14,43 @@ export default function Connections() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    if (!user) return
+    if (!user) return;
 
     // Function to load connections data for the current user
     async function loadData() {
       const { data, error } = await supabase
         .from("connections")
-        .select("*, users!connections_to_user_fkey(id, full_name, company, programme)")
+        .select(
+          "*, users!connections_to_user_fkey(id, full_name, company, programme)",
+        )
         .eq("from_user", user.id)
-        .eq("status", "accepted")
+        .eq("status", "accepted");
 
       if (error) {
-        console.error(error)
+        console.error(error);
       } else {
-        setRows(data)
+        setRows(data);
       }
     }
-    loadData()
+    loadData();
 
     // Subscribe to changes in connections where current user is the sender
     const subscription = supabase
-      .channel('accepted-connections')
-      .on('postgres_changes', {
-        event: 'UPDATE',
-        schema: 'public',
-        table: 'connections',
-        filter: `from_user=eq.${user.id}`
-      }, () => loadData())
-      .subscribe()
+      .channel("accepted-connections")
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "connections",
+          filter: `from_user=eq.${user.id}`,
+        },
+        () => loadData(),
+      )
+      .subscribe();
 
-    return () => subscription.unsubscribe()
-
-
-  }, [user])
+    return () => subscription.unsubscribe();
+  }, [user]);
 
   function toggleModal() {
     setIsModalOpen((s) => !s);
@@ -221,37 +226,19 @@ export default function Connections() {
       <img
         onClick={toggleModal}
         className={styles.helpBtn}
-        src="../../public/StudentHelp.png"
+        src="../../StudentHelp.png"
         alt="Question mark button for help"
       />
 
-      <section className={styles.modalContainer}>
-        <article
-          className={`${styles.modalContent} ${isModalOpen ? styles.showModal : ""}`}
-        >
-          <h3>How does it work?</h3>
-          <p>
-            Create connections by entering a company's code, collecting piece in
-            your personal puzzle. Complete three to see it join a larger piece
-            live on screen.
-          </p>
-          <p>Keep goging and make the most of the people around you!</p>
-          <button
-            className={styles.modalClose}
-            onClick={() => setIsModalOpen(false)}
-            aria-label="Close"
-          >
-            ×
-          </button>
-        </article>
-        {isModalOpen && (
-          <div
-            className={styles.modalOverlay}
-            onClick={() => setIsModalOpen(false)}
-            aria-hidden="true"
-          />
-        )}
-      </section>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h3>How does it work?</h3>
+        <p>
+          Create connections by entering a company's code, collecting piece in
+          your personal puzzle. Complete three to see it join a larger piece
+          live on screen.
+        </p>
+        <p>Keep goging and make the most of the people around you!</p>
+      </Modal>
     </main>
   );
 }

@@ -1,9 +1,5 @@
 .layout {
-  padding: 15% 0 0 0;
-  box-sizing: border-box;
-  /* background: lightgray; */
-  /* width: 100vw;
-  height: 100vh; */
+  padding-top: 15%;
 }
 
 .cardContainer {
@@ -40,6 +36,15 @@
   margin-top: calc(-1 * var(--circle-size) / 2);
 }
 
+.handshakeTrue {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15vw;
+  aspect-ratio: 1;
+}
+
 .lowerContent {
   position: absolute;
   top: 0%;
@@ -60,12 +65,12 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #ffffff66;
+  background: var(--secondary-faded);
   border: none;
 }
 
 .activeDot {
-  background: white;
+  background: var(--text-h);
   transform: scale(1.2);
 }
 

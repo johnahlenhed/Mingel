@@ -1,14 +1,49 @@
 import { useState } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
-import { verifyPassword } from "../lib/utils";
+import { hashPassword, verifyPassword } from "../lib/utils";
 import RedButton from "../components/register/RedButton";
 import styles from "./Login.module.css";
 import { useUser } from "../lib/useUser";
 import { useEventStatus } from "../lib/useEventStatus";
+import { sendLoginEmail } from "../lib/sendEmail";
 
 
 function Login() {
+    const [showResend, setShowResend] = useState(false)
+    const [resendEmail, setResendEmail] = useState('')
+    const [resendStatus, setResendStatus] = useState(null)
+
+    const handleResend = async (e) => {
+        e.preventDefault()
+
+        // Check if email exists
+        const { data, error } = await supabase
+            .from('users')
+            .select('id')
+            .eq('email', resendEmail)
+            .single()
+
+        if (error || !data) {
+            setResendStatus('Email not found')
+            return
+        }
+
+        // Generate new login code
+        const loginCode = Math.floor(100000 + Math.random() * 900000).toString()
+        const haskedLoginCode = await hashPassword(loginCode)
+
+        // Update the database
+        await supabase
+            .from('users')
+            .update({ login_code: haskedLoginCode })
+            .eq('id', data.id)
+
+        // Send email with new login code (this is a placeholder, implement your email sending logic here)
+        await sendLoginEmail(resendEmail, loginCode)
+        setResendStatus('New login code has been sent to your email')
+    }
+
     const [formData, setFormData] = useState({
         email: '',
         code: ''
@@ -89,6 +124,25 @@ function Login() {
                         <Link to="/register" className={styles.registerLink}>Create account</Link>
                     </div>
                 </form>
+
+                {!showResend ? (
+                    <button onClick={() => setShowResend(true)}>
+                        Resend login code
+                    </button>
+
+                ) : (
+                    <form onSubmit={handleResend}>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            value={resendEmail}
+                            onChange={(e) => setResendEmail(e.target.value)}
+                            required
+                        />
+                        <button type="submit">Send new login code</button>
+                        {resendStatus && <p>{resendStatus}</p>}
+                    </form>
+                )}
             </section>
         </main>
     )

@@ -1,6 +1,6 @@
-import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
-import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
-import NavigationButton from "../components/NavigationButton";
+import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle.jsx";
+import LowerPiecePuzzle from "../components/application/LowerPiecePuzzle.jsx";
+import NavigationButton from "../components/application/NavigationButton.jsx";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Contacts.module.css";
 import { supabase } from "../lib/supabase.js";
@@ -15,6 +15,7 @@ export default function Contacts() {
 
   const containerRef = useRef(null);
   const cardRefs = useRef([]);
+  const hasAutoScrolled = useRef(false);
 
   useEffect(() => {
     if (!user) return;
@@ -22,18 +23,20 @@ export default function Contacts() {
     async function loadData() {
       const { data, error } = await supabase
         .from("connections")
-        .select("*, users!connections_to_user_fkey(id, full_name, email, programme, link)")
+        .select(
+          "*, users!connections_to_user_fkey(id, full_name, email, programme, link)",
+        )
         .eq("from_user", user.id)
-        .eq("status", "accepted")
+        .eq("status", "accepted");
 
       if (error) {
-        console.error(error)
+        console.error(error);
       } else {
-        setRows(data)
+        setRows(data);
       }
     }
-    loadData()
-  }, [user])
+    loadData();
+  }, [user]);
 
   // Check which card is visible
   useEffect(() => {
@@ -64,10 +67,12 @@ export default function Contacts() {
 
   useEffect(() => {
     if (!rows.length) return;
+    if (hasAutoScrolled.current) return;
 
     const index = rows.findIndex((r) => r.users.id === id);
     if (index !== -1) {
       scrollToCard(index);
+      hasAutoScrolled.current = true;
     }
   }, [rows, id]);
 
@@ -93,6 +98,14 @@ export default function Contacts() {
             </div>
             <div className={styles.lowerContainer}>
               <LowerPiecePuzzle variant="blue">
+                {row.handshake ? (
+                  <img
+                    className={styles.handshakeTrue}
+                    src="/handshake_student.png"
+                    alt="Handshake"
+                  />
+                ) : null}
+
                 <div>
                   <p className={styles.lowerContent}>{row.users.full_name}</p>
                 </div>

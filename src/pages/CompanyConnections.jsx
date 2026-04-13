@@ -1,7 +1,8 @@
-import UpperPiecePuzzle from "../components/UpperPiecePuzzle";
-import LowerPiecePuzzle from "../components/LowerPiecePuzzle";
-import NavigationButton from "../components/NavigationButton";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle.jsx";
+import LowerPiecePuzzle from "../components/application/LowerPiecePuzzle.jsx";
+import NavigationButton from "../components/application/NavigationButton.jsx";
+import Modal from "../components/application/Modal.jsx";
 import { Link } from "react-router-dom";
 import styles from "./CompanyConnections.module.css";
 import { supabase } from "../lib/supabase.js";
@@ -52,6 +53,18 @@ export default function Connections() {
     setIsModalOpen((s) => !s);
   }
 
+  // function closeModal() {
+  //   const modal = modalRef.current;
+  //   if (!modal) return;
+
+  //   modal.style.transition = "transform 0.3s ease";
+  //   modal.style.transform = "translateY(100%)";
+
+  //   setTimeout(() => {
+  //     setIsModalOpen(false);
+  //   }, 250);
+  // }
+
   return (
     <main className={styles.layout}>
       <section className={styles.gridContainer}>
@@ -95,39 +108,19 @@ export default function Connections() {
         <img
           onClick={toggleModal}
           className={styles.helpBtn}
-          src="../../public/StudentHelp.png"
+          src="../../StudentHelp.png"
           alt="Question mark button for help"
         />
-
-        <section className={styles.modalContainer}>
-          <article
-            className={`${styles.modalContent} ${isModalOpen ? styles.showModal : ""}`}
-          >
-            <h3>How does it work?</h3>
-            <p>
-              Meet students and grow your network by sharing your unique code.
-            </p>
-            <p>
-              Every connection is collected in your library, and after the event
-              you can highlight promising candidates using the handshake icon.
-            </p>
-            <button
-              className={styles.modalClose}
-              onClick={() => setIsModalOpen(false)}
-              aria-label="Close"
-            >
-              ×
-            </button>
-          </article>
-          {isModalOpen && (
-            <div
-              className={styles.modalOverlay}
-              onClick={() => setIsModalOpen(false)}
-              aria-hidden="true"
-            />
-          )}
-        </section>
       </section>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h3>How does it work?</h3>
+        <p>Meet students and grow your network by sharing your unique code.</p>
+        <p>
+          Every connection is collected in your library, and after the event you
+          can highlight promising candidates using the handshake icon.
+        </p>
+      </Modal>
     </main>
   );
 }

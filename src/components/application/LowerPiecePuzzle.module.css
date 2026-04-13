@@ -1,11 +1,5 @@
-:root {
-  --yrgo-blue: #002a52;
-}
-
 .lowerPuzzle {
   --circle-size: 20vw;
-  /* --circle-size: clamp(48px, 18vw, 64px); */
-
   width: 100%;
   height: 100%;
   border-bottom-left-radius: 20px;
@@ -60,93 +54,90 @@
   padding: 1rem;
 }
 
-/* Variants */
+/* ----- VARIANTS ----- */
+/* Default */
 .default {
-  border: 2px solid lightgray;
+  border: 2px solid var(--faded);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  background-color: white;
+  background-color: var(--bg);
 }
 
 .default::before {
-  background-color: white;
+  background-color: var(--bg);
 }
 
 .default::after {
-  border: 2px solid lightgray;
+  border: 2px solid var(--faded);
   border-bottom: none;
 }
 
 /* Blue solid */
 .blue {
-  border: 2px solid var(--yrgo-blue);
+  border: 2px solid var(--border);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  background-color: var(--yrgo-blue);
+  background-color: var(--border);
 }
 
 .blue::before {
-  background: var(--yrgo-blue);
-  /* border: none; */
+  background: var(--border);
 }
 
 .blue::after {
-  border: 2px solid var(--yrgo-blue);
+  border: 2px solid var(--border);
   border-bottom: none;
 }
 
 /* Transparent background + light border (HOLLOW) */
 .lightBorderSolid {
   background-color: transparent;
-  border: 2px solid lightgray;
+  border: 2px solid var(--faded);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  background: white;
+  background: var(--bg);
 }
 
 .lightBorderSolid::before {
-  background: white;
-  /* border-bottom: none; */
+  background: var(--bg);
 }
 
 .lightBorderSolid::after {
-  border: 2px solid lightgray;
+  border: 2px solid var(--faded);
   border-bottom: none;
 }
 
 /* Transparent background + light dashed border (Home) */
 .lightBorderDashed {
   background-color: transparent;
-  border: 2px dashed lightgray;
-  /* border-top: none; */
+  border: 2px dashed var(--faded);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
 .lightBorderDashed::before {
-  background-color: white;
-  /* border-bottom: none; */
+  background-color: var(--bg);
 }
 
 .lightBorderDashed::after {
-  border: 2px dashed lightgray;
+  border: 2px dashed var(--faded);
   border-bottom: none;
 }
 
-/* Transparent background + blue border (ADD) */
+/* Transparent/white background + blue border (ADD) */
 .darkBorderSolid {
   background-color: transparent;
-  border: 2px solid var(--yrgo-blue);
+  border: 2px solid var(--border);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  background: white;
+  background: var(--bg);
 }
 
 .darkBorderSolid::before {
-  background: white;
+  background: var(--bg);
 }
 
 .darkBorderSolid::after {
-  border: 2px solid var(--yrgo-blue);
+  border: 2px solid var(--border);
   border-bottom: none;
 }
