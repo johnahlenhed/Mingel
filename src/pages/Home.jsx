@@ -91,6 +91,11 @@ export default function Home() {
   const handleSaveUrl = async () => {
     if (!user) return;
 
+    if (!newUrl.trim()) {
+      console.log("URL cannot be empty");
+      return;
+    }
+
     const { error } = await supabase
       .from("users")
       .update({ link: newUrl })
