@@ -57,7 +57,8 @@
   padding: 1rem;
 }
 
-/* Variants */
+/* ----- Variants ----- */
+/* Default */
 .default {
   border: 2px solid var(--faded);
   border-bottom: none;

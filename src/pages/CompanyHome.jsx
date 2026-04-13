@@ -25,7 +25,7 @@ export default function CompanyHome() {
     if (!user) return;
 
     if (!newUrl.trim()) {
-      console.log("URL cannot be empty");
+      setConfirmation("URL cannot be empty");
       return;
     }
 
@@ -35,11 +35,8 @@ export default function CompanyHome() {
       .eq("id", user.id);
 
     if (error) {
-      // console.log(error);
       setConfirmation("Something went wrong");
     } else {
-      // console.log("URL updated successfully");
-      //setIsModalOpen(false);
       setConfirmation("URL updated successfully!");
       setTimeout(() => {
         setIsModalOpen(false);

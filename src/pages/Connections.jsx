@@ -1,6 +1,5 @@
 import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle.jsx";
 import LowerPiecePuzzle from "../components/application/LowerPiecePuzzle.jsx";
-// import NavigationButton from "../components/NavigationButton";
 import Modal from "../components/application/Modal.jsx";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";

@@ -105,7 +105,7 @@ export default function Home() {
     if (!user) return;
 
     if (!newUrl.trim()) {
-      console.log("URL cannot be empty");
+      setConfirmation("URL cannot be empty");
       return;
     }
 
@@ -116,7 +116,6 @@ export default function Home() {
 
     if (error) {
       setConfirmation("Something went wrong");
-      // console.log(error);
     } else {
       setConfirmation("URL updated successfully!");
       setTimeout(() => {

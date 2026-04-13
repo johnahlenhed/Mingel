@@ -21,23 +21,9 @@
   will-change: transform;
 }
 
-/* .close {
-  position: absolute;
-  right: 0.5rem;
-  top: 0.25rem;
-  background: transparent;
-  border: none;
-  font-size: 2rem;
-  color: var(--text);
-} */
-
 .swipe {
   position: absolute;
   left: 50%;
   top: 5%;
   transform: translateX(-50%);
-  /* background: transparent; */
-  /* border: none; */
-  /* font-size: 2rem; */
-  /* color: var(--text); */
 }

@@ -96,9 +96,6 @@ export default function Modal({ isOpen, onClose, children }) {
           src="../../swipe.png"
           alt="Swipe to close modal"
         />
-        {/* <button className={styles.close} onClick={closeModal}>
-          ×
-        </button> */}
         {children}
       </article>
     </>

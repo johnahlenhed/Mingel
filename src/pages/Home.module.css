@@ -13,11 +13,6 @@
   height: 20vh;
 }
 
-/* .label {
-  font-size: 1.5rem;
-  font-weight: bold;
-} */
-
 .form {
   display: flex;
   flex-direction: column;
@@ -28,18 +23,6 @@
   margin-bottom: 5vh;
   z-index: 1000;
 }
-
-/* .input {
-  width: 50%;
-  padding: 0.5rem;
-  height: 3rem;
-  border-radius: 8px;
-  border: 1px solid lightgray;
-  background-color: white;
-  color: darkgrey;
-  font-size: 2rem;
-  text-align: center;
-} */
 
 .addBtnContainer {
   width: 50vw;
