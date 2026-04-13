@@ -15,6 +15,7 @@ export default function Contacts() {
 
   const containerRef = useRef(null);
   const cardRefs = useRef([]);
+  const hasAutoScrolled = useRef(false);
 
   useEffect(() => {
     if (!user) return;
@@ -66,10 +67,12 @@ export default function Contacts() {
 
   useEffect(() => {
     if (!rows.length) return;
+    if (hasAutoScrolled.current) return;
 
     const index = rows.findIndex((r) => r.users.id === id);
     if (index !== -1) {
       scrollToCard(index);
+      hasAutoScrolled.current = true;
     }
   }, [rows, id]);
 
