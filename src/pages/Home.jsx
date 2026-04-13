@@ -106,7 +106,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <ConnectionRequest />
+      {/* <ConnectionRequest /> */}
       <section className={styles.layout}>
         <div className={styles.upperContainer}>
           <UpperPiecePuzzle variant="lightBorderDashed" />
