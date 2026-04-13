@@ -8,6 +8,7 @@ import Modal from "../components/application/Modal.jsx";
 import { supabase } from "../lib/supabase.js";
 import { useUser } from "../lib/useUser.js";
 import { Link } from "react-router-dom";
+import LogoutButton from "../components/LogoutButton.jsx";
 
 export default function CompanyHome() {
   const user = useUser();
@@ -47,50 +48,53 @@ export default function CompanyHome() {
   };
 
   return (
-    <main className={styles.layout}>
-      <section className={styles.rotatedContainer}>
-        <LowerPiecePuzzle variant="lightBorderDashed"></LowerPiecePuzzle>
-      </section>
+    <>
+      <main className={styles.layout}>
+        <section className={styles.rotatedContainer}>
+          <LowerPiecePuzzle variant="lightBorderDashed"></LowerPiecePuzzle>
+        </section>
 
-      <section>
-        <article className={styles.codeContainer}>
-          <DisplayDigit></DisplayDigit>
-        </article>
-      </section>
+        <section>
+          <article className={styles.codeContainer}>
+            <DisplayDigit></DisplayDigit>
+          </article>
+        </section>
 
-      <section className={styles.rotatedContainer}>
-        <UpperPiecePuzzle variant="lightBorderDashed"></UpperPiecePuzzle>
-      </section>
+        <section className={styles.rotatedContainer}>
+          <UpperPiecePuzzle variant="lightBorderDashed"></UpperPiecePuzzle>
+        </section>
 
-      <section className={styles.navigation}>
-        <Link to="/company2">
-          <NavigationButton>
-            Connections <img src="../../arrow_right.svg" />
-          </NavigationButton>
-        </Link>
-      </section>
+        <section className={styles.navigation}>
+          <Link to="/company2">
+            <NavigationButton>
+              Connections <img src="../../arrow_right.svg" />
+            </NavigationButton>
+          </Link>
+        </section>
 
-      <div>
-        <p className={styles.changeURL} onClick={toggleModal}>
-          Change the URL you share
-        </p>
-      </div>
+        <div>
+          <p className={styles.changeURL} onClick={toggleModal}>
+            Change the URL you share
+          </p>
+        </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <input
-          className={styles.inputURL}
-          type="url"
-          placeholder={"Current: " + user?.link || "New URL"}
-          value={newUrl}
-          onChange={(e) => setNewUrl(e.target.value)}
-        ></input>
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <input
+            className={styles.inputURL}
+            type="url"
+            placeholder={"Current: " + user?.link || "New URL"}
+            value={newUrl}
+            onChange={(e) => setNewUrl(e.target.value)}
+          ></input>
 
-        {confirmation && <p className={styles.confirmation}>{confirmation}</p>}
+          {confirmation && <p className={styles.confirmation}>{confirmation}</p>}
 
-        <button className={styles.saveBtn} onClick={handleSaveUrl}>
-          Save
-        </button>
-      </Modal>
-    </main>
+          <button className={styles.saveBtn} onClick={handleSaveUrl}>
+            Save
+          </button>
+        </Modal>
+      </main>
+      <LogoutButton />
+    </>
   );
 }
