@@ -16,6 +16,7 @@ export default function Home() {
   const [connectionStatus, setConnectionStatus] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUrl, setNewUrl] = useState("");
+  const [confirmation, setConfirmation] = useState("");
 
   if (user?.role === "company") {
     return <Navigate to="/company1" />;
@@ -102,10 +103,15 @@ export default function Home() {
       .eq("id", user.id);
 
     if (error) {
-      console.log(error);
+      setConfirmation("Something went wrong");
+      // console.log(error);
     } else {
-      console.log("URL updated succesfully");
-      setIsModalOpen(false);
+      setConfirmation("URL updated successfully!");
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setConfirmation("");
+        setNewUrl("");
+      }, 2000);
     }
   };
 
@@ -170,6 +176,8 @@ export default function Home() {
           value={newUrl}
           onChange={(e) => setNewUrl(e.target.value)}
         ></input>
+
+        {confirmation && <p className={styles.confirmation}>{confirmation}</p>}
 
         <button className={styles.saveBtn} onClick={handleSaveUrl}>
           Save
