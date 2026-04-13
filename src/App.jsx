@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
 import "./App.css";
-import DynamicBG from "./components/DynamicBG.jsx";
+import DynamicBG from "./components/application/DynamicBG.jsx";
 import Home from "./pages/Home.jsx";
 import Connections from "./pages/Connections.jsx";
 import Contacts from "./pages/Contacts.jsx";
@@ -14,7 +14,6 @@ import Admin from "./admin/Admin.jsx";
 import Lobby from "./pages/Lobby.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import ConnectionRequest from "./components/ConnectionRequest.jsx";
-
 
 function App() {
   return (
@@ -29,15 +28,62 @@ function App() {
         <Route path="/lobby" element={<Lobby />} />
 
         {/* Protected routes */}
-        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path="/connections" element={<ProtectedRoute><DynamicBG><Connections /></DynamicBG></ProtectedRoute>} />
-        <Route path="/contacts/:id" element={<ProtectedRoute><DynamicBG><Contacts /></DynamicBG></ProtectedRoute>} />
-        <Route path="/company1" element={<ProtectedRoute><CompanyHome /></ProtectedRoute>} />
-        <Route path="/company2" element={<ProtectedRoute><DynamicBG><CompanyConnections /></DynamicBG></ProtectedRoute>} />
-        <Route path="/company-contacts/:id" element={<ProtectedRoute><CompanyContacts /></ProtectedRoute>} />
-        
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/connections"
+          element={
+            <ProtectedRoute>
+              <DynamicBG>
+                <Connections />
+              </DynamicBG>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/contacts/:id"
+          element={
+            <ProtectedRoute>
+              <DynamicBG>
+                <Contacts />
+              </DynamicBG>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/company1"
+          element={
+            <ProtectedRoute>
+              <CompanyHome />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/company2"
+          element={
+            <ProtectedRoute>
+              <DynamicBG>
+                <CompanyConnections />
+              </DynamicBG>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/company-contacts/:id"
+          element={
+            <ProtectedRoute>
+              <CompanyContacts />
+            </ProtectedRoute>
+          }
+        />
+
         {/* <Route path="/contacts" element={<Contacts />} /> */}
-        
       </Routes>
     </Router>
   );

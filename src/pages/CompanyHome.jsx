@@ -1,6 +1,6 @@
 import styles from "./CompanyHome.module.css";
 import LowerPiecePuzzle from "../components/application/LowerPiecePuzzle";
-import DisplayDigit from "../components/DisplayDigit";
+import DisplayDigit from "../components/application/DisplayDigit";
 import NavigationButton from "../components/application/NavigationButton";
 import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle";
 import { Link } from "react-router-dom";

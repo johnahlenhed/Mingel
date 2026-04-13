@@ -4,8 +4,6 @@
 
 .lowerPuzzle {
   --circle-size: 20vw;
-  /* --circle-size: clamp(48px, 18vw, 64px); */
-
   width: 100%;
   height: 100%;
   border-bottom-left-radius: 20px;
@@ -60,7 +58,8 @@
   padding: 1rem;
 }
 
-/* Variants */
+/* ----- VARIANTS ----- */
+/* Default */
 .default {
   border: 2px solid lightgray;
   border-top-left-radius: 0;
@@ -87,7 +86,6 @@
 
 .blue::before {
   background: var(--yrgo-blue);
-  /* border: none; */
 }
 
 .blue::after {
@@ -106,7 +104,6 @@
 
 .lightBorderSolid::before {
   background: white;
-  /* border-bottom: none; */
 }
 
 .lightBorderSolid::after {
@@ -118,14 +115,12 @@
 .lightBorderDashed {
   background-color: transparent;
   border: 2px dashed lightgray;
-  /* border-top: none; */
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
 .lightBorderDashed::before {
   background-color: white;
-  /* border-bottom: none; */
 }
 
 .lightBorderDashed::after {
@@ -133,7 +128,7 @@
   border-bottom: none;
 }
 
-/* Transparent background + blue border (ADD) */
+/* Transparent/white background + blue border (ADD) */
 .darkBorderSolid {
   background-color: transparent;
   border: 2px solid var(--yrgo-blue);

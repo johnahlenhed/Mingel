@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../../lib/supabase";
 import styles from "./DisplayDigit.module.css";
-import { useUser } from "../lib/useUser";
+import { useUser } from "../../lib/useUser";
 
 export default function FourDigitDisplay() {
   const user = useUser();
