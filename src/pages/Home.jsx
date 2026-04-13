@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle.jsx";
 import DigitInput from "../components/application/DigitInput.jsx";
@@ -12,9 +12,12 @@ import { Navigate } from "react-router-dom";
 
 export default function Home() {
   const user = useUser();
+  const [code, setCode] = useState("");
+  const [reset, setReset] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUrl, setNewUrl] = useState("");
+  const [confirmation, setConfirmation] = useState("");
 
   if (user?.role === "company") {
     return <Navigate to="/company1" />;
@@ -81,6 +84,16 @@ export default function Home() {
     setConnectionStatus("Connection request sent!");
   };
 
+  useEffect(() => {
+    if (!connectionStatus) return;
+
+    const timer = setTimeout(() => {
+      setConnectionStatus(null);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [connectionStatus]);
+
   // Open modal
   function toggleModal() {
     setIsModalOpen((s) => !s);
@@ -90,16 +103,25 @@ export default function Home() {
   const handleSaveUrl = async () => {
     if (!user) return;
 
+    if (!newUrl.trim()) {
+      setConfirmation("URL cannot be empty");
+      return;
+    }
+
     const { error } = await supabase
       .from("users")
       .update({ link: newUrl })
       .eq("id", user.id);
 
     if (error) {
-      console.log(error);
+      setConfirmation("Something went wrong");
     } else {
-      console.log("URL updated succesfully");
-      setIsModalOpen(false);
+      setConfirmation("URL updated successfully!");
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setConfirmation("");
+        setNewUrl("");
+      }, 2000);
     }
   };
 
@@ -111,10 +133,23 @@ export default function Home() {
         </div>
 
         <article className={styles.form}>
-          <DigitInput onComplete={handleConnect} />
+          <DigitInput
+            onComplete={setCode}
+            onChangeCode={setCode}
+            reset={reset}
+          />
           {connectionStatus && <p>{connectionStatus}</p>}
           <div className={styles.addBtnContainer}>
-            <button className={styles.addBtn}>Add +</button>
+            <button
+              className={styles.addBtn}
+              onClick={() => {
+                handleConnect(code);
+                setReset((prev) => !prev);
+              }}
+              disabled={code.length !== 4}
+            >
+              Add +
+            </button>
           </div>
         </article>
 
@@ -163,6 +198,8 @@ export default function Home() {
           value={newUrl}
           onChange={(e) => setNewUrl(e.target.value)}
         ></input>
+
+        {confirmation && <p className={styles.confirmation}>{confirmation}</p>}
 
         <button className={styles.saveBtn} onClick={handleSaveUrl}>
           Save

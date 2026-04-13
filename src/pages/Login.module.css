@@ -1,120 +1,118 @@
 .loginPage {
-    font-family: var(--text);
-    background-image: url('/background.png');
-    background-size: cover;
-    background-position: center 20%;
-    background-repeat: no-repeat;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-family: var(--text);
+  background-image: url("/background.png");
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .loginWrapper {
-    width: 100%;
-    margin-top: 30rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  margin-top: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .loginForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
 }
 
 .inputWrapper {
-    position: relative;
-    width: 90%;
+  position: relative;
+  width: 90%;
 }
 
 .inputWrapper label {
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    background-color: var(--bg);
-    padding: 0 4px;
-    font-size: 0.8rem;
-    color: var(--text-faded);
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background-color: var(--bg);
+  padding: 0 4px;
+  font-size: 0.8rem;
+  color: var(--text-faded);
 }
 
 .inputWrapper label span {
-    color: var(--text-accent);
+  color: var(--text-accent);
 }
 
 .inputWrapper input,
 .inputWrapper select {
-    width: 100%;
-    height: 53px;
-    padding: 0 20px;
-    border: 2px solid var(--secondary-faded);
-    border-radius: 32px;
-    background-color: var(--bg);
-    color: var(--text);
-    font-size: 1rem;
-    box-sizing: border-box;
+  width: 100%;
+  height: 53px;
+  padding: 0 20px;
+  border: 2px solid var(--secondary-faded);
+  border-radius: 32px;
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .inputWrapper input:focus,
 .inputWrapper select:focus {
-    border-color: var(--accent);
-    outline: none;
+  border-color: var(--accent);
+  outline: none;
 }
 
 .inputWrapper select {
-    appearance: none;
-    cursor: pointer;
+  appearance: none;
 }
 
 .inputWrapper select:invalid {
-    color: var(--text-faded);
+  color: var(--text-faded);
 }
 
 .inputWrapper:has(select)::after {
-    content: '↓';
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: var(--text-faded);
+  content: "↓";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-faded);
 }
 
 .error {
-    color: var(--text-accent);
-    font-size: 0.85rem;
+  color: var(--text-accent);
+  font-size: 0.85rem;
 }
 
 .informationWrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 }
 
 .informationWrapper p {
-    color: var(--text-faded);
+  color: var(--text-faded);
 }
 
 .buttonWrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5rem;
 }
 
 .registerLink {
-    color: var(--text);
-    text-decoration: none;
-    font-size: 0.9rem;
-    margin: 1rem 0 5rem 0;
-
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin: 1rem 0 5rem 0;
 }

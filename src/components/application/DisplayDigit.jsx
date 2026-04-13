@@ -1,5 +1,3 @@
-// import { useEffect, useState } from "react";
-// import { supabase } from "../../lib/supabase";
 import styles from "./DisplayDigit.module.css";
 import { useUser } from "../../lib/useUser";
 

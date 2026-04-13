@@ -53,18 +53,6 @@ export default function Connections() {
     setIsModalOpen((s) => !s);
   }
 
-  // function closeModal() {
-  //   const modal = modalRef.current;
-  //   if (!modal) return;
-
-  //   modal.style.transition = "transform 0.3s ease";
-  //   modal.style.transform = "translateY(100%)";
-
-  //   setTimeout(() => {
-  //     setIsModalOpen(false);
-  //   }, 250);
-  // }
-
   return (
     <main className={styles.layout}>
       <section className={styles.gridContainer}>
