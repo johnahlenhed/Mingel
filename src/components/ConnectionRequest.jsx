@@ -30,7 +30,7 @@ export default function ConnectionRequest() {
         fetchPending()
 
         const subscription = supabase
-            .channel('incoming-connections')
+            .channel(`incoming-connections-${user.id}`)
             .on('postgres_changes', {
                 event: 'INSERT',
                 schema: 'public',
