@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import styles from "./DigitInput.module.css";
 
-export default function FourDigitInput({ onComplete }) {
+export default function FourDigitInput({ onComplete, onChangeCode }) {
   const [values, setValues] = useState(["", "", "", ""]);
   const refs = useRef([]);
 
@@ -13,6 +13,10 @@ export default function FourDigitInput({ onComplete }) {
     const newValues = [...values];
     newValues[index] = value;
     setValues(newValues);
+
+    if (onChangeCode) {
+      onChangeCode(newValues.join(""));
+    }
 
     // Jump forward
     if (value && index < 3) {

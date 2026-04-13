@@ -13,6 +13,7 @@ import { Navigate } from "react-router-dom";
 
 export default function Home() {
   const user = useUser();
+  const [code, setCode] = useState("");
   const [connectionStatus, setConnectionStatus] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUrl, setNewUrl] = useState("");
@@ -124,10 +125,16 @@ export default function Home() {
         </div>
 
         <article className={styles.form}>
-          <DigitInput onComplete={handleConnect} />
+          <DigitInput onComplete={setCode} onChangeCode={setCode} />
           {connectionStatus && <p>{connectionStatus}</p>}
           <div className={styles.addBtnContainer}>
-            <button className={styles.addBtn}>Add +</button>
+            <button
+              className={styles.addBtn}
+              onClick={() => handleConnect(code)}
+              disabled={code.length !== 4}
+            >
+              Add +
+            </button>
           </div>
         </article>
 

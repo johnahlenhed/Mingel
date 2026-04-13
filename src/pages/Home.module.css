@@ -55,6 +55,10 @@
   color: var(--text-white);
 }
 
+.addBtn:disabled {
+  opacity: 0.4;
+}
+
 .linksContainer {
   width: 100%;
 }
