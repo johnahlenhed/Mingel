@@ -1,7 +1,7 @@
 .selectionButton {
-  background-color: var(--bg);
+  background-color: transparent;
   color: var(--text);
-  border: 2px solid var(--bg);
+  border: none;
   border-radius: 0;
   padding: 16px 32px;
   font-size: 18px;
@@ -16,7 +16,9 @@
 }
 
 .selected {
-  border-color: var(--accent);
+  background-color: var(--bg);
+  border: 2px solid var(--accent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .left {
