@@ -14,12 +14,10 @@ import Puzzle from "./pages/Puzzle.jsx";
 import Admin from "./admin/Admin.jsx";
 import Lobby from "./pages/Lobby.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import ConnectionRequest from "./components/ConnectionRequest.jsx";
 
 function App() {
   return (
     <Router>
-      <ConnectionRequest />
       <Routes>
         {/* Always accessible routes */}
         <Route path="/register" element={<LandingPage />} />

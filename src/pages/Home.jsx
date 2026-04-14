@@ -54,18 +54,12 @@ export default function Home() {
       .or(
         `and(from_user.eq.${user.id},to_user.eq.${targetUser.id}),and(from_user.eq.${targetUser.id},to_user.eq.${user.id})`,
       )
-      .in("status", ["pending", "accepted"])
+      .eq("status", "accepted")
       .maybeSingle();
 
     if (existing) {
-      if (existing.status === "pending") {
-        setConnectionStatus(
-          "Connection request already pending with this user",
-        );
-      } else {
-        setConnectionStatus("You are already connected with this user");
-      }
-      return;
+        setConnectionStatus("You are already connected with this user")
+        return
     }
 
     // Create connection
@@ -74,7 +68,7 @@ export default function Home() {
       .insert({
         from_user: user.id,
         to_user: targetUser.id,
-        status: "pending",
+        status: "accepted",
       });
 
     if (connectionError) {
@@ -87,7 +81,7 @@ export default function Home() {
       return;
     }
 
-    setConnectionStatus("Connection request sent!");
+    setConnectionStatus("Connected!");
   };
 
   useEffect(() => {

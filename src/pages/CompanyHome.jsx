@@ -94,7 +94,7 @@ export default function CompanyHome() {
           </button>
         </Modal>
       </main>
-      <LogoutButton />
+      <LogoutButton className={styles.logOutBtn} />
     </>
   );
 }

@@ -31,17 +31,23 @@ function Login() {
 
         // Generate new login code
         const loginCode = Math.floor(100000 + Math.random() * 900000).toString()
-        const haskedLoginCode = await hashPassword(loginCode)
+        const hashedLoginCode = await hashPassword(loginCode)
 
         // Update the database
         await supabase
             .from('users')
-            .update({ login_code: haskedLoginCode })
+            .update({ login_code: hashedLoginCode })
             .eq('id', data.id)
 
         // Send email with new login code (this is a placeholder, implement your email sending logic here)
         await sendLoginEmail(resendEmail, loginCode)
         setResendStatus('New login code has been sent to your email')
+
+        setTimeout(() => {
+            setShowResend(false)
+            setResendStatus(null)
+            setResendEmail('')
+        }, 2000)
     }
 
     const [formData, setFormData] = useState({
@@ -121,27 +127,40 @@ function Login() {
                     <div className={styles.buttonWrapper}>
                         <RedButton type="submit" text="Sign in" />
 
+                        <p className={styles.resendLink} onClick={() => setShowResend(true)}>
+                            I've lost my password
+                        </p>
+
+                        <div className={styles.divider} />
+
                         <Link to="/register" className={styles.registerLink}>Create account</Link>
                     </div>
                 </form>
 
-                {!showResend ? (
-                    <button onClick={() => setShowResend(true)}>
-                        Resend login code
-                    </button>
+                
 
-                ) : (
-                    <form onSubmit={handleResend}>
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            value={resendEmail}
-                            onChange={(e) => setResendEmail(e.target.value)}
-                            required
-                        />
-                        <button type="submit">Send new login code</button>
-                        {resendStatus && <p>{resendStatus}</p>}
-                    </form>
+                {showResend && (
+                    <>
+                        <div className={styles.overlay} onClick={() => setShowResend(false)} />
+                        <div className={styles.modal}>
+                            <div className={styles.handle} />
+                            <h2>Lost your password?</h2>
+                            <p>Enter your email and we'll send you a new login code.</p>
+                            <form onSubmit={handleResend}>
+                                <input
+                                    className={styles.modalInput}
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    value={resendEmail}
+                                    onChange={(e) => setResendEmail(e.target.value)}
+                                    required
+                                />
+                                {resendStatus && <p className={styles.resendStatus}>{resendStatus}</p>}
+                                <button className={styles.sendBtn} type="submit">Send new code</button>
+                                <button className={styles.cancelBtn} type="button" onClick={() => setShowResend(false)}>Cancel</button>
+                            </form>
+                        </div>
+                    </>
                 )}
             </section>
         </main>

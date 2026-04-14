@@ -1,0 +1,29 @@
+.puzzlePiece {
+    background-color: var(--secondary-faded);
+    height: 116px;
+    width: 123px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.puzzlePiece p {
+    color: var(--text-faded);
+    font-size: 18px;
+    margin: 0;
+    white-space: nowrap;
+    text-align: center;
+    z-index: 1;
+}
+
+.puzzleTab {
+    background-color: white;
+    height: 61px;
+    width: 61px;
+    border-radius: 50%;
+    position: absolute;
+    left: -45px;
+    z-index: 0;
+}
