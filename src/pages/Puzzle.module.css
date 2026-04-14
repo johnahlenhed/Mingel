@@ -1,21 +1,36 @@
-body {
-    margin: 0;
-    padding: 0;
+.puzzleContainer {
+    position: relative;
     width: 100vw;
     height: 100vh;
+    padding: 3rem;
+    box-sizing: border-box;
+}
+
+.puzzleImage {
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    width: calc(100% - 10rem);
+    height: calc(100% - 10rem);
+    object-fit: contain;
+    z-index: 0;
 }
 
 .puzzleWrapper {
-    width: 100vw;
-    height: 100vh;
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    width: calc(100% - 10rem);
+    height: calc(100% - 10rem);
     overflow: hidden;
-    padding: 5rem;
 }
 
 .puzzleWrapper svg {
     width: 100%;
     height: 100%;
     display: block;
+    position: relative;
+    z-index: 1;
 }
 
 .puzzleWrapper svg .piece {
@@ -36,4 +51,91 @@ body {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+.textLeftTop {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-family: var(--heading);
+    font-size: 1.1rem;
+    color: var(--text);
+    z-index: 2;
+}
+
+.textRightTop {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-family: var(--text);
+    font-size: 1rem;
+    color: var(--text-accent);
+    z-index: 2;
+}
+
+.textLeftBottom {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-family: var(--text);
+    font-size: 1rem;
+    color: var(--text-accent);
+    z-index: 2;
+}
+
+.textRightBottom {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-family: var(--heading);
+    font-size: 1.1rem;
+    color: var(--text);
+    z-index: 2;
+}
+
+/* Event inactive styles */
+
+.qrSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-image: url(/puzzle/qr-bg.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.qrContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 75%;
+    width: 80%;
+    background-color: var(--bg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
+}
+
+.textWrapper p {
+    font-family: var(--text);
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+.qrContainer h1 {
+    font-family: var(--heading);
+    font-size: 5rem;
+    font-weight: 350;
+    color: var(--text);
+    margin-bottom: 2rem;
 }

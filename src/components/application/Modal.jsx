@@ -91,9 +91,11 @@ export default function Modal({ isOpen, onClose, children }) {
     <>
       <div className={styles.overlay} onClick={closeModal} />
       <article ref={modalRef} className={styles.modal}>
-        <button className={styles.close} onClick={closeModal}>
-          ×
-        </button>
+        <img
+          className={styles.swipe}
+          src="../../swipe.png"
+          alt="Swipe to close modal"
+        />
         {children}
       </article>
     </>

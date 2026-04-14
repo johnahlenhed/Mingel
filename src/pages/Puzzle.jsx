@@ -1,12 +1,26 @@
 import { useEffect, useState, useRef } from "react";
 import { supabase } from "../lib/supabase.js";
 import styles from "./Puzzle.module.css";
-
+import { QRCodeSVG } from "qrcode.react";
+import { useEventStatus } from "../lib/useEventStatus.js";
 
 function Puzzle() {
     const [unlockedPieces, setUnlockedPieces] = useState()
     const [svgContent, setSvgContent] = useState('')
     const wrapperRef = useRef(null)
+    const eventActive = useEventStatus()
+    const [pieceOrder, setPieceOrder] = useState([])
+
+    // Randomize piece order on initial load
+    useEffect(() => {
+        const order = Array.from({ length: 50 }, (_, i) => i + 1)
+        // Fisher-Yates shuffle
+        for (let i = order.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [order[i], order[j]] = [order[j], order[i]]
+        }
+        setPieceOrder(order)
+    }, [])
 
     // Add class to body for page-specific styling and fetch SVG content
     useEffect(() => {
@@ -19,19 +33,19 @@ function Puzzle() {
 
     // Update SVG classes after content or unlocked pieces change
     useEffect(() => {
-        if (!svgContent) return
+        if (!svgContent || !pieceOrder.length) return
     
         // Väntar tills React har renderat SVG:n i DOM:en
         const timer = setTimeout(() => {
             if (!wrapperRef.current) return
-            for (let i = 1; i <= 50; i++) {
-                const el = wrapperRef.current.querySelector(`[id="${i}"]`)
-                if (el) el.classList.toggle('unlocked', i <= unlockedPieces)
-            }
+            pieceOrder.forEach((pieceId, index) => {
+            const el = wrapperRef.current.querySelector(`[id="${pieceId}"]`)
+            if (el) el.classList.toggle('unlocked', index < unlockedPieces)
+            })
         }, 0)
     
         return () => clearTimeout(timer)
-    }, [unlockedPieces, svgContent])
+    }, [unlockedPieces, svgContent, pieceOrder])
 
     // Fetch initial count of accepted connections and subscribe to changes
     const fetchCount = async () => {
@@ -61,7 +75,7 @@ function Puzzle() {
     // Subscribe to changes in accepted connections to update unlocked pieces in real-time
     useEffect(() => {
         const subscription = supabase
-            .channel('connections')
+            .channel('puzzle-connections')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'connections', filter: 'status=eq.accepted' },
                 async () => await fetchCount())
             .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'connections', filter: 'status=eq.accepted' },
@@ -73,7 +87,7 @@ function Puzzle() {
     // Subscribe to puzzle completion status changes
     useEffect(() => {
         const subscription = supabase
-            .channel('settings')
+            .channel('puzzle-settings')
             .on('postgres_changes', {
                 event: 'UPDATE',
                 schema: 'public',
@@ -91,11 +105,40 @@ function Puzzle() {
     }, [])
 
     return (
-        <div
-            ref={wrapperRef}
-            className={styles.puzzleWrapper}
-            dangerouslySetInnerHTML={{ __html: svgContent }}
-        />
+        <>
+            {!eventActive ? (
+                <section className={styles.qrSection}>
+                    <div className={styles.qrContainer}>
+                        <h1>WELCOME!</h1>
+
+                        <div className={styles.textWrapper}>
+                            <p>Make sure you're signed in and</p>
+                            <p>ready to start networking.</p>
+                        </div>
+                        
+                        <QRCodeSVG
+                            value="https://mingel.vercel.app/register"
+                            size={256}
+                        />
+                    </div>
+                </section>
+                
+            ) : (
+                <div className={styles.puzzleContainer}>
+                    <p className={styles.textLeftTop}>YRGO - DIGITAL DESIGN X WEBBUTVECKLING</p>
+                    <p className={styles.textRightTop}>LIVE PUZZLE</p>
+                    <p className={styles.textLeftBottom}>LIVE PUZZLE</p>
+                    <p className={styles.textRightBottom}>YRGO - DIGITAL DESIGN X WEBBUTVECKLING</p>
+                    <img src="/puzzle/puzzle-placeholder.png" alt="Puzzle Placeholder" className={styles.puzzleImage} />
+                    <div
+                    ref={wrapperRef}
+                    className={styles.puzzleWrapper}
+                    dangerouslySetInnerHTML={{ __html: svgContent }}
+                    />
+                </div>
+            )}
+        </>
+        
     )
 }
 

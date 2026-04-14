@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import styles from "./DigitInput.module.css";
 
-export default function FourDigitInput({ onComplete }) {
+export default function DigitInput({ onComplete, onChangeCode, reset }) {
   const [values, setValues] = useState(["", "", "", ""]);
   const refs = useRef([]);
 
@@ -13,6 +13,10 @@ export default function FourDigitInput({ onComplete }) {
     const newValues = [...values];
     newValues[index] = value;
     setValues(newValues);
+
+    if (onChangeCode) {
+      onChangeCode(newValues.join(""));
+    }
 
     // Jump forward
     if (value && index < 3) {
@@ -31,6 +35,15 @@ export default function FourDigitInput({ onComplete }) {
       refs.current[index - 1].focus();
     }
   };
+
+  //Empty input after request
+  useEffect(() => {
+    if (reset) {
+      setValues(["", "", "", ""]);
+      refs.current[0]?.focus();
+      if (onChangeCode) onChangeCode("");
+    }
+  }, [reset]);
 
   return (
     <div className={styles.container}>

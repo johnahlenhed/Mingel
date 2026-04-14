@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import UpperPiecePuzzle from "../components/application/UpperPiecePuzzle.jsx";
 import DigitInput from "../components/application/DigitInput.jsx";
@@ -9,12 +9,16 @@ import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase.js";
 import { useUser } from "../lib/useUser.js";
 import { Navigate } from "react-router-dom";
+import LogoutButton from "../components/LogoutButton.jsx";
 
 export default function Home() {
   const user = useUser();
+  const [code, setCode] = useState("");
+  const [reset, setReset] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUrl, setNewUrl] = useState("");
+  const [confirmation, setConfirmation] = useState("");
 
   if (user?.role === "company") {
     return <Navigate to="/company1" />;
@@ -39,24 +43,23 @@ export default function Home() {
       return;
     }
 
+    if (targetUser.role === "student") {
+      setConnectionStatus("You can only connect with companies");
+      return;
+    }
+
     const { data: existing } = await supabase
       .from("connections")
       .select("*")
       .or(
         `and(from_user.eq.${user.id},to_user.eq.${targetUser.id}),and(from_user.eq.${targetUser.id},to_user.eq.${user.id})`,
       )
-      .in("status", ["pending", "accepted"])
+      .eq("status", "accepted")
       .maybeSingle();
 
     if (existing) {
-      if (existing.status === "pending") {
-        setConnectionStatus(
-          "Connection request already pending with this user",
-        );
-      } else {
-        setConnectionStatus("You are already connected with this user");
-      }
-      return;
+        setConnectionStatus("You are already connected with this user")
+        return
     }
 
     // Create connection
@@ -65,7 +68,7 @@ export default function Home() {
       .insert({
         from_user: user.id,
         to_user: targetUser.id,
-        status: "pending",
+        status: "accepted",
       });
 
     if (connectionError) {
@@ -78,8 +81,18 @@ export default function Home() {
       return;
     }
 
-    setConnectionStatus("Connection request sent!");
+    setConnectionStatus("Connected!");
   };
+
+  useEffect(() => {
+    if (!connectionStatus) return;
+
+    const timer = setTimeout(() => {
+      setConnectionStatus(null);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [connectionStatus]);
 
   // Open modal
   function toggleModal() {
@@ -90,84 +103,111 @@ export default function Home() {
   const handleSaveUrl = async () => {
     if (!user) return;
 
+    if (!newUrl.trim()) {
+      setConfirmation("URL cannot be empty");
+      return;
+    }
+
     const { error } = await supabase
       .from("users")
       .update({ link: newUrl })
       .eq("id", user.id);
 
     if (error) {
-      console.log(error);
+      setConfirmation("Something went wrong");
     } else {
-      console.log("URL updated succesfully");
-      setIsModalOpen(false);
+      setConfirmation("URL updated successfully!");
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setConfirmation("");
+        setNewUrl("");
+      }, 2000);
     }
   };
 
   return (
-    <main className={styles.main}>
-      <section className={styles.layout}>
-        <div className={styles.upperContainer}>
-          <UpperPiecePuzzle variant="lightBorderDashed" />
-        </div>
-
-        <article className={styles.form}>
-          <DigitInput onComplete={handleConnect} />
-          {connectionStatus && <p>{connectionStatus}</p>}
-          <div className={styles.addBtnContainer}>
-            <button className={styles.addBtn}>Add +</button>
+    <>
+      <main className={styles.main}>
+        <section className={styles.layout}>
+          <div className={styles.upperContainer}>
+            <UpperPiecePuzzle variant="lightBorderDashed" />
           </div>
-        </article>
 
-        <div className={styles.lowerContainer}>
-          <LowerPiecePuzzle variant="lightBorderDashed">
-            <div className={styles.lowerContent}>
-              {user ? (
-                <>
-                  <p>{user.full_name}</p>
-                  <p>{user.programme}</p>
-                </>
-              ) : (
-                <p>Loading...</p>
-              )}
+          <article className={styles.form}>
+            <DigitInput
+              onComplete={setCode}
+              onChangeCode={setCode}
+              reset={reset}
+            />
+            {connectionStatus && <p>{connectionStatus}</p>}
+            <div className={styles.addBtnContainer}>
+              <button
+                className={styles.addBtn}
+                onClick={() => {
+                  handleConnect(code);
+                  setReset((prev) => !prev);
+                }}
+                disabled={code.length !== 4}
+              >
+                Add +
+              </button>
             </div>
-          </LowerPiecePuzzle>
-        </div>
+          </article>
 
-        <article className={styles.linksContainer}>
-          <div className={styles.myConnectionsContainer}>
-            <Link to="/connections">
-              <NavigationButton>
-                <div className={styles.navContent}>
-                  <span>Connections</span>
-                  <img
-                    className={styles.arrowIcon}
-                    src="../../arrow_right.svg"
-                  />
-                </div>
-              </NavigationButton>
-            </Link>
+          <div className={styles.lowerContainer}>
+            <LowerPiecePuzzle variant="lightBorderDashed">
+              <div className={styles.lowerContent}>
+                {user ? (
+                  <>
+                    <p>{user.full_name}</p>
+                    <p>{user.programme}</p>
+                  </>
+                ) : (
+                  <p>Loading...</p>
+                )}
+              </div>
+            </LowerPiecePuzzle>
           </div>
-          <div>
-            <p className={styles.changeURL} onClick={toggleModal}>
-              Change the URL you share
-            </p>
-          </div>
-        </article>
-      </section>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <input
-          className={styles.inputURL}
-          type="url"
-          placeholder={"Current: " + user?.link || "New URL"}
-          value={newUrl}
-          onChange={(e) => setNewUrl(e.target.value)}
-        ></input>
+          <article className={styles.linksContainer}>
+            <div className={styles.myConnectionsContainer}>
+              <Link to="/connections">
+                <NavigationButton>
+                  <div className={styles.navContent}>
+                    <span>Connections</span>
+                    <img
+                      className={styles.arrowIcon}
+                      src="../../arrow_right.svg"
+                    />
+                  </div>
+                </NavigationButton>
+              </Link>
+            </div>
+            <div>
+              <p className={styles.changeURL} onClick={toggleModal}>
+                Change the URL you share
+              </p>
+            </div>
+          </article>
+        </section>
 
-        <button className={styles.saveBtn} onClick={handleSaveUrl}>
-          Save
-        </button>
-      </Modal>
-    </main>
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <input
+            className={styles.inputURL}
+            type="url"
+            placeholder={"Current: " + user?.link || "New URL"}
+            value={newUrl}
+            onChange={(e) => setNewUrl(e.target.value)}
+          ></input>
+
+          {confirmation && <p className={styles.confirmation}>{confirmation}</p>}
+
+          <button className={styles.saveBtn} onClick={handleSaveUrl}>
+            Save
+          </button>
+        </Modal>
+      </main>
+      <LogoutButton />
+    </>
   );
 }
