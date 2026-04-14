@@ -107,12 +107,22 @@ function Puzzle() {
     return (
         <>
             {!eventActive ? (
-                <div>
-                    <QRCodeSVG
-                        value="https://mingel.vercel.app/register"
-                        size={256}
-                    />
-                </div>
+                <section className={styles.qrSection}>
+                    <div className={styles.qrContainer}>
+                        <h1>WELCOME!</h1>
+
+                        <div className={styles.textWrapper}>
+                            <p>Make sure you're signed in and</p>
+                            <p>ready to start networking.</p>
+                        </div>
+                        
+                        <QRCodeSVG
+                            value="https://mingel.vercel.app/register"
+                            size={256}
+                        />
+                    </div>
+                </section>
+                
             ) : (
                 <div className={styles.puzzleContainer}>
                     <p className={styles.textLeftTop}>YRGO - DIGITAL DESIGN X WEBBUTVECKLING</p>

@@ -92,3 +92,50 @@
     color: var(--text);
     z-index: 2;
 }
+
+/* Event inactive styles */
+
+.qrSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-image: url(/puzzle/qr-bg.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.qrContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 75%;
+    width: 80%;
+    background-color: var(--bg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
+}
+
+.textWrapper p {
+    font-family: var(--text);
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+.qrContainer h1 {
+    font-family: var(--heading);
+    font-size: 5rem;
+    font-weight: 350;
+    color: var(--text);
+    margin-bottom: 2rem;
+}
