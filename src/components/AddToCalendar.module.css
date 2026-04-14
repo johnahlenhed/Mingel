@@ -1,0 +1,10 @@
+.calendarBtn {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    color: var(--text-almost-white);
+    border: 1px solid var(--secondary-faded);
+    border-radius: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+}

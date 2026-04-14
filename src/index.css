@@ -2,6 +2,7 @@
 
   --text: #181818;
   --text-white: #ffffff;
+  --text-almost-white: #F5F5F5;
   --text-h: #181818;
   --text-accent: #E51236;
   --text-faded: #6B6B6B;
@@ -76,6 +77,10 @@ body {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+}
+
+body.register-page {
+    overflow-x: hidden;
 }
 
 body.puzzle-page {

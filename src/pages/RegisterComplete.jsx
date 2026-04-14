@@ -1,5 +1,6 @@
 import styles from "./RegisterComplete.module.css";
 import { Link } from "react-router-dom";
+import AddToCalendar from "../components/AddToCalendar.jsx";
 
 export default function RegisterComplete() {
   return (
@@ -11,7 +12,9 @@ export default function RegisterComplete() {
           password for signing in before the event.
         </p>
 
-        <button className={styles.calendarBtn}>Add to Calendar +</button>
+        <div className={styles.calendarBtnWrapper}>
+          <AddToCalendar />
+        </div>
         <Link to="/login">
           <button className={styles.loginBtn}>Login</button>
         </Link>
