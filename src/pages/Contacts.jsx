@@ -91,7 +91,7 @@ export default function Contacts() {
                 <div>
                   <p>{row.users.full_name}</p>
                   <p>{row.users.email}</p>
-                  <p>{row.users.programme}</p>
+                  <p>{row.users.company}</p>
                   <p>{row.users.link}</p>
                 </div>
               </UpperPiecePuzzle>
