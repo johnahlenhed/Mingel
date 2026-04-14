@@ -3,7 +3,7 @@
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    background: var(--accent-bg);
+    background: var(--text-almost-white);
     border: none;
     cursor: pointer;
     padding: 0.75rem;
@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1001;
+    color: var(--yet-another-blue-color);
 }
 
 .overlay {
