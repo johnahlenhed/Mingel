@@ -115,6 +115,10 @@ function Puzzle() {
                 </div>
             ) : (
                 <div className={styles.puzzleContainer}>
+                    <p className={styles.textLeftTop}>YRGO - DIGITAL DESIGN X WEBBUTVECKLING</p>
+                    <p className={styles.textRightTop}>LIVE PUZZLE</p>
+                    <p className={styles.textLeftBottom}>LIVE PUZZLE</p>
+                    <p className={styles.textRightBottom}>YRGO - DIGITAL DESIGN X WEBBUTVECKLING</p>
                     <img src="/puzzle/puzzle-placeholder.png" alt="Puzzle Placeholder" className={styles.puzzleImage} />
                     <div
                     ref={wrapperRef}
