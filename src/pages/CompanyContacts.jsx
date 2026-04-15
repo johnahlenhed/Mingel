@@ -97,9 +97,9 @@ export default function CompanyContacts() {
             <div className={styles.lowerContainer}>
               <LowerPiecePuzzle variant="blue">
                 {row.handshake ? (
-                  <img className={styles.handshake} src="/company_true.png" />
+                  <img className={styles.handshake} src="/handshake_company_true.png" />
                 ) : (
-                  <img className={styles.handshake} src="/false.png" />
+                  <img className={styles.handshake} src="/handshake_company_false.png" />
                 )}
                 <div>
                   <p className={styles.lowerContent}>{row.users.full_name}</p>
